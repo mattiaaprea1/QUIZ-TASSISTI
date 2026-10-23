@@ -211,7 +211,10 @@
             <option value="Geografia">Geografia</option>
             <option value="Normativa Statale e Regionale">Normativa Statale e Regionale</option>
             <option value="Regolamento e Comportamento">Regolamento e Comportamento</option>
-            <option value="Lingue Straniere">Lingue Straniere</option>
+            <option value="Inglese">Inglese</option>
+            <option value="Spagnolo">Spagnolo</option>
+            <option value="Francese">Francese</option>
+            <option value="Tedesco">Tedesco</option>
           </select>
         </div>
 
@@ -244,7 +247,7 @@
 </div>
 
 <script>
-// RAW DATA - Inserimento dinamico delle domande pulite e aggregate
+// RAW DATA
 const RAW_DATA = `
 Inglese | Where ………. from? | You are | Are you | Are | 2
 Inglese | Where ……….? | You live | Are you live | Do you live | 3
@@ -601,7 +604,7 @@ Normativa Statale e Regionale | Il termine entro il quale i comuni devono render
 Normativa Statale e Regionale | Gli autoservizi pubblici non di linea come vengono definiti ai sensi della L. 21/92 art. 1 c. 1? | Servizi con funzione complementare e integrativa a quelli di linea con qualsiasi mezzo effettuati | Servizi svolti senza obbligo di aderire alla richiesta di trasporto | Servizi ad offerta non indifferenziata | 1
 Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 1 c. 1 che cosa distingue gli autoservizi pubblici non di linea da quelli di linea? | L’offerta riservata a particolari categorie di utenti | La non continuità e periodicità e lo svolgimento su itinerari e con orari non predeterminati | Le tariffe contrattabili liberamente | 2
 Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 1 c. 2 quali sono gli autoservizi pubblici non di linea? | Taxi e noleggio con conducente con autovettura, natante, motocarrozzetta e veicolo a trazione animale | Servizio da piazza e servizio di rimessa, svolti con qualsiasi tipo di auto o motoveicolo | Taxi, noleggio senza conducente, noleggio con conducente | 1
-Normativa Statale e Regionale | Le tariffe del servizio di taxi ai sensi della L. 21/92 art. 2 c. 1 da chi sono determinate? | Dalla libera contrattazione tra il cliente e il vettore, entro i limiti minimi e massimi comunali | Dagli organi competenti che stabiliscono le modalità del servizio | Dalla Camera di Commercio | 2
+Normativa Statale e Regionale | Le tariffe del servizio di taxi ai sensi della L. 21/92 art. 2 c. 1 da chi sono determinate? | Dalla libera contrattazione tra il cliente e il vettore, entro i limits minimi e massimi comunali | Dagli organi competenti che stabiliscono le modalità del servizio | Dalla Camera di Commercio | 2
 Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 dove deve avvenire il prelevamento dell’utente o l’inizio del servizio taxi? | Esclusivamente entro l’area comunale | Entro l’area comunale o comprensoriale | Entro l’area provinciale | 2
 Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 dove può avvenire lo stazionamento dei veicoli adibiti a servizio taxi, durante il servizio stesso? | Esclusivamente su suolo pubblico, in aree specificatamente individuate | Esclusivamente su piazze | Indifferentemente su suolo pubblico o presso apposite rimesse private | 1
 Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 qual è lo scopo del servizio taxi? | Soddisfa esigenze di trasporto individuale o di piccoli gruppi | Soddisfa esigenze solo di trasporto individuale | Soddisfa esigenze di trasporto di qualsiasi genere, anche con contratto di noleggio | 1
@@ -654,7 +657,7 @@ Normativa Statale e Regionale | La Legge Regionale 4 aprile 2012 n.6 "Disciplina
 Normativa Statale e Regionale | Ai sensi dell'art.26 comma 1 della Legge Regionale 4 aprile 2012 n.6 la commissione tecnica provinciale è composta, tra gli altri, da: | Un rappresentante designato dal compartimento della Polizia Stradale della Lombardia | Un rappresentante designato dall'Arma dei Carabinieri | Un rappresentante designato dalla Guardia di Finanza | 1
 Normativa Statale e Regionale | Ai sensi dell'art.25 comma 1 della Legge Regionale 4 aprile 2012 n.6, il ruolo provinciale dei conducenti di veicoli o natanti adibiti a servizi pubblici non di linea, presso quale ente è istituito? | Camera di Commercio | Regione | Province | 1
 Normativa Statale e Regionale | Ai sensi dell'art.27 comma 3 della Legge Regionale 4 aprile 2012 n.6, per favorire il miglioramento della qualità ambientale e della sicurezza, da chi sono concessi contributi in conto capitale ai titolari di licenza taxi, nelle forme previste dall'art.7 Legge 21/1992? | Comune | Regione | Provincia | 2
-Normativa Statale e Regionale | Ai sensi dell'art.24 comma 2 della Legge Regionale 4 aprile 2012 n.6 la violazione agli obblighi del servizio taxi comporta: | La sanzione amministrativa della sospensione da uno a trenta giorni della licenza per l'esercizio taxi | La sospensione della patente di guida | La decadenza del CAP | 1
+Normativa Statale e Regionale | Ai sensi dell'art.24 comma 2 della Legge Regionale 4 aprile 2012 n.6 la violazione agli obblighi del servizio taxi comporta: | La sanzione administrative della sospensione da uno a trenta giorni della licenza per l'esercizio taxi | La sospensione della patente di guida | La decadenza del CAP | 1
 Normativa Statale e Regionale | L'iscrizione al ruolo dei conducenti, di cui alla Legge Regionale 4 aprile 2012 n.6, è requisito indispensabile per: | Il rilascio della licenza per l'esercizio del servizio taxi e l'autorizzazione per l'esercizio del servizio di noleggio con conducente | L'abilitazione alla guida dei motocicli | Espletare l'attività di responsabile di agenzia turistica | 1
 Normativa Statale e Regionale | Ai sensi dell'art.46 comma 1 della Legge Regionale 14 luglio 2009 n.11, è fatto obbligo di rilasciare attestato comprovante l'importo della corsa: | A richiesta | Sempre | Per importi superiori ai 20 euro | 1
 Normativa Statale e Regionale | Nelle zone di intensa conurbazione il varo di una struttura tariffaria su base multipla e/o progressiva con validità sull'intera zona vieta: | Il pagamento della corsa con tessera bancomat | Il trasporto collettivo con funzione complementare e integrativa rispetto ai trasporti pubblici non di linea | L'applicazione di oneri aggiuntivi all'utente per eventuale corsa di ritorno a vuoto | 3
@@ -729,7 +732,7 @@ Normativa Statale e Regionale | Qual è l’importo minimo per le corse in parte
 Normativa Statale e Regionale | Fuori servizio, il tassista può fare una corsa? | Sì sempre | Sì, se necessario ( Conveniente) | Sì, se richiesto dalle Forze dell’Ordine | 3
 Normativa Statale e Regionale | Per l’NCC è obbligatorio rientrare in rimessa alla fine di ogni singolo servizio? | Sì, sempre | No, mai | No, se nel foglio di servizio è previsto un altro servizio | 3
 Normativa Statale e Regionale | Quali sono i limiti territoriali per il prelevamento e la destinazione per gli NCC? | Nessun limite | Prelevamento nella Provincia e nessun limite per la destinazione | Limiti sia al prelevamento che alla destinazione | 1
-Normativa Statale e Regionale | In caso di decesso del titolare, a chi può essere trasferita la Licenza Taxi? | Ad uno degli eredi appartenenti al nucleo familiare | A chiunque abbia i requisiti | Solo ai figli maggiorenni | 1
+Normativa Statale e Regionale | In caso di decesso del titolare, a chi può essere trasferita la Licenza Taxi? | Ad uno degli eredi appartenant al nucleo familiare | A chiunque abbia i requisiti | Solo ai figli maggiorenni | 1
 Normativa Statale e Regionale | Chi stabilisce forma e dimensioni della scritta servizio pubblico che ogni taxi deve avere? | Regione | Comune | Città Metropolitana | 2
 Normativa Statale e Regionale | Il titolare può conferire la licenza a organismi cooperativi? | Sì, dietro autorizzazione del Sindaco | No | Sì, ma la titolarità resta in capo a lui | 3
 Normativa Statale e Regionale | Per quanto determinato dall’art 3 L. Reg. 15/04/95 dove deve essere ubicata la sede e almeno una rimessa dei veicoli al servizio NCC? | All’interno della Regione | Nell’area Comunale o Sovracomunale ove sia compreso il comune che ha rilasciato l’autorizzazione | Nella Città Metropolitana | 2
@@ -807,13 +810,13 @@ Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbl
 Regolamento e Comportamento | Ai conducenti dei taxi e delle vetture da noleggio è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
 Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura cani propri | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
 Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita od al trasporto di masserizie ingombranti | 3
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente le strade statali | 1
+Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i cases di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente le strade statali | 1
 Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
-Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza deteriorare il veicolo | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
+Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza che deteriorino il veicolo o limitino la visuale del conducente | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello "FUORI SERVIZIO" al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
 Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e/o tenere la radio ad alto volume | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
-Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luce rossa | 2
+Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
 Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno l'obbligo di: | Prodigarsi per portare a destinazione l'utente, anche se il veicolo si guasta | Prevedere l'importo definitivo e contrattare con l'utente il corrispettivo | Concordare e programmare in accordo con l'utente più viaggi o percorsi | 1
 Regolamento e Comportamento | I conducenti di taxi durante il servizio hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Essere sempre muniti di una congrua quantità di moneta spicciola per essere in grado di corrispondere al cliente il resto | 3
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Disimpegnare il servizio con ogni decoro | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
@@ -845,7 +848,7 @@ Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbl
 Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
 Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone, animali o cose che non abbiano attinenza con il servizio | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
 Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita od al trasporto di masserizie ingombranti | 3
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente le strade statali | 1
+Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
 Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
 Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
 Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
@@ -857,7 +860,7 @@ Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno
 Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Aiutare educatamente a scendere le persone e scaricare i bagagli | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
 Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto in ogni circostanza | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo oppure quando il tassametro non funziona regolarmente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo oppure quando il tassametro non funciona regolarmente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
 Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi taxi | Vestire con decoro | 1
 Regolamento e Comportamento | Al termine del servizio il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre al prezzo segnato sul tassametro ed i supplementi dovuti | 2
 Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi assegnati | Attraverso lo stazionamento in apposite rimesse | 2
@@ -985,7 +988,7 @@ Tedesco | Am Montag habe ich ……………….. Bruder ein Geburtstagsgeschenk
 Tedesco | Wir treffen uns …………… 10.00 Uhr. | An Mittwoch zu | Um Mittwoch am | Am Mittwoch um | 3
 `;
 
-// Parsing & Deduplicazione delle domande
+// Parsing e Deduplicazione
 function parseQuestions(dataStr) {
   const lines = dataStr.trim().split('\n');
   const seenQuestions = new Set();
@@ -996,21 +999,15 @@ function parseQuestions(dataStr) {
     const parts = line.split('|').map(p => p.trim());
     if (parts.length < 6) return;
 
-    let rawCategory = parts[0];
+    let mainTopic = parts[0];
     const qText = parts[1];
     const opts = [parts[2], parts[3], parts[4]];
     const ansIndex = parseInt(parts[5], 10) - 1;
 
-    // Normalizza categoria Lingue Straniere
-    let mainTopic = rawCategory;
-    if (['Inglese', 'Francese', 'Spagnolo', 'Tedesco'].includes(rawCategory)) {
-      mainTopic = 'Lingue Straniere';
-    } else if (rawCategory === 'Fuori Dispensa') {
-      // Mappa Fuori Dispensa nei rispettivi argomenti standard per evitare confusione
+    if (mainTopic === 'Fuori Dispensa') {
       mainTopic = 'Normativa Statale e Regionale';
     }
 
-    // Deduplicazione per testo della domanda
     const normalizeKey = qText.toLowerCase().replace(/[^a-z0-9]/g, '');
     if (!seenQuestions.has(normalizeKey)) {
       seenQuestions.add(normalizeKey);
@@ -1027,12 +1024,14 @@ function parseQuestions(dataStr) {
 }
 
 const ALL_QUESTIONS = parseQuestions(RAW_DATA);
-const TOPICS = [
-  'Geografia',
-  'Normativa Statale e Regionale',
-  'Regolamento e Comportamento',
-  'Lingue Straniere'
-];
+
+// Mappatura delle materie nelle 4 Macro Categorie per l'Esame
+const MACRO_CATEGORIES = {
+  'Geografia': ['Geografia'],
+  'Normativa Statale e Regionale': ['Normativa Statale e Regionale'],
+  'Regolamento e Comportamento': ['Regolamento e Comportamento'],
+  'Lingue Straniere': ['Inglese', 'Spagnolo', 'Francese', 'Tedesco']
+};
 
 const letters = ['A', 'B', 'C'];
 let pool = [];
@@ -1042,9 +1041,17 @@ let answered = false;
 let correct = 0;
 let wrong = 0;
 let history = [];
-let topicErrors = {};
+let macroErrors = {};
 
 const $ = id => document.getElementById(id);
+
+// Funzione helper per ottenere la macro categoria di una domanda
+function getMacroCategory(topic) {
+  for (const [macro, topics] of Object.entries(MACRO_CATEGORIES)) {
+    if (topics.includes(topic)) return macro;
+  }
+  return topic;
+}
 
 function initSession() {
   const mode = $('modeSelect').value;
@@ -1053,10 +1060,11 @@ function initSession() {
   $('topicSelect').disabled = (mode === 'exam');
 
   if (mode === 'exam') {
-    // Genera pool per Esame: 4 domande casuali per ciascuno dei 4 argomenti
+    // Genera pool per Esame: 4 domande casuali per ciascuna delle 4 Macro Categorie (Totale 16)
     pool = [];
-    TOPICS.forEach(top => {
-      const categoryQuestions = ALL_QUESTIONS.filter(q => q.topic === top);
+    Object.keys(MACRO_CATEGORIES).forEach(macro => {
+      const validTopics = MACRO_CATEGORIES[macro];
+      const categoryQuestions = ALL_QUESTIONS.filter(q => validTopics.includes(q.topic));
       categoryQuestions.sort(() => Math.random() - 0.5);
       pool.push(...categoryQuestions.slice(0, 4));
     });
@@ -1075,12 +1083,8 @@ function initSession() {
   correct = 0;
   wrong = 0;
   history = [];
-  topicErrors = {
-    'Geografia': 0,
-    'Normativa Statale e Regionale': 0,
-    'Regolamento e Comportamento': 0,
-    'Lingue Straniere': 0
-  };
+  macroErrors = {};
+  Object.keys(MACRO_CATEGORIES).forEach(m => macroErrors[m] = 0);
 
   $('resultScreen').classList.add('hidden');
   $('quizScreen').classList.remove('hidden');
@@ -1142,6 +1146,7 @@ function handleNext() {
   const mode = $('modeSelect').value;
   const q = pool[index];
   const isCorrect = (selected === q.answer);
+  const macroCat = getMacroCategory(q.topic);
 
   if (!answered) {
     answered = true;
@@ -1149,8 +1154,8 @@ function handleNext() {
       correct++;
     } else {
       wrong++;
-      if (topicErrors[q.topic] !== undefined) {
-        topicErrors[q.topic]++;
+      if (macroErrors[macroCat] !== undefined) {
+        macroErrors[macroCat]++;
       }
     }
 
@@ -1199,13 +1204,13 @@ function showResults() {
   const topicBreakdown = $('topicBreakdown');
 
   if (mode === 'exam') {
-    let failedTopic = null;
-    TOPICS.forEach(top => {
-      if (topicErrors[top] > 2) failedTopic = top;
+    let failedMacro = null;
+    Object.keys(macroErrors).forEach(macro => {
+      if (macroErrors[macro] > 2) failedMacro = macro;
     });
 
     const totalFailed = (wrong > 4);
-    const isPassed = !totalFailed && !failedTopic;
+    const isPassed = !totalFailed && !failedMacro;
 
     if (isPassed) {
       badge.className = 'status-badge passed';
@@ -1217,14 +1222,14 @@ function showResults() {
 
     let detailMsg = `Hai totalizzato <b>${correct}</b> risposte corrette su 16 (<b>${wrong}</b> errori).<br>`;
     if (totalFailed) detailMsg += `• Hai superato il limite massimo di 4 errori totali.<br>`;
-    if (failedTopic) detailMsg += `• Hai commesso più di 2 errori nell'argomento: <b>${failedTopic}</b>.<br>`;
+    if (failedMacro) detailMsg += `• Hai commesso più di 2 errori nella macro categoria: <b>${failedMacro}</b>.<br>`;
 
     resultText.innerHTML = detailMsg;
 
-    let breakdownHtml = '<h4>Dettaglio errori per argomento:</h4><ul>';
-    TOPICS.forEach(top => {
-      const errs = topicErrors[top] || 0;
-      breakdownHtml += `<li><b>${top}</b>: ${errs} errori ${errs > 2 ? '<strong style="color:red;">(Superato limite di 2)</strong>' : ''}</li>`;
+    let breakdownHtml = '<h4>Dettaglio errori per Macro Categoria:</h4><ul>';
+    Object.keys(macroErrors).forEach(macro => {
+      const errs = macroErrors[macro] || 0;
+      breakdownHtml += `<li><b>${macro}</b>: ${errs} errori ${errs > 2 ? '<strong style="color:red;">(Superato limite di 2)</strong>' : ''}</li>`;
     });
     breakdownHtml += '</ul>';
     topicBreakdown.innerHTML = breakdownHtml;
