@@ -3,38 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Quiz Preparazione Esame</title>
+  <title>Quiz Preparazione Esame Taxi / NCC</title>
   <style>
     :root {
-      --primary: #1e40af;
-      --primary-dark: #1e3a8a;
-      --accent: #3b82f6;
-      --bg: #f1f5f9;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
       --card-bg: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
       --border: #e2e8f0;
       --green: #10b981;
-      --green-bg: #d1fae5;
+      --green-bg: #ecfdf5;
+      --green-border: #059669;
       --red: #ef4444;
-      --red-bg: #fee2e2;
+      --red-bg: #fef2f2;
+      --red-border: #dc2626;
+      --accent-yellow: #f59e0b;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: var(--text);
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      background: var(--bg-gradient);
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       padding: 16px 12px 32px;
     }
-    .wrap { max-width: 720px; margin: 0 auto; }
+
+    .wrap { width: 100%; max-width: 760px; margin: 0 auto; }
+
     .card {
       background: var(--card-bg);
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .brand {
       display: flex;
       align-items: center;
@@ -43,145 +54,229 @@
       border-bottom: 1px solid var(--border);
       background: #f8fafc;
     }
-    .brand-title { font-size: 22px; font-weight: 800; color: var(--primary); margin: 0; }
+
+    .brand-title { font-size: 20px; font-weight: 800; color: var(--primary-dark); }
+
     .main { padding: 24px; }
+
+    /* Barra di progresso */
     .progress-row {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
       align-items: center;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 10px;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
     }
+
     .track {
-      height: 8px;
-      border-radius: 8px;
+      height: 10px;
+      border-radius: 10px;
       background: #e2e8f0;
       overflow: hidden;
       margin-bottom: 20px;
     }
+
     .fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
+      background: linear-gradient(90deg, var(--primary), #3b82f6);
       width: 0;
-      transition: width 0.3s ease;
+      transition: width 0.4s ease;
     }
+
+    /* Controlli Filtri */
     .toolbar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-bottom: 20px;
     }
+
+    @media (max-width: 500px) {
+      .toolbar { grid-template-columns: 1fr; }
+    }
+
     .select {
-      min-height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      height: 46px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
       background: white;
       padding: 0 12px;
       font: inherit;
-      color: var(--text);
-      flex: 1;
-      min-width: 140px;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
     }
+
+    .select:focus { border-color: var(--primary); }
+
     .pill {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       padding: 6px 14px;
       border-radius: 20px;
-      background: #dbeafe;
-      color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
       font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 16px;
+      font-size: 12px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
     }
+
     .question {
-      font-size: 20px;
-      line-height: 1.4;
-      margin: 0 0 20px;
+      font-size: 19px;
+      line-height: 1.45;
+      margin-bottom: 22px;
       font-weight: 700;
-      white-space: pre-wrap;
+      color: var(--text-main);
     }
+
+    /* Risposte */
     .answers { display: grid; gap: 12px; }
+
     .answer {
       width: 100%;
       text-align: left;
       border: 2px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 16px;
       background: #fff;
       font: inherit;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-main);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       transition: all 0.2s ease;
     }
+
+    .answer:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
     .answer .letter {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: #f1f5f9;
       display: grid;
       place-items: center;
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-muted);
       flex-shrink: 0;
+      transition: all 0.2s ease;
     }
-    .answer.selected { border-color: var(--accent); background: #eff6ff; }
-    .answer.correct { border-color: var(--green); background: var(--green-bg); }
-    .answer.wrong { border-color: var(--red); background: var(--red-bg); }
-    .answer.correct .letter { background: #10b981; color: white; }
-    .answer.wrong .letter { background: #ef4444; color: white; }
+
+    .answer.selected { border-color: var(--primary); background: var(--primary-light); }
+    .answer.selected .letter { background: var(--primary); color: white; }
+
+    .answer.correct { border-color: var(--green-border); background: var(--green-bg); color: #065f46; }
+    .answer.correct .letter { background: var(--green); color: white; }
+
+    .answer.wrong { border-color: var(--red-border); background: var(--red-bg); color: #991b1b; }
+    .answer.wrong .letter { background: var(--red); color: white; }
+
     .feedback {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 10px;
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: 12px;
       font-weight: 600;
+      font-size: 14px;
       display: none;
     }
+
     .feedback.show { display: block; }
-    .feedback.good { background: var(--green-bg); color: #065f46; }
-    .feedback.bad { background: var(--red-bg); color: #991b1b; }
-    .actions { display: flex; gap: 10px; margin-top: 24px; }
+    .feedback.good { background: var(--green-bg); color: #065f46; border: 1px solid var(--green-border); }
+    .feedback.bad { background: var(--red-bg); color: #991b1b; border: 1px solid var(--red-border); }
+    .feedback.info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+
+    /* Pulsanti Azione */
+    .actions { display: flex; gap: 12px; margin-top: 24px; }
+
     .btn {
       border: 0;
       border-radius: 12px;
-      padding: 14px 20px;
+      padding: 14px 22px;
       font: inherit;
       font-weight: 700;
+      font-size: 15px;
       cursor: pointer;
-      transition: background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
     }
-    .primary { background: var(--primary); color: white; flex: 1; }
-    .primary:hover { background: var(--primary-dark); }
-    .secondary { background: #f1f5f9; color: var(--text); }
-    .secondary:hover { background: #e2e8f0; }
+
+    .btn-primary { background: var(--primary); color: white; flex: 1; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+
+    .btn-secondary { background: #f1f5f9; color: var(--text-main); }
+    .btn-secondary:hover:not(:disabled) { background: #e2e8f0; }
+
+    .btn-warning { background: var(--accent-yellow); color: white; }
+    .btn-warning:hover:not(:disabled) { background: #d97706; }
+
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .stats { display: flex; gap: 10px; margin-top: 20px; }
-    .stat { flex: 1; background: #f8fafc; border-radius: 10px; padding: 10px; text-align: center; border: 1px solid var(--border); }
-    .stat strong { display: block; font-size: 18px; }
-    .stat span { font-size: 12px; color: var(--muted); }
+
+    /* Statistiche in basso */
+    .stats { display: flex; gap: 10px; margin-top: 24px; }
+
+    .stat {
+      flex: 1;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 12px 8px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .stat strong { display: block; font-size: 20px; font-weight: 800; color: var(--text-main); }
+    .stat span { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+
     .hidden { display: none !important; }
-    .result { text-align: center; padding: 20px 10px; }
-    .result h2 { font-size: 26px; margin-bottom: 10px; }
+
+    /* Risultati */
+    .result { text-align: center; padding: 10px 0; }
+    .result h2 { font-size: 28px; margin-bottom: 8px; font-weight: 800; }
+
     .status-badge {
       display: inline-block;
-      padding: 8px 18px;
+      padding: 10px 24px;
       border-radius: 30px;
       font-weight: 800;
       font-size: 16px;
-      margin: 10px 0 20px;
+      margin: 12px 0 20px;
+      letter-spacing: 0.5px;
     }
-    .status-badge.passed { background: var(--green-bg); color: #065f46; }
-    .status-badge.failed { background: var(--red-bg); color: #991b1b; }
-    .review-item { text-align: left; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .review-item b { display: block; margin-bottom: 4px; }
-    .review-item .ok { color: var(--green); }
-    .review-item .no { color: var(--red); }
+
+    .status-badge.passed { background: var(--green-bg); color: #065f46; border: 2px solid var(--green-border); }
+    .status-badge.failed { background: var(--red-bg); color: #991b1b; border: 2px solid var(--red-border); }
+
+    .review-list { margin-top: 24px; text-align: left; }
+    .review-item { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.4; }
+    .review-item b { display: block; margin-bottom: 6px; color: var(--text-main); font-size: 15px; }
+    .review-item .ok { color: var(--green-border); font-weight: 700; }
+    .review-item .no { color: var(--red-border); font-weight: 700; }
+
+    /* Statistiche Globali Salvate */
+    .global-stats {
+      margin-top: 20px;
+      padding: 14px;
+      background: #f8fafc;
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border: 1px dashed var(--border);
+    }
   </style>
 </head>
 <body>
@@ -189,11 +284,12 @@
 <div class="wrap">
   <div class="card">
     <header class="brand">
-      <h1 class="brand-title">Quiz di Preparazione</h1>
-      <button class="btn secondary" id="homeBtn" type="button">Home</button>
+      <h1 class="brand-title">🚕 Quiz Taxi & NCC</h1>
+      <button class="btn btn-secondary" id="homeBtn" type="button">Inizio</button>
     </header>
     
     <main class="main">
+      <!-- SCHERMATA QUIZ -->
       <div id="quizScreen">
         <div class="progress-row">
           <span id="counter">Domanda 1</span>
@@ -203,8 +299,8 @@
 
         <div class="toolbar">
           <select class="select" id="modeSelect">
-            <option value="practice">Modalità Ripasso</option>
-            <option value="exam">Modalità Esame (16 Domande)</option>
+            <option value="practice">Modalità Ripasso (Libera)</option>
+            <option value="exam">Modalità Esame Ufficiale (16 Domande)</option>
           </select>
           <select class="select" id="topicSelect">
             <option value="all">Tutti gli argomenti</option>
@@ -221,30 +317,42 @@
         <div class="feedback" id="feedback"></div>
 
         <div class="actions">
-          <button class="btn primary" id="nextBtn" type="button" disabled>Conferma risposta</button>
+          <button class="btn btn-primary" id="nextBtn" type="button" disabled>Conferma risposta</button>
         </div>
 
         <div class="stats" id="statsRow">
-          <div class="stat"><strong id="correctCount">0</strong><span>Corrette</span></div>
-          <div class="stat"><strong id="wrongCount">0</strong><span>Errori</span></div>
+          <div class="stat"><strong id="correctCount" style="color: var(--green);">0</strong><span>Corrette</span></div>
+          <div class="stat"><strong id="wrongCount" style="color: var(--red);">0</strong><span>Errori</span></div>
           <div class="stat"><strong id="remainingCount">0</strong><span>Rimanenti</span></div>
         </div>
       </div>
 
+      <!-- SCHERMATA RISULTATI -->
       <div id="resultScreen" class="hidden result">
         <h2>Risultato Finale</h2>
         <div id="statusBadge" class="status-badge"></div>
-        <p id="resultText"></p>
-        <div id="topicBreakdown" style="text-align: left; margin: 20px 0; font-size: 14px;"></div>
-        <button class="btn primary" id="restartBtn" type="button">Nuova Sessione</button>
-        <div class="review-list" id="reviewList" style="margin-top:20px;"></div>
+        <p id="resultText" style="font-size: 16px; margin-bottom: 16px;"></p>
+        
+        <div id="topicBreakdown" style="text-align: left; margin: 20px 0; font-size: 14px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid var(--border);"></div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="restartBtn" type="button">Nuova Sessione</button>
+          <button class="btn btn-warning hidden" id="retryErrorsBtn" type="button">Ripeti Solo Errori 🎯</button>
+        </div>
+
+        <div class="global-stats" id="globalStatsBox">
+          📊 <b>I tuoi progressi totali (salvati sul dispositivo):</b><br>
+          <span id="globalStatsText">Nessuna statistica registrata.</span>
+        </div>
+
+        <div class="review-list" id="reviewList"></div>
       </div>
     </main>
   </div>
 </div>
 
 <script>
-// DATI CON SOLTANTO INGLESE
+// BASE DATI INTEGRA
 const RAW_DATA = `
 Inglese | Where ………. from? | You are | Are you | Are | 2
 Inglese | Where ……….? | You live | Are you live | Do you live | 3
@@ -656,7 +764,7 @@ Normativa Statale e Regionale | Ai sensi dell'art.46 comma 1 della Legge Regiona
 Normativa Statale e Regionale | La Legge Regionale 4 aprile 2012 n.6 "Disciplina del Settore dei Trasporti" è composta da quanti articoli? | Sessantasette | Sessanta | Cinquantotto | 1
 Normativa Statale e Regionale | Ai sensi dell'art.26 comma 1 della Legge Regionale 4 aprile 2012 n.6 la commissione tecnica provinciale è composta, tra gli altri, da: | Un rappresentante designato dal compartimento della Polizia Stradale della Lombardia | Un rappresentante designato dall'Arma dei Carabinieri | Un rappresentante designato dalla Guardia di Finanza | 1
 Normativa Statale e Regionale | Ai sensi dell'art.25 comma 1 della Legge Regionale 4 aprile 2012 n.6, il ruolo provinciale dei conducenti di veicoli o natanti adibiti a servizi pubblici non di linea, presso quale ente è istituito? | Camera di Commercio | Regione | Province | 1
-Normativa Statale e Regionale | Ai sensi dell'art.27 comma 3 della Legge Regionale 4 aprile 2012 n.6, per favorire il miglioramento della qualità ambientale e della sicurezza, da chi sono concessi contributi in conto capitale ai titolari di licenza taxi, nelle forme previste dall'art.7 Legge 21/1992? | Comune | Regione | Provincia | 2
+Normativa Statale e Regionale | Ai sensi dell'art.27 comma 3 della Legge Regionale 4 aprile 2012 n.6, per favorire il miglioramento della qualità ambientale e della sicurezza, da chi sono concessi contributi in conto capitale ai titolari di licenza taxi, nelle forms previste dall'art.7 Legge 21/1992? | Comune | Regione | Provincia | 2
 Normativa Statale e Regionale | Ai sensi dell'art.24 comma 2 della Legge Regionale 4 aprile 2012 n.6 la violazione agli obblighi del servizio taxi comporta: | La sanzione administrative della sospensione da uno a trenta giorni della licenza per l'esercizio taxi | La sospensione della patente di guida | La decadenza del CAP | 1
 Normativa Statale e Regionale | L'iscrizione al ruolo dei conducenti, di cui alla Legge Regionale 4 aprile 2012 n.6, è requisito indispensabile per: | Il rilascio della licenza per l'esercizio del servizio taxi e l'autorizzazione per l'esercizio del servizio di noleggio con conducente | L'abilitazione alla guida dei motocicli | Espletare l'attività di responsabile di agenzia turistica | 1
 Normativa Statale e Regionale | Ai sensi dell'art.46 comma 1 della Legge Regionale 14 luglio 2009 n.11, è fatto obbligo di rilasciare attestato comprovante l'importo della corsa: | A richiesta | Sempre | Per importi superiori ai 20 euro | 1
@@ -797,7 +905,7 @@ Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche d
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Attendere che l'utente scenda, azionando contestualmente la segnalazione d'emergenza (quattro frecce) | Azzerare il tassametro | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | 2
 Regolamento e Comportamento | Per quali motivi può essere, tra l'altro, revocata la licenza taxi? (art.40) | Per mancato rispetto dell'orario di servizio | Per inottemperanza all'obbligo di presentarsi alla visita straordinaria di controllo | Per aver manomesso il tassametro al fine di alterarne il funzionamento | 3
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
-Regolamento e Comportamento | Gli incaricati della sorveglianza devono ritirare la licenza d'esercizio quando accertino, tra l'altro, che: (art.37) | L'autopubblica è il circolazione senza aver ottemperato all'obbligo si presentarsi alla visita straordinaria di controllo | Il titolare abbia manomesso il tassametro al fine di alterarne il funzionamento | Il titolare non abbia controllato il regolare funzionamento del contachilometri | 1
+Regolamento e Comportamento | Gli incaricati della sorveglianza devono ritirare la licenza d'esercizio quando accertino, tra l'altro, che: (art.37) | L'autopubblica è il circolazione senza aver ottemperato all'obbligo si presentarsi alla visita straordinaria di controllo | Il titolare abbia manomesso il tassametro al fine di alterarne il funzionamento | Il titolare non abbia controlled il regolare funzionamento del contachilometri | 1
 Regolamento e Comportamento | è possibile cumulare più licenze per l'esercizio del servizio taxi in capo al medesimo soggetto? (art.6) | Solo se non è una persona fisica | No | Solo se esso è associato ad una cooperativa | 2
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto nei confronti dei passeggeri trasportati | 3
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
@@ -821,7 +929,7 @@ Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della
 Regolamento e Comportamento | I conducenti di taxi durante il servizio hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Essere sempre muniti di una congrua quantità di moneta spicciola per essere in grado di corrispondere al cliente il resto | 3
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Disimpegnare il servizio con ogni decoro | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
 Regolamento e Comportamento | I conducenti di taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente, con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere sempre un contegno corretto sia con il pubblico che con i colleghi | 3
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto sia con il pubblico che con i colleghi | 3
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicado dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
 Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi | Vestire decorosamente | 1
 Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Accettare il pagamento di supplementi oltre il prezzo della corsa, quando sono dovuti | Fare servizio senza aver azionato il tassametro | Interrompere il lavoro a fine turno di servizio | 2
@@ -829,7 +937,7 @@ Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso l
 Regolamento e Comportamento | Al conducente di taxi in servizio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere l'importo segnato dal tassametro a fine corsa | Allontanarsi dall'autoveicolo in sosta in attesa di passeggeri | 3
 Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
 Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
-Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone e/o cani di proprietà del conducente | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
+Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone e/o cani di proprietà del conducente | Tenere con gli utenti un contegno corretto | Seguire les indicazioni di percorso fornite dall'utente | 1
 Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi del carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita ambulante di merci | 3
 Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
 Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
@@ -852,8 +960,8 @@ Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | In
 Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
 Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
 Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello "FUORI SERVIZIO" al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e fumare | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
+Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello di fuori servizio al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
+Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e tenere la radio ad alto volume | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
 Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
 Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno l'obbligo di: | Prodigarsi per portare a destinazione l'utente anche se il veicolo si guasta | Prevedere l'importo definitivo e contrattare con l'utente il corrispettivo | Concordare e programmare in accordo con l'utente più viaggi o percorsi | 1
 Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | 3
@@ -886,7 +994,7 @@ Regolamento e Comportamento | Da dove deve iniziare il Servizio Taxi? (art.37 Re
 Regolamento e Comportamento | Cosa riporta il Foglio di Servizio NCC? | Targa, conducente, data, ora, km, destinazione, utente | Il divieto di fumare | La capacità del bagaglio | 1
 `;
 
-// Parsing e Deduplicazione
+// PARSING E DEDUPLICAZIONE
 function parseQuestions(dataStr) {
   const lines = dataStr.trim().split('\n');
   const seenQuestions = new Set();
@@ -923,13 +1031,12 @@ function parseQuestions(dataStr) {
 
 const ALL_QUESTIONS = parseQuestions(RAW_DATA);
 
-// Mappatura delle 4 Macro Categorie
-const MACRO_CATEGORIES = {
-  'Geografia': ['Geografia'],
-  'Normativa Statale e Regionale': ['Normativa Statale e Regionale'],
-  'Regolamento e Comportamento': ['Regolamento e Comportamento'],
-  'Inglese': ['Inglese']
-};
+const MACRO_CATEGORIES = [
+  'Geografia',
+  'Normativa Statale e Regionale',
+  'Regolamento e Comportamento',
+  'Inglese'
+];
 
 const letters = ['A', 'B', 'C'];
 let pool = [];
@@ -943,32 +1050,26 @@ let macroErrors = {};
 
 const $ = id => document.getElementById(id);
 
-function getMacroCategory(topic) {
-  for (const [macro, topics] of Object.entries(MACRO_CATEGORIES)) {
-    if (topics.includes(topic)) return macro;
-  }
-  return topic;
-}
-
-function initSession() {
+// INIZIALIZZAZIONE SESSIONE
+function initSession(customPool = null) {
   const mode = $('modeSelect').value;
   const topicFilter = $('topicSelect').value;
 
-  if (mode === 'exam') {
+  if (customPool) {
+    // Sessione speciale (es. Solo Errori)
+    pool = [...customPool];
+    $('modeDisplay').textContent = "Recupero Errori";
+  } else if (mode === 'exam') {
     pool = [];
-    
-    // Per ciascuna delle 4 macro categorie estrae esattamente 4 domande (16 totali)
-    ['Geografia', 'Normativa Statale e Regionale', 'Regolamento e Comportamento', 'Inglese'].forEach(macro => {
-      const categoryQuestions = ALL_QUESTIONS.filter(q => MACRO_CATEGORIES[macro].includes(q.topic));
+    MACRO_CATEGORIES.forEach(macro => {
+      const categoryQuestions = ALL_QUESTIONS.filter(q => q.topic === macro);
       categoryQuestions.sort(() => Math.random() - 0.5);
       pool.push(...categoryQuestions.slice(0, 4));
     });
-
-    // Mescola il totale delle 16 domande d'esame
     pool.sort(() => Math.random() - 0.5);
     $('modeDisplay').textContent = "Modalità Esame (16 Domande)";
   } else {
-    // Modalità Ripasso
+    // Modalità Ripasso Libera
     pool = ALL_QUESTIONS.filter(q => topicFilter === 'all' || q.topic === topicFilter);
     pool.sort(() => Math.random() - 0.5);
     $('modeDisplay').textContent = "Modalità Ripasso";
@@ -981,13 +1082,16 @@ function initSession() {
   wrong = 0;
   history = [];
   macroErrors = {};
-  Object.keys(MACRO_CATEGORIES).forEach(m => macroErrors[m] = 0);
+  MACRO_CATEGORIES.forEach(m => macroErrors[m] = 0);
 
   $('resultScreen').classList.add('hidden');
   $('quizScreen').classList.remove('hidden');
+  $('topicSelect').disabled = (mode === 'exam' || customPool !== null);
+
   renderQuestion();
 }
 
+// RENDERIZZA LA DOMANDA
 function renderQuestion() {
   if (index >= pool.length) {
     showResults();
@@ -1010,7 +1114,16 @@ function renderQuestion() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'answer';
-    btn.innerHTML = `<span class="letter">${letters[i]}</span><span>${opt}</span>`;
+    
+    const letterSpan = document.createElement('span');
+    letterSpan.className = 'letter';
+    letterSpan.textContent = letters[i];
+
+    const textSpan = document.createElement('span');
+    textSpan.textContent = opt;
+
+    btn.appendChild(letterSpan);
+    btn.appendChild(textSpan);
     btn.addEventListener('click', () => chooseOption(i));
     answersContainer.appendChild(btn);
   });
@@ -1027,6 +1140,7 @@ function renderQuestion() {
   $('remainingCount').textContent = pool.length - index;
 }
 
+// SELEZIONA OPZIONE
 function chooseOption(i) {
   if (answered) return;
   selected = i;
@@ -1037,13 +1151,13 @@ function chooseOption(i) {
   $('nextBtn').disabled = false;
 }
 
+// GESTIONE CONFERMA / AVANZAMENTO
 function handleNext() {
   if (selected === null) return;
 
   const mode = $('modeSelect').value;
   const q = pool[index];
   const isCorrect = (selected === q.answer);
-  const macroCat = getMacroCategory(q.topic);
 
   if (!answered) {
     answered = true;
@@ -1051,8 +1165,8 @@ function handleNext() {
       correct++;
     } else {
       wrong++;
-      if (macroErrors[macroCat] !== undefined) {
-        macroErrors[macroCat]++;
+      if (macroErrors[q.topic] !== undefined) {
+        macroErrors[q.topic]++;
       }
     }
 
@@ -1070,13 +1184,13 @@ function handleNext() {
 
     const fb = $('feedback');
     if (mode === 'exam') {
-      fb.className = 'feedback show';
-      fb.textContent = 'Risposta salvata. I risultati saranno visibili al termine dell’esame.';
+      fb.className = 'feedback show info';
+      fb.textContent = 'Risposta salvata. Esito disponibile al termine dell’esame.';
     } else {
       fb.className = 'feedback show ' + (isCorrect ? 'good' : 'bad');
       fb.textContent = isCorrect 
-        ? 'Risposta Corretta!' 
-        : `Risposta Errata. Quella corretta era: ${q.options[q.answer]}`;
+        ? '✨ Risposta Corretta!' 
+        : `❌ Risposta Errata. La risposta corretta era: ${q.options[q.answer]}`;
     }
 
     $('correctCount').textContent = correct;
@@ -1090,6 +1204,7 @@ function handleNext() {
   }
 }
 
+// SCHERMATA FINALE RISULTATI
 function showResults() {
   $('quizScreen').classList.add('hidden');
   $('resultScreen').classList.remove('hidden');
@@ -1099,6 +1214,10 @@ function showResults() {
   const badge = $('statusBadge');
   const resultText = $('resultText');
   const topicBreakdown = $('topicBreakdown');
+  const retryBtn = $('retryErrorsBtn');
+
+  // Salvataggio statistiche nel LocalStorage
+  saveGlobalStats(correct, wrong);
 
   if (mode === 'exam') {
     let failedMacro = null;
@@ -1111,22 +1230,22 @@ function showResults() {
 
     if (isPassed) {
       badge.className = 'status-badge passed';
-      badge.textContent = 'ESAME SUPERATO!';
+      badge.textContent = '🎉 ESAME SUPERATO!';
     } else {
       badge.className = 'status-badge failed';
-      badge.textContent = 'ESAME NON SUPERATO';
+      badge.textContent = '❌ ESAME NON SUPERATO';
     }
 
-    let detailMsg = `Hai totalizzato <b>${correct}</b> risposte corrette su 16 (<b>${wrong}</b> errori).<br>`;
-    if (totalFailed) detailMsg += `• Hai superato il limite massimo di 4 errori totali.<br>`;
-    if (failedMacro) detailMsg += `• Hai commesso più di 2 errori nella macro categoria: <b>${failedMacro}</b>.<br>`;
+    let detailMsg = `Punteggio totale: <b>${correct}</b> corrette su 16 (<b>${wrong}</b> errori).<br>`;
+    if (totalFailed) detailMsg += `<span style="color:red">• Superato il limite di 4 errori totali consentiti.</span><br>`;
+    if (failedMacro) detailMsg += `<span style="color:red">• Più di 2 errori nella categoria: <b>${failedMacro}</b>.</span><br>`;
 
     resultText.innerHTML = detailMsg;
 
-    let breakdownHtml = '<h4>Dettaglio errori per Macro Categoria:</h4><ul>';
+    let breakdownHtml = '<b>Dettaglio Errori Categoria:</b><ul style="margin-top: 8px; padding-left: 20px;">';
     Object.keys(macroErrors).forEach(macro => {
       const errs = macroErrors[macro] || 0;
-      breakdownHtml += `<li><b>${macro}</b>: ${errs} errori ${errs > 2 ? '<strong style="color:red;">(Superato limite di 2)</strong>' : ''}</li>`;
+      breakdownHtml += `<li><b>${macro}</b>: ${errs} errori ${errs > 2 ? '<strong style="color:red;">(Max 2)</strong>' : '✓'}</li>`;
     });
     breakdownHtml += '</ul>';
     topicBreakdown.innerHTML = breakdownHtml;
@@ -1135,38 +1254,76 @@ function showResults() {
     badge.className = 'status-badge passed';
     badge.textContent = 'SESSIONE COMPLETATA';
     const pct = pool.length ? Math.round((correct / pool.length) * 100) : 0;
-    resultText.innerHTML = `Risposte corrette: <b>${correct}</b> su ${pool.length} (${pct}%). Errori: <b>${wrong}</b>.`;
-    topicBreakdown.innerHTML = '';
+    resultText.innerHTML = `Risposte corrette: <b>${correct}</b> su ${pool.length} (<b>${pct}%</b>). Errori: <b>${wrong}</b>.`;
+    topicBreakdown.innerHTML = 'Continua ad esercitarti per consolidare la tua preparazione!';
   }
 
-  // Riepilogo Domande
+  // Abilita il tasto per ripetere solo gli errori
+  const wrongQuestions = history.filter(h => !h.isCorrect).map(h => h.q);
+  if (wrongQuestions.length > 0) {
+    retryBtn.classList.remove('hidden');
+    retryBtn.onclick = () => initSession(wrongQuestions);
+  } else {
+    retryBtn.classList.add('hidden');
+  }
+
+  // Riepilogo Dettagliato Domande
   const list = $('reviewList');
-  list.innerHTML = '<h3>Riepilogo Domande</h3>';
+  list.innerHTML = '<h3 style="margin-bottom: 12px; font-weight: 800;">Riepilogo Domande</h3>';
+  
   history.forEach((h, i) => {
     const item = document.createElement('div');
     item.className = 'review-item';
-    item.innerHTML = `
-      <b>${i + 1}. [${h.q.topic}] ${h.q.question}</b>
-      <span class="${h.isCorrect ? 'ok' : 'no'}">
-        Tua risposta: ${h.q.options[h.selected]} ${h.isCorrect ? '✓' : `| Corretta: ${h.q.options[h.q.answer]}`}
-      </span>
-    `;
+    
+    const b = document.createElement('b');
+    b.textContent = `${i + 1}. [${h.q.topic}] ${h.q.question}`;
+    
+    const span = document.createElement('span');
+    span.className = h.isCorrect ? 'ok' : 'no';
+    if (h.isCorrect) {
+      span.textContent = `✓ Tua risposta: ${h.q.options[h.selected]}`;
+    } else {
+      span.textContent = `❌ Tua risposta: ${h.q.options[h.selected]} | Corretta: ${h.q.options[h.q.answer]}`;
+    }
+
+    item.appendChild(b);
+    item.appendChild(span);
     list.appendChild(item);
   });
+
+  updateGlobalStatsDisplay();
 }
 
-// Event Listeners
+// GESTIONE SALVATAGGIO PROGRESSI (LOCALSTORAGE)
+function saveGlobalStats(c, w) {
+  let stats = JSON.parse(localStorage.getItem('taxi_quiz_stats')) || { totalQuiz: 0, correct: 0, wrong: 0 };
+  stats.totalQuiz += 1;
+  stats.correct += c;
+  stats.wrong += w;
+  localStorage.setItem('taxi_quiz_stats', JSON.stringify(stats));
+}
+
+function updateGlobalStatsDisplay() {
+  let stats = JSON.parse(localStorage.getItem('taxi_quiz_stats'));
+  if (stats) {
+    const totalAns = stats.correct + stats.wrong;
+    const pct = totalAns > 0 ? Math.round((stats.correct / totalAns) * 100) : 0;
+    $('globalStatsText').innerHTML = `Sessioni completate: <b>${stats.totalQuiz}</b> | Risposte corrette totali: <b>${stats.correct}</b> | Precisione media: <b>${pct}%</b>`;
+  }
+}
+
+// EVENT LISTENERS
 $('nextBtn').addEventListener('click', handleNext);
-$('modeSelect').addEventListener('change', initSession);
-$('topicSelect').addEventListener('change', initSession);
-$('restartBtn').addEventListener('click', initSession);
+$('modeSelect').addEventListener('change', () => initSession());
+$('topicSelect').addEventListener('change', () => initSession());
+$('restartBtn').addEventListener('click', () => initSession());
 $('homeBtn').addEventListener('click', () => {
-  if (confirm('Vuoi azzerare la sessione e tornare all’inizio?')) {
+  if (confirm('Vuoi azzerare la sessione corrente e tornare all’inizio?')) {
     initSession();
   }
 });
 
-// Avvio
+// AVVIO APPLICAZIONE
 initSession();
 </script>
 </body>
