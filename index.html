@@ -207,14 +207,11 @@
             <option value="exam">Modalità Esame (16 Domande)</option>
           </select>
           <select class="select" id="topicSelect">
-            <option value="all">Tutti gli argomenti / Tutte le lingue</option>
+            <option value="all">Tutti gli argomenti</option>
             <option value="Geografia">Geografia</option>
             <option value="Normativa Statale e Regionale">Normativa Statale e Regionale</option>
             <option value="Regolamento e Comportamento">Regolamento e Comportamento</option>
             <option value="Inglese">Inglese</option>
-            <option value="Spagnolo">Spagnolo</option>
-            <option value="Francese">Francese</option>
-            <option value="Tedesco">Tedesco</option>
           </select>
         </div>
 
@@ -247,7 +244,7 @@
 </div>
 
 <script>
-// RAW DATA
+// DATI CON SOLTANTO INGLESE
 const RAW_DATA = `
 Inglese | Where ………. from? | You are | Are you | Are | 2
 Inglese | Where ……….? | You live | Are you live | Do you live | 3
@@ -466,7 +463,7 @@ Geografia | La SS 12 “dell’Abetone e del Brennero” attraversa per pochi ch
 Geografia | La località di Bellagio è attraversata dalla statale: | SS 239 “dei laghi di Pusiano e Garlate” | SS 583 “Lariana”| SS 33 “del Sempione” | 2
 Geografia | Como è attraversata, tra le altre, dalla seguente statale: | SS 33 “del Sempione” | SS 36 “del lago di Como e dello Spluga” | SS 35 “dei Giovi” | 3
 Geografia | La cittadina di Codogno è raggiunta dalla seguente statale: | SS 591 “Cremasca” | SS 36 “del lago di Como e dello Spluga” | SS 472 “Bergamina” | 1
-Geografia | Legnano si trova: | Sulla SS “Sempione” n. 33 | Sulla SS “Paullese” n. 415 | Sulla SS n.10 “Padana inferiore” | 1
+Geografia | Legnano si trova: | Sulla SS “Sempione” n. 33 | Sulla SS “Paullese” n. 415 | Sulla SS n.10 “Padana inferior” | 1
 Geografia | L’autostrada A4 Torino-Trieste attraversa quattro province lombarde nell’ordine: | Milano, Lodi, Brescia | Milano, Monza, Bergamo, Brescia | Milano, Bergamo, Mantova | 2
 Geografia | La SS 470 attraversa: | La Val di Scalve | La Val Seriana | La Val Brembana | 3
 Geografia | Quale strada statale collega Pavia a Lodi? | La SS 234 “Codognese” | La SS 235 “di Orzinuovi” | La SS 35 “dei Giovi” | 2
@@ -650,7 +647,7 @@ Normativa Statale e Regionale | Di quale colore devono essere le autovetture adi
 Normativa Statale e Regionale | Il ruolo provinciale dei conducenti di veicoli o natanti adibiti ai servizi pubblici non di linea è articolato, secondo l'art.25 comma 2 della Legge Regionale 4 aprile 2012 n.6, nelle sezioni: | Autovetture, natanti e ambulanze | Autovetture, natanti, motoslitte e pedalò | Autovetture, natanti, motocarrozzette e veicoli a trazione animale | 3
 Normativa Statale e Regionale | Ai sensi del comma 1 dell'art.24 della Legge Regionale 4 aprile 2012 n.6, chi aggiorna i contingenti delle licenze taxi e le autorizzazioni di noleggio con conducente relative a ciascun bacino di traffico, in relazione al mutamento di mobilità rilevato dal competente organo? | Le aree metropolitane competenti su segnalazione dei singoli comuni interessati | Il Commissario di Governo per la regione Lombardia | La Regione | 3
 Normativa Statale e Regionale | La revoca della licenza o dell'autorizzazione può essere dichiarata ai sensi dell'art.24 comma 4 della Legge Regionale 4 aprile 2012 n.6: | Dalla Camera di Commercio | Dal Prefetto | Dal Sindaco del Comune che l'ha rilasciata | 3
-Normativa Statale e Regionale | Ai sensi dell'art.51 comma 5 della Legge Regionale 14 luglio 2009 n.11, i comuni sono tenuti a comunicare alle province le licenze o le autorizzazioni di autonoleggio con conducente rilasciate, rispetto alle quote loro assegnate: | Entro il 31 dicembre di ogni anno | Due volte l'anno entro il 30 giugno ed entro il 31 dicembre | Ad ogni rinnovo del Consiglio provinciale | 1
+Normativa Statale e Regionale | Ai sensi dell'art.51 comma 5 della Legge Regionale 14 luglio 2009 n.11, i comuni sono tenuti a comunicare alle province le licenze o le autorizzazioni di autonoleggio con conducente rilasciate, rispetto alle quote assigned: | Entro il 31 dicembre di ogni anno | Due volte l'anno entro il 30 giugno ed entro il 31 dicembre | Ad ogni rinnovo del Consiglio provinciale | 1
 Normativa Statale e Regionale | Ai sensi dell'art.51 comma 1 della Legge Regionale 14 luglio 2009 n.11, ai fini della programmazione dei servizi il territorio regionale è articolato: | In 10 bacini di traffico | In 11 bacini di traffico | In 13 bacini di traffico | 2
 Normativa Statale e Regionale | Ai sensi dell'art.46 comma 1 della Legge Regionale 14 luglio 2009 n.11, i veicoli devono essere dotati: | Di tassametro | Di tassametro omologato | Di avvisi chiaramente leggibili | 2
 Normativa Statale e Regionale | La Legge Regionale 4 aprile 2012 n.6 "Disciplina del Settore dei Trasporti" è composta da quanti articoli? | Sessantasette | Sessanta | Cinquantotto | 1
@@ -667,7 +664,7 @@ Normativa Statale e Regionale | Il contingentamento delle licenza e autorizzazio
 Normativa Statale e Regionale | Ai sensi della Legge Regionale 4 aprile 2012 n.6 il ruolo dei conducenti di veicoli o natanti adibiti a servizi pubblici non di linea è articolato nelle seguenti sezioni: | Conducenti di autovetture, motocarrozzette, natanti e veicoli a trazione animale | Conducenti di autobus di linea | Conducenti di taxi muniti di radiotaxi | 1
 Normativa Statale e Regionale | Ai sensi dell'art.51 comma 5 della Legge Regionale 14 luglio 2009 n.11, i Comuni sono tenuti a comunicare le licenze e le autorizzazioni di autonoleggio con conducente rilasciate rispetto alle quote assigned, alla/alle: | Regione | Camera di Commercio | Province | 3
 Normativa Statale e Regionale | Il possesso del certificato di abilitazione professionale di cui al DL 285/92 è requisito indispensabile, ai sensi dell'art.25 della Legge Regionale 4 aprile 2012 n.6 per l'iscrizione: | Al ruolo provinciale dei conducenti per i servizi di linea | All'apposita lista della motorizzazione relativa ai conducenti di autovetture in attesa di assegnazione di licenza | Al ruolo provinciale dei conducenti | 3
-Normativa Statale e Regionale | Nelle zone di intensa conurbazione individuate ai sensi dell'art.52 comma 4 della Legge Regionale 14 luglio 2009 n.11, i veicoli adibiti al servizio taxi hanno diritto di: | Effettuare il servizio anche al di fuori delle apposite aree | Sosta e ricarico nelle apposite aree di stazionamento | Ignorare le zone di sosta | 2
+Normativa Statale e Regionale | Nelle zone di intensa conurbazione individuate ai sensi dell'art.52 comma 4 della Legge Regionale 14 luglio 2009 n.11, i veicoli adibiti al servizio taxi hanno diritto di: | Effettuare il servizio anche al di fuori delle apposite aree | Sosta e ricarico nelle apposite areas di stazionamento | Ignorare le zone di sosta | 2
 Normativa Statale e Regionale | I criteri e le procedure per determinare il contingente complessivo delle licenze e delle autorizzazioni assentibili, ai sensi dell'art.24 comma 1 della Legge Regionale 4 aprile 2012 n.6, sono disciplinati con: | Decreto ministeriale | Regolamento provinciale | Regolamento regionale | 3
 Normativa Statale e Regionale | Le zone caratterizzate da intensa conurbazione di cui all'art.52 comma 1 della Legge Regionale 14 luglio 2009 n.11 sono: | Quelle ove non esiste un servizio di noleggio con conducente | Quelle individuate dalla giunta regionale, sentito le Province e i Comuni interessati e previo parere della Commissione Consultiva Regionale | Quelle in cui è esercitato il servizio taxi esclusivamente mediante radiotaxi | 2
 Normativa Statale e Regionale | Ai sensi dell'art.24 comma 4 della Legge Regionale 4 aprile 2012 n.6, la revoca della licenza o dell'autorizzazione è dichiarata: | Dal Prefetto | Dal Sindaco del Comune che l'ha rilasciata | Dalla Camera di Commercio | 2
@@ -776,7 +773,7 @@ Regolamento e Comportamento | Il servizio taxi ha lo scopo di soddisfare le rich
 Regolamento e Comportamento | Il servizio taxi può essere svolto solamente con autovetture da piazza? ( art.1) | Si | No, può essere svolto anche con minibus | No, può essere svolto anche con minibus ma con autorizzazione comunale | 1
 Regolamento e Comportamento | Qual è lo scopo del servizio taxi? (art.1) | Quello di soddisfare esigenze di trasporto individuale | Quello di soddisfare esigenze di trasporto individuale o di piccoli gruppi | Quello di soddisfare esigenze di trasporto di qualsiasi genere, anche con contrato di noleggio | 2
 Regolamento e Comportamento | Chi può essere titolare di licenza per l'esercizio del servizio taxi? (art.9) | La persona singola | La persona giuridica | Qualsiasi società di capitali | 1
-Regolamento e Comportamento | Come viene assegnata la licenza per l'esercizio del servizio taxi? (art.9) | Mediante concorso pubblico | Mediante iscrizione al ruolo conducenti | A seguito di denuncia di inizio del servizio | 1
+Regolamento e Comportamento | Come viene assigned la licenza per l'esercizio del servizio taxi? (art.9) | Mediante concorso pubblico | Mediante iscrizione al ruolo conducenti | A seguito di denuncia di inizio del servizio | 1
 Regolamento e Comportamento | Come viene assigned l'autorizzazione per il servizio di noleggio con conducente? (art.6) | Mediante concorso pubblico | Mediante iscrizione al ruolo dei conducenti | A seguito di denuncia di inizio del servizio | 1
 Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
 Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Non essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età superiore ai 55 anni | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 1
@@ -822,7 +819,7 @@ Regolamento e Comportamento | I conducenti di taxi durante il servizio hanno l'o
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Disimpegnare il servizio con ogni decoro | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
 Regolamento e Comportamento | I conducenti di taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente, con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere sempre un contegno corretto sia con il pubblico che con i colleghi | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicato dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicado dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
 Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi | Vestire decorosamente | 1
 Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Accettare il pagamento di supplementi oltre il prezzo della corsa, quando sono dovuti | Fare servizio senza aver azionato il tassametro | Interrompere il lavoro a fine turno di servizio | 2
 Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi stabiliti dall'Amministrazione comunale | Attraverso lo stazionamento in apposite rimesse | 2
@@ -884,108 +881,6 @@ Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno
 Regolamento e Comportamento | Dove vanno posizionate le tariffe? | Dietro al sedile anteriore lato passeggero | Di fianco al tassametro | Nella portiera lato conducente | 1
 Regolamento e Comportamento | Da dove deve iniziare il Servizio Taxi? (art.37 Regolamento di Bacino 2014) | Dal Bacino di Traffico del Sistema Aeroportuale | Dalla Provincia del Comune che ha rilasciato la Licenza | Dalla Città Metropolitana di Milano | 2
 Regolamento e Comportamento | Cosa riporta il Foglio di Servizio NCC? | Targa, conducente, data, ora, km, destinazione, utente | Il divieto di fumare | La capacità del bagaglio | 1
-Francese | Je suis canadienne; j’habite ……… Toronto. | à | De | Pour | 1
-Francese | Mes parents ont ………. yeux bleus | Les | Des | L' | 1
-Francese | Nous arrivons ………… Russie où il fait très froid. | à | En | De | 3
-Francese | Qu’est-ce que c’est? C’est ………… spécialité de mon pays. | Une | De | Des | 1
-Francese | J’aime les italiens et en particulier …………. cuisine. | Son | Leur | Sa | 2
-Francese | Ma grand-mère est incapable ……. savoir utiliser un téléphone mobile. | à |De | Puor | 2
-Francese | Est-ce que tu vas au cinéma samedi? Non je n’ ……… vais pas. | Le | En | Y | 3
-Francese | Pour mon anniversaire, j’invite tous ………. amis chez moi. | Mes | Mon | Ma | 1
-Francese | Alexandra est …………. au restaurant. | Serveur | Serveuse | Service | 2
-Francese | …………….. ton numéro de téléphone? | Quel est | Quels sont | Quelle est | 1
-Francese | Est-ce que tu as fait ……………………. tennis hier? | De le | Du | Le | 2
-Francese | Je viens ……….. Italie. | De | D' | Du | 2
-Francese | Elles …………….. à la chorale du village. | Chanter | Chantent | Chantè | 2
-Francese | Cet après-midi, nous ……………….. le musée des Beaux-Arts. | Aller visitons | Aller visiter | Allons visiter | 3
-Francese | Quand j’étais plus jeune, je ………… tous les week-ends. | Ai skiè | Skiais | J'aurais ski | 2
-Francese | Excusez-moi madame, je …………… essayer une autre taille s’il vous plaît. | Voudrais | Je veut | Voulais | 1
-Francese | Si! Je suis sûre que Bernadette ………….. ce soir. | Vienne | Viendra | Viens | 2
-Francese | Je travaille en ……………. de la musique. | ècoute | ècouter | ècoutant | 3
-Francese | Tu veux dormir ………. moi? | Chez | à | De | 1
-Francese | Donnez-moi un kilo ………. pommes de terre. | Des | Du | De | 3
-Francese | Pourquoi tu ne …………….. écoutes pas? Nous sommes tes parents! | Nous | Me | Lui | 1
-Francese | Demain, nous ……………… faire du bateau. | Ayons | Irons | Sommes allès | 2
-Francese | ……….. demandé à ma mère de venir. | J'ai | Je suis | Je | 1
-Francese | Elle ………. de la maison. | A sorti | Est sorti | Est sortie | 3
-Francese | Mon voisin ……………. son chien trois fois ce matin. | A sorti | Est sorti | Ont sorti | 1
-Francese | Il va à Lyon? ……………………………… | Oui Felix en va | Oui Felix y va | Non Felix y va | 2
-Francese | Je connais bien cet homme ……………… est sur la photo. | Qui | Que | Où | 1
-Francese | C’est mon parapluie! C’est …………………. | La mien | Le mienne | Le mien | 3
-Spagnolo | Laura ……………… en Sevilla. | Vivo | Vive | Vives | 2
-Spagnolo | …………………. la mùsica. | Yo gusto | Me gusto de | Me gusta | 3
-Spagnolo | No gracias, no quiero comer. No ………….. hambre. | Soy | Tengo | Estoy | 2
-Spagnolo | Juan trabaja en un bar, es ………… | Mecànico | Restaurador | Camarero | 3
-Spagnolo | La profesora es ……. Argentina. | De | A | Desde | 1
-Spagnolo | Mi apartamento està ……………… la playa. | Cerca | Cerca a | Cerca de | 3
-Spagnolo | Los chicos estàn ……………. en su cuarto. | Estudiendo | Estudiandos | Estudiando | 3
-Spagnolo | Estos zapatos son ………….. caros. | Muy | Mucha | Mucho | 1
-Spagnolo | Madrid …………… en el centro de España. | Està | Es | Estamos | 1
-Spagnolo | Nosotros ……………… varios idiomas, por ejemplo castellano. | Hablamos | Scribi | Vivimos | 1
-Spagnolo | Vosotras …………….. una gran paella. | Comes | Cocinis | Comen | 2
-Spagnolo | Ellos …………………… las manos con jabon. | Se duchan | Se levantan | Se lavan | 3
-Spagnolo | Donde ……………… en esta ciudad una farmacia? | Est | Son | Hay | 3
-Spagnolo | En esta ciudad hay ………………. lugares muy turisticos. | Unos | Unas | Un | 1
-Spagnolo | Begoa y Eugenia estàn ……………….. en el despacho. | Leendo | Estudiando | Estudiano | 2
-Spagnolo | En Agosto de 1968 ………………. mis estudios. | Terminé | Termina | Termino | 1
-Spagnolo | Dame ………. libros por favor. | Mas | Tus | Mi | 2
-Spagnolo | Elisa, ordena …………… cosas por favor. | Tu | Tuyas | Tus | 3
-Spagnolo | Jos ………… mucho en su proximo examen. | Piensa | Pienso | Pensa | 1
-Spagnolo | Ellos ……….. a los nios temprano. | Acuestan | Acuesta | Acostan | 1
-Spagnolo | Me alegro de que vosotras …………. comprado la casa. | Hayàis | Hayan | Hallan | 1
-Spagnolo | El joven, …………… vuelta espero, llega hoy. | Tuya | Cuya | Suy | 2
-Spagnolo | Cuando salimos del cine ya …………. de llover. | Habìa dejado | Habìa comenzado | Habas dejado | 1
-Spagnolo | La mesa ……….. de madera. | Es | Està | Eres | 1
-Spagnolo | ………… todos bien, gracias, no te preocupes. | Somos | Estamos | Bienvenidos | 2
-Spagnolo | No tienes que decir nada, ……… claro que el problema no es tuyo. | Siempre | Es | Serà | 2
-Spagnolo | ……….. dònde vienes? | A | De | En | 2
-Spagnolo | Mi hermano viaja siempre …………… coche. | A | De | En | 3
-Spagnolo | A que hora …………………… las noticias? | Se empiezan | Empiezan | Empezan | 2
-Spagnolo | Lola ……………… casi sempre a las siete. | Despierta | Despertar | Se despierta | 3
-Spagnolo | ……….. se cuece la pasta y despues, se añade la salsa. | Grande | Primero | Malo | 2
-Spagnolo | Lidia es una ……………. madre, solo piensa en sus hijos. | Tercera | Mal | Buena | 3
-Spagnolo | Pedro …………………. un curso la semana pasada. | Ganò | Ganar | Ganaron | 1
-Spagnolo | ………………… casa es muy grande y bonita. | Aquel | Aquella | Aquil | 2
-Spagnolo | Carmen y yo somos ………….. amigas. | Mucho | Muy | Nada | 2
-Spagnolo | Nosotros comemos ……………… fruta en verano. | Mucha | Muy | Mucho | 1
-Spagnolo | Ella es muy aburrida, siempre …………………. en las reuniones. | Se duerme | Dormirse | Se dorme | 1
-Spagnolo | ………….. Juan en casa? | Estan | Està | Estaban | 2
-Spagnolo | Faltan solo dos meses ………… terminar el curso | Para | Por | Porquè | 1
-Spagnolo | Ayer ……………… literatura y hoy leo una novela. | Estudiè | Estudiar | Estudiemos | 1
-Spagnolo | …………………. años tienes Cristina? | Dònde | Que | Cuantos | 3
-Spagnolo | …………… son los teléfonos de los bomberos? | Què | Cuàles | Por | 2
-Spagnolo | Las calles son ………………. estrechas. | Mucho | Cuantas | Muy | 3
-Spagnolo | Ana y yo …………………………. siempre 8 horas. | Dormimos | Duermimos | Durmimos | 1
-Spagnolo | ………………… fumar aquì? | Puede | Se puede | Poder | 2
-Spagnolo | …………….. una tienda nueva de informatica. | Han abrido | Han abierto | Han habido | 2
-Spagnolo | Lo siento, …………….. no he oìdo el despertador. | Porque | Es que | Que | 2
-Spagnolo | A qué se dedica Eva?  …………. enfermera. | Es | Esta | Tiene | 1
-Tedesco | Ich heiße Heinz und arbeite ………. Berlin. | In | Zu | An | 1
-Tedesco | Meine Frau ………… Lehrerin. | Sind | Seid | Ist | 2
-Tedesco | Ich wohne in Lecco und habe ……….. schönes Haus. | Ein | Eines | Einem | 1
-Tedesco | Wir haben Obst, Brot und Fleisch ……….. | Gekauft | Kaufen | Wird gekauft | 1
-Tedesco | ……………….. Peter Müller. | Heißt | Heißen | Heiße | 3
-Tedesco | Wo ……………… Frau Maier? | Arbeite | Arbeitet | Arbeitest | 2
-Tedesco | Heute ist Donnerstag. Gestern ………. Mittwoch. | Ist | War | Bist | 2
-Tedesco | “Kommst du auch zur Party?” Tut mir Leid, ich ……. leider nicht kommen. | Will | Muss | Kann | 3
-Tedesco | Ich habe heute bis 10.00 Uhr ………… | Schlafen | Geschlafen | Geschlaft | 2
-Tedesco | Möchtest du heute Abend …………. Film sehen? | Eine | Das | Einen | 3
-Tedesco | Ich gehe …………….. Hause. | Nach | Von | Aus | 1
-Tedesco | Hans fährt ……………… | Grün | Schnell | Groß | 2
-Tedesco | Ich mache ………………… Hausaufgaben im Café. | Meine | Meinen | Mein | 1
-Tedesco | “Wie finden Sie meinen neuen Pullover?” Oh, ……. ist aber schön! | Den | Dem | Der | 3
-Tedesco | “Wer ist der Mann? Kennst du ………….. ?” | Ihm | Ihn | Er | 2
-Tedesco | Kannst du …………… bitte das Buch geben? | Mein | Mich | Mir | 3
-Tedesco | Der Unterricht beginnt ………….. Montag um 10.00 Uhr. | Am | Im | An | 1
-Tedesco | Meine Freundin, ………… ich seit drei Jahren kenne, heiratet nächste Woche. | Sie | Die | Das | 2
-Tedesco | Petra wohnt in Berlin, ………… sie die Stadt nicht mag. | Obwohl | Weil | Warum | 1
-Tedesco | Ein Hund ist ……………… eine Maus. | Größer wie | Größer als | Mehr groß als | 2
-Tedesco | Ich lese gerne Bücher, aber ich gehe …………. ins Kino. | Lieber | Gerner | Besser | 1
-Tedesco | Gestern bin ich ins Kino ……… | Gegangt | Gewesen | Gegangen | 3
-Tedesco | ………… Sie mir bitte sagen, wann das Konzert beginnt? | Möchten | Könnten | Wollten | 2
-Tedesco | Herr Maier ist krank. Der Arzt hat gesagt dass er drei Tage im Bett liegen …… | Will | Soll | Kann | 2
-Tedesco | Am Montag habe ich ……………….. Bruder ein Geburtstagsgeschenk gekauft. | Meinem | Meinen | Meiner | 1
-Tedesco | Wir treffen uns …………… 10.00 Uhr. | An Mittwoch zu | Um Mittwoch am | Am Mittwoch um | 3
 `;
 
 // Parsing e Deduplicazione
@@ -1025,12 +920,12 @@ function parseQuestions(dataStr) {
 
 const ALL_QUESTIONS = parseQuestions(RAW_DATA);
 
-// Mappatura delle materie nelle 4 Macro Categorie per l'Esame
+// Mappatura delle 4 Macro Categorie
 const MACRO_CATEGORIES = {
   'Geografia': ['Geografia'],
   'Normativa Statale e Regionale': ['Normativa Statale e Regionale'],
   'Regolamento e Comportamento': ['Regolamento e Comportamento'],
-  'Lingue Straniere': ['Inglese', 'Spagnolo', 'Francese', 'Tedesco']
+  'Inglese': ['Inglese']
 };
 
 const letters = ['A', 'B', 'C'];
@@ -1045,7 +940,6 @@ let macroErrors = {};
 
 const $ = id => document.getElementById(id);
 
-// Helper per determinare la macro categoria
 function getMacroCategory(topic) {
   for (const [macro, topics] of Object.entries(MACRO_CATEGORIES)) {
     if (topics.includes(topic)) return macro;
@@ -1057,30 +951,15 @@ function initSession() {
   const mode = $('modeSelect').value;
   const topicFilter = $('topicSelect').value;
 
-  // Il selettore rimane sempre SBLOCCATO
-  $('topicSelect').disabled = false;
-
   if (mode === 'exam') {
     pool = [];
     
-    // Per le prime 3 macro categorie
-    ['Geografia', 'Normativa Statale e Regionale', 'Regolamento e Comportamento'].forEach(macro => {
+    // Per ciascuna delle 4 macro categorie estrae esattamente 4 domande (16 totali)
+    ['Geografia', 'Normativa Statale e Regionale', 'Regolamento e Comportamento', 'Inglese'].forEach(macro => {
       const categoryQuestions = ALL_QUESTIONS.filter(q => MACRO_CATEGORIES[macro].includes(q.topic));
       categoryQuestions.sort(() => Math.random() - 0.5);
       pool.push(...categoryQuestions.slice(0, 4));
     });
-
-    // Per la macro categoria "Lingue Straniere":
-    // Se l'utente ha scelto una lingua specifica (Inglese, Spagnolo, Francese, Tedesco), prende 4 domande SOLO da quella lingua!
-    const languages = ['Inglese', 'Spagnolo', 'Francese', 'Tedesco'];
-    let langQuestions = [];
-    if (languages.includes(topicFilter)) {
-      langQuestions = ALL_QUESTIONS.filter(q => q.topic === topicFilter);
-    } else {
-      langQuestions = ALL_QUESTIONS.filter(q => languages.includes(q.topic));
-    }
-    langQuestions.sort(() => Math.random() - 0.5);
-    pool.push(...langQuestions.slice(0, 4));
 
     // Mescola il totale delle 16 domande d'esame
     pool.sort(() => Math.random() - 0.5);
