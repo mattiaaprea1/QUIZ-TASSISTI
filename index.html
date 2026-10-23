@@ -1,110 +1,618 @@
 <!doctype html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f7c313">
-<title>Quiz Taxi – Esame ruolo conducenti</title>
-<style>
-:root{--bg:#eceff2;--card:#fff;--ink:#14181f;--muted:#5d6672;--line:#d9dee4;--y:#f7c313;--yd:#c99b00;--ok:#1f8a4c;--okbg:#e2f4e9;--ko:#c7372f;--kobg:#fbe5e3;--sel:#fff6d1;--r:14px}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1217;--card:#181d25;--ink:#eef1f5;--muted:#9aa4b2;--line:#2a313c;--ok:#4cc582;--okbg:#14291e;--ko:#ff7b72;--kobg:#33191a;--sel:#2c2610}}
-:root[data-theme=dark]{--bg:#0f1217;--card:#181d25;--ink:#eef1f5;--muted:#9aa4b2;--line:#2a313c;--ok:#4cc582;--okbg:#14291e;--ko:#ff7b72;--kobg:#33191a;--sel:#2c2610}
-*{box-sizing:border-box}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:16px/1.45 "Avenir Next","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
-button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--y);outline-offset:2px}
-.strip{height:12px;background:repeating-conic-gradient(var(--ink) 0 25%,var(--y) 0 50%) 0 0/24px 24px}
-.wrap{max-width:680px;margin:0 auto;padding:16px 14px 40px}
-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
-h1{font-size:22px;line-height:1.2;margin:0;font-weight:800;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:14px;margin:2px 0 0}
-.ghost{background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:600;min-height:40px}
-.hidden{display:none!important}
-.menu{display:grid;gap:10px}
-.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
-.opt:hover{border-color:var(--yd)}
-.opt b{display:block;font-size:17px}
-.opt small{color:var(--muted);font-size:14px}
-.opt.main{background:var(--y);border-color:var(--y);color:#14181f}
-.opt.main small{color:#3a3410}
-.opt:disabled{opacity:.5;cursor:not-allowed}
-.badge{flex:none;min-width:44px;text-align:center;border-radius:99px;padding:4px 10px;font-weight:700;font-size:14px;background:rgba(0,0,0,.08)}
-h2{font-size:15px;margin:22px 0 8px;color:var(--muted);font-weight:700}
-.bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin:6px 0 14px}
-.bar i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
-.meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:14px;font-weight:600}
-.topic{display:inline-block;background:var(--sel);border:1px solid var(--y);border-radius:99px;padding:3px 12px;font-size:13px;font-weight:700;margin:4px 0 12px}
-.q{font-size:20px;line-height:1.38;font-weight:700;margin:0 0 16px;max-width:60ch}
-.ans{display:grid;gap:10px}
-.a{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:14px;font-weight:600}
-.a .l{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:var(--bg);color:var(--muted)}
-.a.sel{border-color:var(--y);background:var(--sel)}
-.a.sel .l{background:var(--y);color:#14181f}
-.a.ok{border-color:var(--ok);background:var(--okbg)}.a.ok .l{background:var(--ok);color:#fff}
-.a.ko{border-color:var(--ko);background:var(--kobg)}.a.ko .l{background:var(--ko);color:#fff}
-.fb{margin-top:14px;padding:12px 14px;border-radius:12px;font-weight:600}
-.fb.ok{background:var(--okbg);color:var(--ok)}.fb.ko{background:var(--kobg);color:var(--ko)}
-.go{position:sticky;bottom:0;padding:12px 0 6px;margin-top:10px;background:linear-gradient(transparent,var(--bg) 35%)}
-.btn{width:100%;border:0;border-radius:12px;padding:15px;font-weight:800;background:var(--y);color:#14181f;min-height:52px}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.alt{background:var(--card);border:1px solid var(--line);color:var(--ink);font-weight:700}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
-.stat b{display:block;font-size:18px}.stat span{font-size:12px;color:var(--muted)}
-.res{text-align:center;padding:10px 0}
-.verdict{display:inline-block;border-radius:99px;padding:8px 20px;font-weight:800;font-size:18px;margin:8px 0}
-.verdict.ok{background:var(--okbg);color:var(--ok)}.verdict.ko{background:var(--kobg);color:var(--ko)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;text-align:left;margin:12px 0}
-.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
-.row.bad b{color:var(--ko)}
-.rev{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;text-align:left}
-.rev b{display:block;margin-bottom:3px}.rev .no{color:var(--ko)}.rev .yes{color:var(--ok)}
-details{text-align:left}summary{cursor:pointer;font-weight:700;padding:8px 0}
-.stack{display:grid;gap:10px;margin-top:14px}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quiz Preparazione Esame</title>
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-dark: #1e3a8a;
+      --accent: #3b82f6;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --green: #10b981;
+      --green-bg: #d1fae5;
+      --red: #ef4444;
+      --red-bg: #fee2e2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%);
+      min-height: 100vh;
+      padding: 16px 12px 32px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #f8fafc;
+    }
+    .brand-title { font-size: 22px; font-weight: 800; color: var(--primary); margin: 0; }
+    .main { padding: 24px; }
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .track {
+      height: 8px;
+      border-radius: 8px;
+      background: #e2e8f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      width: 0;
+      transition: width 0.3s ease;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .select {
+      min-height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      padding: 0 12px;
+      font: inherit;
+      color: var(--text);
+      flex: 1;
+      min-width: 140px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .question {
+      font-size: 20px;
+      line-height: 1.4;
+      margin: 0 0 20px;
+      font-weight: 700;
+      white-space: pre-wrap;
+    }
+    .answers { display: grid; gap: 12px; }
+    .answer {
+      width: 100%;
+      text-align: left;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+    .answer .letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .answer.selected { border-color: var(--accent); background: #eff6ff; }
+    .answer.correct { border-color: var(--green); background: var(--green-bg); }
+    .answer.wrong { border-color: var(--red); background: var(--red-bg); }
+    .answer.correct .letter { background: #10b981; color: white; }
+    .answer.wrong .letter { background: #ef4444; color: white; }
+    .feedback {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.good { background: var(--green-bg); color: #065f46; }
+    .feedback.bad { background: var(--red-bg); color: #991b1b; }
+    .actions { display: flex; gap: 10px; margin-top: 24px; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .primary { background: var(--primary); color: white; flex: 1; }
+    .primary:hover { background: var(--primary-dark); }
+    .secondary { background: #f1f5f9; color: var(--text); }
+    .secondary:hover { background: #e2e8f0; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .stats { display: flex; gap: 10px; margin-top: 20px; }
+    .stat { flex: 1; background: #f8fafc; border-radius: 10px; padding: 10px; text-align: center; border: 1px solid var(--border); }
+    .stat strong { display: block; font-size: 18px; }
+    .stat span { font-size: 12px; color: var(--muted); }
+    .hidden { display: none !important; }
+    .result { text-align: center; padding: 20px 10px; }
+    .result h2 { font-size: 26px; margin-bottom: 10px; }
+    .status-badge {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 16px;
+      margin: 10px 0 20px;
+    }
+    .status-badge.passed { background: var(--green-bg); color: #065f46; }
+    .status-badge.failed { background: var(--red-bg); color: #991b1b; }
+    .review-item { text-align: left; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .review-item b { display: block; margin-bottom: 4px; }
+    .review-item .ok { color: var(--green); }
+    .review-item .no { color: var(--red); }
+  </style>
 </head>
 <body>
-<div class="strip" aria-hidden="true"></div>
+
 <div class="wrap">
-<header>
-  <div><h1>Quiz Taxi</h1><p class="sub" id="sub">Esame di iscrizione al ruolo conducenti</p></div>
-  <button class="ghost hidden" id="exit" type="button">Esci</button>
-</header>
+  <div class="card">
+    <header class="brand">
+      <h1 class="brand-title">Quiz di Preparazione</h1>
+      <button class="btn secondary" id="homeBtn" type="button">Home</button>
+    </header>
+    
+    <main class="main">
+      <div id="quizScreen">
+        <div class="progress-row">
+          <span id="counter">Domanda 1</span>
+          <span id="modeDisplay">Modalità Ripasso</span>
+        </div>
+        <div class="track"><div class="fill" id="progress"></div></div>
 
-<section id="home">
-  <div class="menu">
-    <button class="opt main" id="mExam" type="button"><span><b>Simulazione d’esame</b><small>16 domande, 4 per materia, senza correzione</small></span><span class="badge">16</span></button>
-    <button class="opt" id="mWrong" type="button"><span><b>Ripassa i miei errori</b><small>Le domande sbagliate restano qui finché non le azzecchi</small></span><span class="badge" id="wrongN">0</span></button>
-    <button class="opt" id="mAll" type="button"><span><b>Ripasso di tutte le domande</b><small>Correzione immediata dopo ogni risposta</small></span><span class="badge" id="allN">0</span></button>
+        <div class="toolbar">
+          <select class="select" id="modeSelect">
+            <option value="practice">Modalità Ripasso</option>
+            <option value="exam">Modalità Esame (16 Domande)</option>
+          </select>
+          <select class="select" id="topicSelect">
+            <option value="all">Tutti gli argomenti</option>
+            <option value="Geografia">Geografia</option>
+            <option value="Normativa Statale e Regionale">Normativa Statale e Regionale</option>
+            <option value="Regolamento e Comportamento">Regolamento e Comportamento</option>
+            <option value="Inglese">Inglese</option>
+          </select>
+        </div>
+
+        <div class="pill" id="topicPill">Argomento</div>
+        <h2 class="question" id="question">Caricamento in corso...</h2>
+        <div class="answers" id="answers"></div>
+        <div class="feedback" id="feedback"></div>
+
+        <div class="actions">
+          <button class="btn primary" id="nextBtn" type="button" disabled>Conferma risposta</button>
+        </div>
+
+        <div class="stats" id="statsRow">
+          <div class="stat"><strong id="correctCount">0</strong><span>Corrette</span></div>
+          <div class="stat"><strong id="wrongCount">0</strong><span>Errori</span></div>
+          <div class="stat"><strong id="remainingCount">0</strong><span>Rimanenti</span></div>
+        </div>
+      </div>
+
+      <div id="resultScreen" class="hidden result">
+        <h2>Risultato Finale</h2>
+        <div id="statusBadge" class="status-badge"></div>
+        <p id="resultText"></p>
+        <div id="topicBreakdown" style="text-align: left; margin: 20px 0; font-size: 14px;"></div>
+        <button class="btn primary" id="restartBtn" type="button">Nuova Sessione</button>
+        <div class="review-list" id="reviewList" style="margin-top:20px;"></div>
+      </div>
+    </main>
   </div>
-  <h2>Ripasso per materia</h2>
-  <div class="menu" id="topics"></div>
-  <h2>Regole della simulazione</h2>
-  <div class="card" style="margin-top:0;font-size:15px">Superi l’esame con al massimo <b>4 errori</b> totali e non più di <b>2 errori</b> in ciascuna materia.</div>
-  <button class="ghost" id="theme" type="button" style="margin-top:6px">Cambia tema</button>
-</section>
-
-<section id="quiz" class="hidden">
-  <div class="meta"><span id="cnt"></span><span id="mode"></span></div>
-  <div class="bar"><i id="prog"></i></div>
-  <span class="topic" id="topic"></span>
-  <h2 class="q" id="q" style="color:var(--ink);margin-top:0"></h2>
-  <div class="ans" id="ans"></div>
-  <div class="fb hidden" id="fb" role="status"></div>
-  <div class="go"><button class="btn" id="next" type="button" disabled>Conferma</button></div>
-  <div class="stats" id="stats"><div class="stat"><b id="sOk">0</b><span>Corrette</span></div><div class="stat"><b id="sKo">0</b><span>Errori</span></div><div class="stat"><b id="sLeft">0</b><span>Rimanenti</span></div></div>
-</section>
-
-<section id="result" class="hidden res">
-  <div class="verdict" id="verdict"></div>
-  <p id="rtext"></p>
-  <div class="card" id="rbreak"></div>
-  <div class="stack" id="ractions"></div>
-  <div style="margin-top:18px" id="review"></div>
-</section>
 </div>
 
 <script>
-const DATA=[[3,"Where ………. from?",["You are","Are you","Are"],1],[3,"Where ……….?",["You live","Are you live","Do you live"],2],[3,"How old ……….?",["Are you sister","Is your sister","Your sister"],1],[3,"I ………. to the cinema every Friday.",["Go","Goes","Am going"],0],[3,"Paolo can ………. three languages.",["Speak","To speak","Speaks"],0],[3,"My husband usually ………. home about 6.",["Arrive","Is arriving","Arrives"],2],[3,"Take an umbrella. ……….",["I’m raining","It’s raining","It’s rain"],1],[3,"How much ………. it cost?",["Is","Does","Are"],1],[3,"………. like coffee now or later?",["Would you","You","Are you"],0],[3,"How ………. photo did you take?",["Many","Any","Much"],0],[3,"I ………. John when i was at the bank.",["See","Said","Saw"],2],[3,"This book is ………. that one.",["Old as","Older as","Older than"],2],[3,"What did you ……….?",["Say","Said","Told"],0],[3,"…….... go skiing this weekend?",["Why do we","Why don’t we","How about"],1],[3,"Anne is 25 years old but (she) still lives ………. her parents.",["With","To","From"],0],[3,"………. you go to the mountains at the weekend?",["Did","Have","Does"],0],[3,"This ………. my friend John.",["Is","Are","A"],0],[3,"………. there students in the room?",["Are","Have","Does"],0],[3,"How are you? ……….",["Fine, thanks.","How do you do?","I’m a secretary."],0],[3,"Can you speak French? ……….",["Yes, I can’t.","No, I can.","Yes, I can."],2],[3,"Tom is ………. taxi driver.",["An","The","A"],2],[3,"It’s cold today. ………. you got a jacket?",["Have","Do","Has"],0],[3,"In my course there is only one man and four ……….",["Women","Womens","Womans"],0],[3,"This is Mr. Taylor and that is ………. son.",["His","Her","Its"],0],[3,"What’s the time? ……………?",["A quarter to eight","At eight o’clock","It’s half past eight o’clock"],0],[3,"I don’t like wine. I ………. drink it.",["Never","Ever","Always"],0],[3,"………. do you go to the gym?",["How much","How often","Many times"],1],[3,"What ………. your sister do?",["Do","Does","Make"],1],[3,"Look at that girl! She ………. an ice cream.",["Drink","Is eating","Eats"],1],[3,"My sister works in a restaurant. She ………. very well.",["Cook","Can cook","Cans cook"],1],[3,"Tell me, is ………. your coat?",["Those","It","This"],2],[3,"I’d like some coffee. I’m afraid there isn’t ……….",["Anything","Any","Some"],1],[3,"There is ………. milk in the fridge.",["A lot","More","Enough"],2],[3,"Kate and Jenny are sisters and Bill is ………. brother.",["His","Their","Them"],1],[3,"Is that your car? No, ……….",["It is","This is","It isn’t"],2],[3,"………. are you? I am in the bedroom.",["Where","Why","When"],0],[3,"How are you? ……………",["I am fine.","I are good.","You are ok."],0],[3,"I ………. hungry.",["Have","Am","Got"],1],[3,"Our house has three bedrooms. I have the ……….",["Largest","Greater","Big"],0],[3,"Shall we go ………. the cinema tonight?",["From","With","To"],2],[3,"John and Mary have been married ………. last October.",["In","To","Since"],2],[3,"I have been learning English ………. two years.",["To","For","Since"],1],[3,"My son is afraid ………. dogs.",["Into","Of","To"],1],[3,"What ……….? A letter to my pen friend.",["Are you writing","Does you write","Write"],0],[3,"Where ……………?",["Do he go","Doesn’t he going","Did he go"],2],[3,"Chinese people ………. a lot of rice.",["Eat","Are eating","Drink"],0],[3,"How old is Bill? ……………",["He is 21.","He has 21.","She are 21."],0],[3,"What is her job? ………. nurse.",["She is a","She","She has a"],0],[3,"Where ……….? From Japan.",["Are you from","Are you for","Is Japan"],0],[3,"Do you like London? Yes, ……….",["I do.","So I do.","I like."],0],[3,"Where are you going …….. friday?",["On","In","At"],0],[3,"What ………. in London last weekend?",["You did","Did you","Did you do"],2],[3,"Is your English improving? ……….",["Hoping.","I hope so.","I hope it."],1],[3,"He was mowing the lawn when I ………. him yesterday.",["Saw","Had seen","Was seeing"],0],[3,"Last tuesday I ………. to the passport Office.",["Must gone","Must go","Had to go"],2],[3,"How many people ………. in your family?",["Are there","Are they","Is"],0],[3,"What time is it? ……………",["Ten and a quarter.","A quarter past ten.","Fifteen after ten o’clock."],1],[3,"I get up at 8 o’clock ………. morning.",["In the","In","At the"],0],[3,"What were you doing at 7.30 on Sunday evening? ………. TV.",["Watched","I was watching","Was watched"],1],[3,"What time ………. to bed during the week?",["You are going","Are you go","Do you go"],2],[3,"How much ………. where you live?",["Do houses cost","Does cost houses","Do cost houses"],0],[3,"I’m afraid I haven’t got ……….",["Scissor","Some scissors","Any scissors"],2],[3,"Would you mind ………. me that pencil?",["Passing","Pass","To pass to"],0],[3,"I wish you ……….",["Are there","Were here","Was here"],1],[3,"How old are you? ……………",["I’m 30 years old.","I have 30.","30 years."],0],[3,"She came to Britain ……..",["At four days","Four days ago","Since four days"],1],[3,"I’m sorry. I haven’t done my report ……..",["Yet","Already","Until the present"],0],[3,"My friend doesn’t speak Chinese. I don’t ……….",["Too","Also","Either"],2],[3,"It’s time ………. some work.",["She did","For to do","She would do"],0],[3,"She asked me how big ……….",["Is your house.","Is my house.","My house was."],2],[3,"My friend let ………. his bike yesterday.",["Me borrow","To borrow","Me to borrow"],0],[3,"I have difficulty ………. English.",["To writing","To write","Writing"],2],[3,"We’re having the party at ……….",["The Deborah’s house","Deborah’s","House of Deborah"],1],[3,"It’s now 9 o’clock and the train ………. arrive at 8:15.",["Must","Was due to","Will"],1],[3,"I don’t like tests. Neither ……….",["Do I","I do","I don’t"],0],[3,"Good afternoon! Excelsior Hotel. Can I ………. you?",["Attend","Assist","Help"],2],[3,"Have you got any luggage?",["I've got some","I've got any","I don't some"],0],[0,"Benaco è il nome di quale Lago:",["Lago d'Iseo","Lago Maggiore","Lago di Garda"],2],[0,"Sebino è il nome di quale Lago:",["Lago di Garda","Lago d'Iseo","Lago di Como"],1],[0,"La Val Veddasca, la Val Tresa, la Valcuvia e Valganna si trovano:",["Nella provincia di Sondrio","Nella provincia di Brescia","Nella provincia di Varese"],2],[0,"Il fiume Mincio, forma in prossimità di un capoluogo di provincia della Lombardia, tre laghi, detti di “mezzo” “inferiore” e “superiore”, qual è questa città?",["Cremona","Pavia","Mantova"],2],[0,"L'aeroporto bergamasco di Orio al serio rispetto a capoluogo di provincia, dove è situato?",["Nord","Sud","All'interno della stessa città di Bergamo"],1],[0,"Le sorgenti del fiume Adda, in quale provincia della Lombardia si trovano?",["Sondrio","Lecco","Varese"],0],[0,"Sotto il monte, città natale di Papa Giovanni XXIII si trova in provincia di:",["Brescia","Bergamo","Lecco"],1],[0,"Quali fiumi collega il canale Villoresi?",["Adda-Lambro","Ticino-Olona","Ticino-Adda"],2],[0,"Dove si trova il Monte barro",["In provincia di Lecco","In provincia di Lodi","Provincia di Varese"],0],[0,"In Lombardia un comune sorge isolato in territorio svizzero, si tratta di:",["Campione d'Italia","Castiglione Olona","Lavena-Ponte Tresa"],0],[0,"Verbano e il nome di quale Lago:",["Lago Maggiore","Lago d'Iseo","Lago di Garda"],0],[0,"Mantova è bagnata da quale fiume:",["Mincio","Serio","Bozzente"],0],[0,"In quale di queste tre province si trova Bellagio",["Varese","Sondrio","Como"],2],[0,"La cittadina di Bosisio Parini si affaccia su un piccolo Lago:",["Lago d'idro","Lago di Lecco","Lago di Pusiano"],2],[0,"Calolziocorte si trova in provincia di:",["Bergamo","Lodi","Lecco"],2],[0,"La Lomellina è una zona della provincia di:",["Pavia","Milano","Lecco"],0],[0,"Quale città della Lombardia è bagnata dal fiume Ticino:",["Varese","Mantova","Pavia"],2],[0,"Uno di queste province non si affaccia sul Lago d'iseo, quale?",["Brescia","Cremona","Bergamo"],1],[0,"Il capoluogo di provincia più meridionale della Lombardia e:",["Como","Cremona","Pavia"],1],[0,"Il fiume Brembo e affluente del fiume:",["Po","Mincio","Adda"],2],[0,"Il fiume Oglio attraversa:",["Ponte di Legno","Ponte Chiasso","Seriate"],0],[0,"Il fiume Mincio è emissario del:",["Lago di Como","Lago di Garda","Lago maggiore"],1],[0,"Qual è il passo più alto della Lombardia?",["Passo Gavia","Passo di croce Domini","Passo dello Stelvio"],2],[0,"La provincia di Mantova confina con:",["Il Trentino Alto Adige","L'Emilia Romagna","Il Piemonte"],1],[0,"Lario è il nome di quale Lago:",["Lago di Como","Lago d'iseo","Lago maggiore"],0],[0,"Il passo del Tonale si trova nella provincia di:",["Varese","Lecco","Brescia"],2],[0,"Quale città, capoluogo di provincia, e bagnata dai tre laghi?",["Mantova","Varese","Lecco"],0],[0,"Tra il Lago di Como e quello di Lugano si estende:",["La Val d'Intelvi","La Valsassina","La Val di Scalve"],0],[0,"Dov'è localizzato il parco delle Groane?",["A est di Milano","A nord di Milano","A sud di Milano"],1],[0,"Castellanza situata tra:",["Legnano e Busto Arsizio","Gallarate e Busto Arsizio","Desio e Seregno"],0],[0,"Il Lago di Mezzola si trova nella provincia di:",["Brescia","Cremona","Sondrio"],2],[0,"La principale località Lombarda del Parco Nazionale dello Stelvio è",["Bormio","Clusone","Cantù"],0],[0,"Quale dei seguenti fiumi interessa la provincia di Varese?",["Ticino","Brembo","Agogna"],0],[0,"Rivolta d'Adda e in provincia di:",["Cremona","Lecco","Bergamo"],0],[0,"La Grigna è:",["Una montagna delle Prealpi","Una località della Val Brembana","Una collina dell'Oltrepò"],0],[0,"A quale di queste province appartiene la Val di Scalve?",["Como","Bergamo","Pavia"],1],[0,"Monteisola è:",["Una località turistica vicino a Livigno","Un'isola del Lago d'Iseo","Una collina nei pressi del Lago d'Endine"],1],[0,"Quale di queste località si affaccia sul Lago maggiore?",["Laveno","Bellagio","Paratico"],0],[0,"La provincia di Pavia confina:",["Con il Veneto","Con l'Emilia Romagna","Con la Svizzera"],1],[0,"Il Po attraversa la provincia di",["Pavia","Bergamo","Varese"],0],[0,"Quale fiume attraversa la Valcamonica?",["L’ Adda","L' Oglio","Il Ticino"],1],[0,"Quale di questi passi si trova in Lombardia",["Falzarego","Sempione","Gavia"],2],[0,"Quale di queste regioni non si affaccia sul Lago di Garda?",["Il Trentino Alto Adige","Il Friuli Venezia Giulia","Il Veneto"],1],[0,"Quali province lombarde bagna il fiume Po",["Pavia-Cremona-Mantova-Piacenza","Pavia-Mantova-Cremona","Pavia-Cremona-Mantova-Lodi"],2],[0,"In quale di queste tre province si trova Sabbioneta?",["Lodi","Cremona","Mantova"],2],[0,"Quale fiume forma il Lago d'Iseo?",["L'Oglio","Il Brembo","Il Serio"],0],[0,"La Valceresio interessa il territorio della provincia di:",["Como","Varese","Sondrio"],1],[0,"Come è denominata la zona dell'entroterra del Lago di Garda verso Mantova",["Colli Euganei","Colli Morenici o Colli Storici","Col di Lana"],1],[0,"Quale di questi fiumi sfocia direttamente nel Po?",["Brembo","Olona","Serio"],1],[0,"Una di queste località termali non è in Lombardia",["Boario Terme","Bognanco Terme","Salice Terme"],1],[0,"Il passo dello Spluga collega:",["La regione Svizzera dei grigioni con la Val Chiavenna","La Valtellina con il Trentino Alto Adige","La provincia di Brescia con il Trentino Alto Adige"],0],[0,"Il Lago di annone si trova:",["In Brianza","Nell'Oltrepò pavese","Nell'alto mantovano"],0],[0,"Con quante regioni italiane confina la Lombardia?",["3","4","5"],1],[0,"Uno di questi fiumi non è un confine naturale della Lombardia",["Il Ticino","Il Po","L 'Adda"],2],[0,"è un comune della provincia di Lodi:",["Paullo","Codogno","Locate Triulzi"],1],[0,"è un comune della provincia di Lecco:",["Valmadrera","Dorno","Dongo"],0],[0,"Uno di questi laghi non è in Lombardia:",["Lago di Alserio","Lago di Annone","Lago di Viverone"],2],[0,"Il Comune di campione d'Italia a quale provincia appartiene?",["Alla provincia di Milano","Alla provincia di Como","A nessuna, è territorio svizzero"],1],[0,"La città di Sesto San Giovanni ha un numero di abitanti pari a:",["Più di 110.000","Tra 40.000 e 50.000","Tra 70.000 e 100.000"],2],[0,"La città di Cinisello Balsamo ha un numero di abitanti pari a:",["Tra 50.000 e 80.000","Meno di 40.000","Più di 90.000"],0],[0,"La città di Legnano ha un numero di abitanti pari a:",["Meno di 30.000","Tra 40.00 e 60.000","Più di 70.000"],1],[0,"La città di Rho ha un numero di abitanti pari a:",["Tra 20.000 e 30.000","Più di 80.000","Tra 40.000 e 60.000"],2],[0,"La città di Cologno Monzese ha un numero di abitanti pari a:",["Tra 20.000 e 30.000","Tra 40.000 e 60.000","Più di 70.000"],1],[0,"La città di Vigevano ha un numero di abitanti pari a:",["Tra 40.000 e 70.000","Tra 20.0000 e 30.000","Tra 80.000 e 100.000"],0],[0,"La città di Busto Arsizio ha un numero di abitanti pari a:",["Tra 60.000 e 90.000","Tra 20.000 e 50.000","Più di 100.000"],0],[0,"Quale di questi comuni non è in provincia di Pavia?",["Stradella","Tortona","Mortara"],1],[0,"Il passo del Tonale collega:",["La provincia di Cremona con l'Emilia Romagna","La provincia di Brescia con il Trentino Alto Adige","La Svizzera con la provincia di Sondrio"],1],[0,"Castiglione Olona denominata “isola di Toscana in Lombardia” si trova:",["In provincia di Milano","In provincia di Pavia","In provincia di Varese"],2],[0,"Dov'è sito il palazzo della Triennale di Milano?",["In prossimità della “Darsena” di porta ticinese","In prossimità di città studi","In prossimità del “parco Sempione”"],2],[0,"Non è considerata una “stazione sciistica”:",["Madesimo","Varzi","Monte Penice"],1],[0,"Dove si trova Villa Olmo, sede di un'importante centro di congressi?",["Sul Lago di Garda","Sul Lago di Como","Sul Lago di Pusiano"],1],[0,"Cosa si intende per “Triangolo Lariano”?",["Il territorio compreso tra Milano Pavia e Lodi","Il territorio compreso tra i rami del Lago di Como","Un'area montana del Bergamasco"],1],[0,"è il secondo nome del Lago di Lugano",["Iridio","Ceresio","Verbano"],1],[0,"Interessa il territorio di due province della Lombardia:",["Il Lago di Lugano","Il Lago di Garda","Il Lago d'idro"],0],[0,"Quale corso d'acqua attraversa la città di Sondrio:",["Il Mallero","Il Ticino","L'Oglio"],0],[0,"Salò, nota a tutti per le vicende legate alla II guerra mondiale, su quale Lago lombardo si affaccia?",["Lago di Garda","Lago di Como","Lago d'Iseo"],0],[0,"Tra i più importanti monumenti della Lombardia vi è:",["La Certosa di Como","La Certosa di Brescia","La Certosa di Pavia"],2],[0,"Bellagio è una località turistica:",["Del Lago di Como","Della Bassa Brianza","Della Val Sabbia"],0],[0,"è sede di un'antica università e di un celebre castello Visconteo:",["Vigevano","Mantova","Pavia"],2],[0,"Una di queste università non ha sede a Milano:",["C’a Foscari","Università del Sacro Cuore","Università degli Studi"],0],[0,"Su quale linea della metropolitana milanese si trova la fermata “Brenta”:",["Linea 2","Linea 3","Linea 1"],1],[0,"La stazione ferroviaria di Rho si trova sulla linea ferroviaria dello Stato:",["Milano-Lecco","Milano-Mortara","Milano-Gallarate"],2],[0,"Quale importante via storica di epoca romana collega Milano con l'adriatico?",["La via Emilia","La via Cassia","La via Aurelia"],0],[0,"Quale di queste città ha un porto fluviale?",["Como","Cremona","Varese"],1],[0,"Cittadina in provincia di Brescia, nota oltre per la più grande villa romana Dell'Italia settentrionale anche per le grotte di Catullo:",["Sirmione","Desenzano del Garda","Gardone Riviera"],0],[0,"è nota, oltre che per la sua stupenda piazza su cui si affacciano il Duomo ed un castello antico, anche qua l'importante centro calzaturiero della Lombardia:",["Varese","Lodi","Vigevano"],2],[0,"Il patroncino dei Gonzaga, l'opéra, tra gli altri del Mantegna e di Giulio Romano, hanno reso questo capoluogo di provincia uno stupendo centro storico/culturale:",["Pavia","Mantova","Lecco"],1],[0,"Città capoluogo di provincia, fondata dai Galli, conosciuta sotto i romani come il nome di Laus Pompeia, Distrutta dai milanesi nel 1110, ricostruita da Federico Barbarossa nel 1158, è rinomata per le sue ceramiche. È nota anche per il santuario dell'incoronata:",["Lecco","Brescia","Lodi"],2],[0,"Quale tratto della metropolitana milanese, tra i seguenti, e in superficie?",["Da Cimiano a Cascina Gobba","Da Brenta a Corvetto","Da Gambara a Primaticcio"],0],[0,"Garegnano è:",["Una Certosa di Milano","Una famosa località turistica sul Lago di Garda","Un fiume della Val Trebbia"],0],[0,"Sirmione è una località turistica del:",["Lago di Garda","Lago d'Iseo","Lago di Ledro"],0],[0,"La Certosa di Chiaravalle si trova nel Comune di:",["Milano","Assago","Rozzano"],0],[0,"Piazza della Loggia in quale città della Lombardia si trova?",["Brescia","Varese","Como"],0],[0,"Quale di questi tre importanti monumenti si trova a Milano?",["La Cappella Colleoni","Il Cenacolo di Leonardo da Vinci","Il Palazzo Te"],1],[0,"L'aeroporto di Malpensa si trova nel territorio della provincia di:",["Milano","Varese","Como"],1],[0,"La stazione ferroviaria di Paderno Dugnano si trova sulla linea delle ferrovie nord:",["Milano Saronno","Milano Novara","Milano Meda"],2],[0,"La stazione ferroviaria di Novate Milanese si trova sulla linea delle Ferrovie Nord:",["Milano-Erba-Asso","Milano-Saronno","Milano-Meda"],1],[0,"Quale di queste tre città è famosa per il “Torrazzo”?",["Cremona","Mantova","Bergamo"],0],[0,"Quale di questi tre importanti monumenti si trova a Bergamo?",["Il Cenacolo di Leonardo da Vinci","La Cappella Colleoni","Il Palazzo Te"],1],[0,"Cos’è il “Vittoriale degli Italiani”?",["Il complesso degli edifici e giardini dimora di Gabriele D’Annunzio a Gardone Riviera","La casa di riposo voluta da Giuseppe Verdi a Milano","La torre eretta a S. Martino della Battaglia a ricordo della vittoria piemontese nella seconda guerra d’indipendenza"],0],[0,"Qual è il confine naturale che divide la provincia di Milano da quelle di Bergamo e Cremona?",["Il fiume Olona","Il fiume Adda","Il fiume Ticino"],1],[0,"Quale dei seguenti comuni è zona extradoganale (zona franca)?",["Aprica","Livigno","Erba"],1],[0,"Quanti abitanti ha Lecco (sulla base del censimento del 21/10/2001)?",["Tra 30.000 e 50.000","Tra 60.000 e 80.000","Più di 100.000"],0],[0,"Quanti abitanti ha Bergamo (sulla base del censimento del 21/10/2001)?",["Da 100.000 a 180.000","Meno di 90.000","Più di 200.000"],0],[0,"Dove si trova il “Parco del Campo dei Fiori”?",["Nella provincia di Lodi","Nella provincia di Varese","Nella provincia di Bergamo"],1],[0,"In quante province è suddivisa la regione Lombardia?",["12","9","10"],0],[0,"Nella città di Milano dov’è localizzato il quartiere “Ortica”?",["A Ovest","A Est","A Sud"],1],[0,"Dove si trova la Valtrompia?",["In provincia di Bergamo","In provincia di Brescia","In provincia di Sondrio"],1],[0,"Quanti abitanti ha Milano (sulla base del censimento del 21/10/2001)?",["Meno di 1 milione di abitanti","Più di 2 milioni di abitanti","Tra 1 milione e 1,5 milioni di abitanti"],2],[0,"Quanti abitanti ha Brescia (sulla base del censimento del 21/10/2001)?",["Tra 100.000 e 150.000","Tra 180.000 e 220.000","Più di 230.000 abitanti"],1],[0,"Quanti abitanti ha Como (sulla base del censimento del 21/10/2001)?",["Tra 120.000 e 130.000","Tra 70.000 e 100.000","Tra 140.000 e 150.000"],1],[0,"Quanti abitanti ha Cremona (sulla base del censimento del 21/10/2001)?",["Meno di 80.000","Tra 100.000 e 120.000","Oltre i 130.000"],0],[0,"Quanti abitanti ha Lodi (sulla base del censimento del 21/10/2001)?",["Meno di 50.000","Tra 60.000 e 70.000","Più di 80.000"],0],[0,"Quanti abitanti ha Mantova (sulla base del censimento del 21/10/2001)?",["Meno di 60.000","Tra 70.000 e 80.000","Più di 100.000"],0],[0,"Quanti abitanti ha Pavia (sulla base del censimento del 21/10/2001)?",["Meno di 50.000","Tra 60.000 e 80.000","Più di 100.000"],1],[0,"Quanti abitanti ha Sondrio (sulla base del censimento del 21/10/2001)?",["Tra 40.000 e 50.000","Più di 60.000","Meno di 30.000"],2],[0,"Quanti abitanti ha Varese (sulla base del censimento del 21/10/2001)?",["Tra 70.000 e 90.000","Oltre 100.000","Tra 50.000 e 60.000"],0],[0,"Dove si trova il “Parco Nazionale delle incisioni rupestri” ove è presente quale elemento ricorrente la “rosa camuna” adottata come simbolo della Regione Lombardia?",["A Ponte di Legno","Nel Parco dell’Oglio Nord nei pressi di Ponte Oglio","A Capo di Ponte in Valcamonica"],2],[0,"In quale località si trova il parco dei divertimenti denominato “Fantasy World Minitalia”?",["Sulla tangenziale ovest di Milano all’altezza di Assago","All’uscita del casello autostradale di Fino Mornasco sull’autostrada A9","Nei pressi di Capriate San Gervasio sulla A4"],2],[0,"Dove si trova un celebre Castello di San Giorgio e un Palazzo Ducale già residenza dei Gonzaga?",["Cremona","Mantova","Pavia"],1],[0,"Non fa parte del territorio di Varese e dintorni.",["Il Sacro Monte","Il Pian dei Resinelli","Il Campo dei Fiori"],1],[0,"E’ la patria di Donizetti e di Colleoni. Si trova allo sbocco della Val Seriana e della Val Brembana. Di quale città si tratta?",["Brescia","Cremona","Bergamo"],2],[0,"Il “Cenacolo” di Leonardo da Vinci, capolavoro rinascimentale, si trova a Milano. In quale di questi luoghi?",["Nella Pinacoteca di Brera","Nella chiesa di Santa Maria delle Grazie","Nel Castello Sforzesco"],1],[0,"Fu istituito nel 1935, è in massima parte nel territorio di un’altra regione, si trova nelle Alpi Centrali nell’Alta Valtellina. Di quale parco nazionale si tratta?",["Il parco nazionale del Delta Padano","Il parco nazionale del Gran Paradiso","Il parco nazionale dello Stelvio"],2],[0,"Quale linea della metropolitana milanese collega tra loro le stazioni FS di Garibaldi, Centrale, Lambrate e la stazione FNM di Cadorna?",["La linea rossa","La linea verde","La linea gialla"],1],[0,"E’ stazione della metropolitana milanese, di corrispondenza con le autolinee extraurbane della zona dell’Adda.",["Molino Dorino","San Donato Milanese","Gessate"],2],[0,"La stazione ferroviaria di Arcore si trova sulla linea delle FS:",["Milano-Gallarate","Milano-Lecco-Sondrio-Tirano","Milano-Treviglio-Bergamo"],1],[0,"La stazione ferroviaria di Melzo si trova sulla linea delle FS:",["Milano-Treviglio-Bergamo","Milano-Saronno","Milano-Piacenza"],0],[0,"Quale di queste è una circonvallazione di Milano?",["Raccordo anulare dei parchi","Circolo interstazionale","Cerchia dei navigli"],2],[0,"La SS 237 “del Caffaro” quale provincia attraversa?",["Brescia","Mantova","Varese"],0],[0,"La SS 342 “Briantea” attraversa l’abitato di:",["Chiavenna","Pontida","Castiglione delle Stiviere"],1],[0,"La SS 596 “dei Cairoli” interessa la provincia di:",["Varese","Sondrio","Pavia"],2],[0,"La SS 37 “del Maloja” attraversa l’abitato di:",["Chiavenna","Boario","Livigno"],0],[0,"La SS 527 “Bustese” collega Monza con un’importante cittadina delle provincia di Varese:",["Malnate","Busto Arsizio","Gallarate"],1],[0,"La SS 234 “Codognese” attraversa tre province lombarde:",["Bergamo, Brescia e Mantova","Lodi, Milano e Varese","Pavia, Lodi e Cremona"],2],[0,"La SS 12 “dell’Abetone e del Brennero” attraversa per pochi chilometri una provincia lombarda, superando un ponte sul fiume Po. Di quale provincia si tratta?",["Mantova","Pavia","Cremona"],0],[0,"La località di Bellagio è attraversata dalla statale:",["SS 239 “dei laghi di Pusiano e Garlate”","SS 583 “Lariana”","SS 33 “del Sempione”"],1],[0,"Como è attraversata, tra le altre, dalla seguente statale:",["SS 33 “del Sempione”","SS 36 “del lago di Como e dello Spluga”","SS 35 “dei Giovi”"],2],[0,"La cittadina di Codogno è raggiunta dalla seguente statale:",["SS 591 “Cremasca”","SS 36 “del lago di Como e dello Spluga”","SS 472 “Bergamina”"],0],[0,"Legnano si trova:",["Sulla SS “Sempione” n. 33","Sulla SS “Paullese” n. 415","Sulla SS n.10 “Padana inferiore”"],0],[0,"L’autostrada A4 Torino-Trieste attraversa quattro province lombarde nell’ordine:",["Milano, Lodi, Brescia","Milano, Monza, Bergamo, Brescia","Milano, Bergamo, Mantova"],1],[0,"La SS 470 attraversa:",["La Val di Scalve","La Val Seriana","La Val Brembana"],2],[0,"Quale strada statale collega Pavia a Lodi?",["La SS 234 “Codognese”","La SS 235 “di Orzinuovi”","La SS 35 “dei Giovi”"],1],[0,"La A22 del Brennero attraversa unicamente una provincia lombarda:",["La provincia di Mantova","La provincia di Brescia","La provincia di Cremona"],0],[0,"La A21 da Cremona raggiunge un altro capoluogo di provincia lombarda:",["Bergamo","Mantova","Brescia"],2],[0,"La SS 38 attraversa un capoluogo di provincia della Lombardia.",["Varese","Bergamo","Sondrio"],2],[0,"La SS 583 quale lago costeggia?",["Il lago Maggiore","Il lago d’Iseo","Il lago di Como"],2],[0,"La SS 10 è denominata:",["Padana Inferiore","Padana Superiore","Della Lomellina"],0],[0,"La SS 345 “delle tre valli” attraversa la provincia di:",["Lodi","Brescia","Varese"],1],[0,"La SS 36 “del lago di Como e dello Spluga” attraversa:",["Lecco","Lumezzane","Livigno"],0],[0,"La SS 402 “Valeriana” interessa principalmente la provincia di:",["Mantova","Bergamo","Sondrio"],2],[0,"Quale di queste province non è attraversata dalla A21 “Brescia-Piacenza-Alessandria”?",["Cremona","Lodi","Pavia"],1],[0,"Quale di queste località non è servita dalle FS:",["Varese","Erba","Laveno Mombello"],1],[0,"Qual è la distanza tra Milano e Mantova?",["Meno di 100 km","Più di 140 km","Più di 180 km"],1],[0,"Quale tra le seguenti stazioni ferroviarie, si trova sulla linea delle FS Milano-Treviglio-Bergamo?",["Trecella","Buttafava","Gazzada-Schianno"],0],[0,"Quale linea della metropolitana milanese passa dalla stazione di P.ta Garibaldi?",["La linea rossa","La linea gialla","La linea verde"],2],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Gallarate-Porto Ceresio?",["Magenta","Secugnago","Canegrate"],2],[0,"Da Milano all’aeroporto intercontinentale della Malpensa la distanza è:",["Km 17 circa","Km 40 circa","Km 83 circa"],1],[0,"Dove inizia la strada del Sempione?",["All’Arco della Pace a Milano","All’uscita di Novara dell’autostrada Milano-Torino","Dopo l’abitato di Lecco in direzione della Valtellina"],0],[0,"Quale strada statale collega Milano a Crema?",["La SS 33 del Sempione","La SS 11 Padana Superiore","La SS 415 Paullese"],2],[0,"Quale strada statale collega Cremona a Mantova?",["La SS 415 Paullese","La SS 10 Padana Inferiore","La SS 45 bis Gardesana occidentale"],1],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Bergamo-Treviglio-Cremona?",["Caravaggio","Rogoredo","Parona Lomellina"],0],[0,"La SS 9 Emilia attraversa la provincia di:",["Pavia","Lodi","Cremona"],1],[0,"Quale di queste strade statali è denominata “Lago di Como e dello Spluga”?",["SS 412","SS 36","SS 33"],1],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Novara-Torino?",["Parabiago","Magenta","San Zenone al Lambro"],1],[0,"Qual è la denominazione/destinazione dell’autostrada A8?",["Milano-Genova","Milano-Varese (Autostrada dei Laghi)","Lainate-Como-Chiasso (Autostrada dei Laghi)"],1],[0,"L’aeroporto di Malpensa si trova:",["A ovest di Milano","A nord di Varese","A est di Bergamo"],0],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle Ferrovie Nord Milano “Milano-Meda”?",["Palazzolo Milanese","Garbagnate Milanese","Vedano al Lambro"],0],[0,"Quale linea della metropolitana di Milano non transita dalla Stazione Centrale?",["La linea 2 verde","La linea 3 gialla","La linea 1 rossa"],2],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Mortara-Alessandria?",["Gaggiano","Secugnago","Villasanta"],0],[0,"Il territorio della Lombardia è attraversato dall’autostrada del Sole nella provincia di:",["Lodi","Como","Mantova"],0],[0,"La stazione ferroviaria di Seveso si trova sulla linea delle Ferrovie Nord Milano:",["Milano-Erba-Asso","Milano-Lecco","Milano-Meda"],2],[0,"La stazione ferroviaria di Corsico si trova sulla linea delle FS:",["Milano-Mortara-Alessandria","Milano-Gallarate","Milano-Saronno"],0],[0,"Quale linea ferroviaria non passa dalla stazione di Rho?",["Milano-Gallarate-Varese-Luino-P.to Ceresio","Milano-Saronno-Novara","Milano-Domodossola"],1],[0,"La stazione ferroviaria di Parabiago si trova sulla linea delle FS:",["Milano-Piacenza","Milano-Treviglio-Bergamo","Milano-Gallarate"],2],[0,"Quale linea ferroviaria passa da Treviglio?",["Milano-Brescia-Venezia","Milano-Monza-Bergamo","Milano-Lodi-Piacenza-Bologna"],0],[0,"Quale autostrada transita dal territorio del comune di Legnano?",["A8 Milano-Varese-Sesto Calende","A9 Milano-Como-Chiasso","A4 Milano-Torino"],0],[0,"Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Piacenza?",["Rovello Porro","San Zenone al Lambro","Villasanta"],1],[0,"La stazione ferroviaria di Tavazzano si trova sulla linea delle FS:",["Milano-Piacenza","Milano-Novara","Milano-Lecco-Sondrio"],0],[0,"La stazione ferroviaria di Milano-Rogoredo è servita da una linea della metropolitana milanese. Qual è?",["La linea 2 verde","La linea 1 rossa","La linea 3 gialla"],2],[0,"L’aeroporto milanese di Linate è da considerarsi rispetto al centro della città a:",["Nord","Est","Ovest"],1],[0,"La stazione ferroviaria di Villasanta si trova sulla linea delle FS:",["Milano-Piacenza","Sesto S.Giovanni-Monza-Molteno-Lecco","Milano-Gallarate-Luino-Bellinzago"],1],[0,"La strada statale 412 della Val Tidone interessa la provincia di:",["Pavia","Varese","Sondrio"],0],[0,"San Pellegrino Terme è attraversata da una statale. Trattasi della:",["SS 472 Bergamina","SS 470 della Val Brembana","SS 342 Briantea"],1],[0,"Collega Magenta ad Abbiategrasso e si innesta nella strada statale 35 a Pavia. Stiamo parlando della:",["SS 526 dell’Est Ticino","SS 494 Vigevanese","SS 236 Goitese"],0],[0,"La città di Castiglione delle Stiviere si trova in provincia di:",["Brescia","Cremona","Mantova"],2],[0,"Quale zona della Lombardia è nota per essere fiorente produttrice di mobili?",["La Brianza","La Lomellina","La Val Trompia"],0],[0,"Una di queste strade statali non interessa il territorio di Cremona:",["SS n. 415 “Paullese”","SS n. 591 “Cremasca”","SS n. 11 “Padana Superiore”"],2],[0,"Tra Salò e Vestone si estende:",["La Val Sabbia","La Val Trompia","La Val di Scalve"],0],[0,"Quale Strada Statale passa per Soncino?",["SS n. 9 Emilia","SS n. 498 Soncinese","SS n. 494 Vigevanese"],1],[0,"Qual è il capoluogo di provincia della Lombardia più settentrionale?",["Brescia","Sondrio","Lecco"],1],[0,"Quale fiume non passa da Milano?",["Olona","Lambro","Ticino"],2],[0,"Quanto è alto il grattacielo Pirelli?",["Da 90 a 100 metri","Da 100 a 120 metri","Oltre 120 metri"],2],[0,"Quale statale non passa da Busto Arsizio?",["SS n. 33 del Sempione","SS n.527 Bustese","SS n.233 Varesina"],2],[0,"In quale provincia si trova il Lago di Endine?",["Brescia","Bergamo","Mantova"],1],[0,"Il Mella è affluente del fiume:",["Serio","Oglio","Adda"],1],[0,"Distanza da Bergamo all’aeroporto di Orio al Serio:",["Meno di 10 Km","15 Km","Più di 25 Km"],0],[0,"In quale provincia si trova il passo del Brallo?",["Pavia","Cremona","Brescia"],0],[0,"La terza città in Lombardia per densità di popolazione",["Monza","Bergamo","Lecco"],0],[0,"Quale città Lombarda non è diventata Capoluogo di Provincia nel 1993?",["Monza","Lodi","Lecco"],0],[0,"Quanti sono gli abitanti della Lombardia?",["9 Milioni","Tra 9 e 11 Milioni","Più di 11 Milioni"],1],[0,"In quale provincia della Lombardia si trova il comune di Belgioioso?",["Pavia","Lodi","Sondrio"],0],[0,"Qual è il Lago più profondo della Lombardia?",["Lago di Garda","Lago di Como","Lago d’Idro"],1],[0,"Vi si trova una Rocca (Sforzesca)",["Soncino","Soresina","Val di Nizza"],0],[0,"Tre Province in Lombardia non hanno confini esterni, ma sono circondate da altre province Lombarde:",["Lecco, Monza e Brianza, Bergamo","Como, Lecco, Bergamo","Lecco, Bergamo, Cremona"],0],[0,"La provincia di Pavia non confina con…",["Piemonte","Emilia Romagna","Liguria"],2],[0,"La denominazione-destinazione della A21 (Autostrada dei Vini)",["Torino, Piacenza, Brescia","Torino, Lodi, Brescia","Alessandria, Piacenza, Bergamo"],0],[0,"Quale città è più vicina al Confine di Stato?",["Como","Varese","Sondrio"],0],[0,"Quali di questi paesi NON ha la stazione delle ferrovie dello stato?",["Varese","Saronno","Laveno Mombello"],1],[0,"Su quale Lago si affaccia Sarnico?",["Lago di Idro","Lago di Garda","Lago d’Iseo"],2],[0,"Importante città dell’Oltrepò pavese",["Voghera","Suzzara","Capri"],0],[0,"Dove si trova il Castello di San Gaudenzio",["Cervesina","Belgioioso","Pietra…"],0],[0,"Sabbioneta NON è:",["Una città romana","In Provincia di Mantova","Sul fiume Po"],2],[0,"Abbiategrasso è sulla linea ferroviaria:",["Milano-Novara","Milano-Mortara","Milano-Pavia"],1],[0,"Da quale Fiume è attraversato Pizzighettone?",["Serio","Adda","Oglio"],1],[0,"Su quale linea ferroviaria si trova Desenzano del Garda?",["Milano-Novara-torino","Milano-Brescia-Venezia","Milano-Piacenza-Bologna"],1],[0,"Dove si trova Gargnano?",["Sul Lago di Garda","Sul Lago Maggiore","Sul Lago di Como"],0],[0,"Per cosa è famosa Cremona?",["Armi","Manufatti in Legno","Strumenti Musicali"],2],[0,"Quale di questi Fiumi non interessa le province di Brescia e Cremona?",["Adda","Ticino","Oglio"],1],[0,"Quale linea collega Milano a Sesto San Giovanni?",["MM 1, Rossa","FFSS Milano - Treviglio","FNM Milano - Meda"],0],[0,"Quale di questi laghi non è in Lombardia?",["Molveno","Iseo","Idro"],0],[0,"Quale strada Provinciale passa vicinissimo al Comune di Chieve?",["SP 234 Codognese","SP 235 di Orzinuovi","SS 36 Lago di Como e dello Spluga"],1],[0,"Dove si trova la statua \"La Minerva\"?",["Vigevano","Voghera","Pavia"],2],[0,"Non fa parte di Vigevano",["Piazza Ducale","Il Broletto","Castello Visconteo-Sforzesco"],1],[1,"Ai sensi dell’art. 2 della legge 15 gennaio 1992 N. 21, chi stabilisce sanzioni amministrative per l’inosservanza dell’obbligo del servizio taxi nelle aree comunali o comprensoriali?",["Le regioni","Le camere di Commercio Industria Artigianato e Agricoltura","Gli organi di Polizia Stradale"],0],[1,"L’art. 14 “disposizioni particolari” della legge 15 gennaio 1992 n. 21 regolamenta tra l’altro:",["Le sanzioni amministrative per l’inosservanza delle tariffe del servizio taxi","L’accessibilità per i servizi taxi e autonoleggio a tutti i soggetti portatori di handicap","L’accesso al carico negli scali aeroportuali"],1],[1,"Il titolare di licenza taxi può essere sostituito, ai sensi dell’art. 10 della legge 15 gennaio 1992 n. 21, per motivi di salute o inabilità temporanea:",["Da altro titolare di licenza taxi di altro comune","Da persone iscritte nel ruolo di cui art. 6 della legge 15 gennaio 1992 n. 21","Da persone designate dal Prefetto"],1],[1,"Le autovetture adibite al servizio di noleggio con conducente, secondo l’art.12 comma 5 della Legge 15 gennaio 1992 n 21, portano, tra l’altro, una targa:",["Inamovibile anteriore con la dicitura “N”","Adesiva posteriore con la dicitura “NC”","Posteriore inamovibile recante la dicitura “NCC”"],2],[1,"Ai sensi dell’art. 9 della legge 15 gennaio 1992 n.21, la licenza per l’esercizio del servizio taxi e l’autorizzazione del servizio di autonoleggio con conducente, sono trasferite su richiesta del titolare, a persona dallo stesso designata, iscritta al ruolo ed in possesso dei requisiti prescritti, purchè il titolare abbia:",["Raggiunto il sessantesimo anno d’età","Raggiunto il sessantacinquesimo anno d’età","Raggiunto il sessantesimo anno d’età o almeno trentacinque anni d’esercizio di dell’attività"],0],[1,"Entro quanto tempo, dall’entrata in vigore della Legge 15 gennaio 1992 n.21, i regolamenti comunali per il servizio taxi e noleggio con conducente sono resi conformi alla legge stessa in base al secondo comma dell’art. 15 della medesima legge?",["Entro un anno","Entro tre anni","Entro due anni"],2],[1,"Ai sensi dell’art. 5 della L. 21/92, chi stabilisce i requisiti e le condizioni per il rilascio delle licenze taxi e le autorizzazioni NCC?",["La Regione","Il Comune","La Provincia"],1],[1,"I titolari di licenza taxi e di autorizzazione di noleggio con conducente, al fine del libero esercizio della propria attività, ai sensi dell’art 7 della legge 15 gennaio 1992 n.21, possono:",["Associarsi in consorzio tra imprese artigiane e in tutte le altre forme previste dalla legge","Essere imprenditori privati per svolgere esclusivamente l’esercizio di taxi in due o più comuni","Essere imprenditori pubblici"],0],[1,"La prestazione del servizio di noleggio con conducente, come stabilito dall’art 13 della Legge 15 Gennaio 1992 n.21 è:",["Obbligatoria","Tassativa solo se richiesta per motivi di estrema necessità","Non obbligatoria"],2],[1,"Ai sensi dell’art. 2 della Legge 15 Gennaio 1992 n.21, il servizio taxi è rivolto ad una utenza di tipo:",["Collettiva differenziata","Indifferenziata individuale o di piccoli gruppi di persone","Individuale differenziata"],1],[1,"Ai sensi dell’art. 3 della Legge 15 gennaio 1992 n. 21, lo stazionamento dei mezzi, nel servizio di noleggio con conducente, avviene:",["In appositi parcheggi individuati dai comuni","Sulla pubblica piazza","All’interno delle rimesse o presso i pontili di attracco"],2],[1,"La competenza in materia di trasporto mediante autoservizi pubblici non di linea è affidata ai sensi dell’art. 4 della Legge 15 gennaio 1992 n. 21:",["Alla questura territorialmente competente","Alle Regioni e agli enti locali delegati","All’ufficio provinciale della Motorizzazione Civile"],1],[1,"Ai sensi dell’art. 6 della Legge 15 gennaio 1992 n. 21 il ruolo dei conducenti di veicoli o natanti adibiti ad autoservizi pubblici non di linea è istituito presso:",["Le province","Le Camere di Commercio, Industria, Artigianato e Agricoltura","Le Regioni"],1],[1,"Ai sensi dell’art. 8 della Legge 15 gennaio 1992 n. 21 è ammesso il cumulo della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio di noleggio con conducente nel caso gli stessi siano esercitati con autovettura?",["Si, se l’autovettura da noleggio con conducente è attrezzata per il trasporto di portatori di handicap","No","Si, previa autorizzazione rilasciata dal Presidente della provincia territorialmente competente"],1],[1,"Ai sensi dell’art. 12 della Legge 15 gennaio 1992 n. 21, in quale modo l’utente è portato a conoscenza dell’esistenza di eventuali supplementi tariffari per il servizio taxi?",["Mediante comunicazione verbale da parte del tassista alla fine della corsa","Mediante avvisi posti in luoghi pubblici","Mediante avviso chiaramente leggibile posto sul cruscotto dell’autovettura"],2],[1,"Ai sensi dell’art. 13 della Legge 15 gennaio 1992 n. 21, nel servizio taxi, la tariffa per il servizio urbano calcolata con tassametro è:",["A base multipla","A progressione chilometrica","A tempo di percorrenza"],0],[1,"I titolari di licenza di taxi possono essere sostituiti temporaneamente per l’esercizio del servizio, da persone iscritte al ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21:",["Per un periodo di ferie non superiore a giorni trenta annui","Per incarichi in società di capitale","Per il periodo necessario ad acquisire un diploma di laurea"],0],[1,"In base alla Legge 15 gennaio 1992 n. 21, a partire dal 1 gennaio 1992 i veicoli di nuova immatricolazione adibiti ai servizi di noleggio con conducente o al servizio taxi devono essere muniti:",["Di estintore nell’eventualità di un incendio a bordo","Di telefono cellulare a servizio dell’utenza","Di marmitta catalitica o di altri dispositivi atti a ridurre i carichi inquinanti"],2],[1,"Il rilascio della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio noleggio con conducente è subordinata:",["All’iscrizione al ruolo dei conducenti di cui all’art. 9 della Legge Regionale 15 aprile 1995 n. 20","Al possesso dell’abilitazione alla guida di autobus di noleggio con conducente","Al possesso del titolo per espletare di responsabile di agenzia turistica"],0],[1,"Ai sensi della Legge 15 gennaio 1992 n. 21, è titolo preferenziale agli effetti del rilascio delle licenze e delle autorizzazioni, l’avere esercitato il servizio taxi in qualità di sostituto alla guida del titolare di licenza:",["Per un periodo di tre mesi consecutivi","Per un periodo di tempo complessivo di almeno sei mesi","Per il periodo di tempo necessario a soddisfare l’obbligo del servizio militare"],1],[1,"Chi detta norme ai sensi dell’art. 14 della Legge 15 gennaio 1992 n. 21, per stabilire il numero e il tipo di veicoli già esistenti da attrezzare anche al trasporto di soggetti portatori di handicap di particolare gravità?",["Le USL competenti territorialmente","I comuni nell’ambito dei regolamenti","Il Settore Assistenza della Regione Lombardia"],1],[1,"Ai sensi dell’art. 14 della Legge 15 gennaio 1992 n. 21 è consentito che le autovetture di noleggio con conducente siano utilizzate anche per l’esercizio taxi?",["Nei servizi aeroportuali","Nei comuni di minori dimensioni","Nelle zone di intensa conurbazione di cui all’art. 8 della Legge Regionale 15 aprile 1995 n. 20"],1],[1,"Ai sensi dell’art. 13 della Legge 15 gennaio 1992 n. 21 il servizio taxi si effettua:",["A richiesta diretta del trasportato o dei trasportati","Solo su richiesta telefonica","Con prenotazione obbligatoria presso le agenzie di viaggio"],0],[1,"Costituiscono autoservizi pubblici non di linea ai sensi della Legge 15 gennaio 1992 n. 21:",["Il servizio taxi con autovettura, motocarrozzetta, natante e veicoli con trazione animale","Tutti i servizi non di linea posti in essere dai privati","Tutti i servizi non di linea finanziati da enti locali"],0],[1,"Il servizio taxi si rivolge ad un’utenza di tipo:",["Differenziata collettiva","Indifferenziata individuale o collettiva","Differenziata individuale"],1],[1,"Nel servizio di noleggio con conducente lo stazionamento dei mezzi avviene:",["In luogo pubblico","In appositi spazi delimitati dai Comuni","All’interno delle rimesse o presso i pontili d’attracco"],2],[1,"A chi è affidata, ai sensi dell’art. 4 della Legge 15 gennaio 1992 n. 21, la competenza in materia di trasporto mediante autoservizi pubblici non di linea?",["Alle Regioni","Alla prefettura territorialmente competente","Alla questura del capoluogo di provincia"],0],[1,"Il ruolo dei conducenti di veicoli o natanti adibiti ad autoservizi pubblici non di linea è istituito ai sensi dell’art.6 della Legge 15 gennaio 1992 n. 21 presso:",["Le regioni","Le camere di commercio, industria, artigianato e agricoltura","I comuni"],1],[1,"Secondo la Legge 15 gennaio 1992 n. 21 è ammesso il cumulo di più licenze per l’esercizio del servizio taxi ovvero il cumulo della licenza per l’esercizio del servizio taxi  e dell’autorizzazione per l’esercizio del servizio di noleggio con conducente nel caso gli stessi siano esercitati con autovettura?",["Si","No","Si, previa autorizzazione rilasciata dal Presidente della Giunta Regionale"],1],[1,"Ai sensi dell’art. 12 della Legge 15 gennaio 1992 n. 21 le autovetture adibite al servizio di taxi sono munite di tassametro omologato, attraverso la sola lettura del quale è deducibile il corrispettivo da pagare. L’esistenza di un eventuale supplemento tariffario è portata a conoscenza dell’utente:",["Mediante comunicazione verbale da parte dello stesso tassista","Mediante avviso chiaramente leggibile posto sul cruscotto dell’autovettura","Mediante comunicazione verbale da parte dello stesso tassista a fine corsa"],1],[1,"I titolari di licenza per l’esercizio del servizio taxi possono essere sostituiti temporaneamente da persone iscritte nel ruolo di cui all’art. 6 Legge 15 gennaio 1992 n. 21, nel caso di chiamata alle armi?",["Si","No","Solo in caso di chiamata per ferma prolungata"],0],[1,"A partire dal 1 gennaio 1992 i veicoli di nuova immatricolazione adibiti al servizio di noleggio con conducente o al servizio taxi devono essere muniti in base alla Legge 15 gennaio 1992 n. 21:",["Di estintore, nell’eventualità di un incendio a bordo","Di cinture di sicurezza, sui sedili posteriori","Di marmitte catalitiche o di altri dispositivi atti a ridurre i carichi inquinanti"],2],[1,"In caso di morte del titolare la licenza può essere trasferita ad uno degli eredi appartenenti al nucleo familiare del titolare qualora in possesso dei requisiti prescritti, ovvero può essere trasferita ad altri:",["Dietro autorizzazione del Presidente della Regione","Dietro autorizzazione del Sindaco","Davanti al notaio curatore dell’eredità"],1],[1,"Sono esonerate dall’obbligo del tassametro le autovetture adibite al servizio taxi:",["Nei comuni inferiori ai 5.000 abitanti","Nei comuni di minori dimensioni","Mai, in nessun caso"],1],[1,"Le autovetture adibite al servizio di noleggio con conducente portano un contrassegno con la scritta “noleggio”:",["All’interno del parabrezza anteriore e sul lunotto posteriore","Solo sul lunotto posteriore","Sulla parte inferiore delle portiere anteriori"],0],[1,"Il rapporto del sostituto alla guida del taxi è regolato con un contratto di lavoro a tempo determinato. A tal fine l’assunzione del sostituto alla guida è equiparata a quella effettuata per sostituire lavoratori assenti, per i quali sussista il diritto alla conservazione del posto, e ciò in base:",["Alla legge 18 aprile 1962 n. 230 art. 1, comma 2, lettera h","Al contratto collettivo nazionale dei lavoratori del comparto del trasporto pubblico","Ad un contratto di gestione per un termine non superiore ai 12 mesi"],0],[1,"Gli eredi minori del titolare di licenza possono farsi sostituire alla guida per l’esercizio del servizio taxi da persone iscritte nel ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21 ed in possesso dei requisiti prescritti:",["Solo per un tempo massimo di due anni","Solo fino al conseguimento della prescritta licenza taxi","Fino al raggiungimento della maggiore età"],2],[1,"Chi stabilisce la tipologia della scritta in nero “servizio pubblico” che ogni vettura adibita al servizio taxi deve possedere?",["L’ufficio comunale competente","L’ufficio regionale competente","L’ufficio apposito della Camera di commercio, industria, artigianato e agricoltura della provincia d’appartenenza"],0],[1,"Gli autoservizi pubblici non di linea sono quelli che:",["Provvedono al solo trasporto individuale di persone","Provvedono al solo servizio collettivo di persone","Provvedono sia al trasporto individuale che collettivo di persone"],2],[1,"Quale funzione svolgono gli autoservizi pubblici non di linea rispetto ai trasporti pubblici di linea ferroviari, automobilistici, marittimi, lacuali ed aerei?",["Nessuna funzione","Funzione complementare ed integrativa","Funzione sostitutiva"],1],[1,"Quale di queste caratteristiche riguardano gli autoservizi pubblici non di linea?",["Vengono effettuati a richiesta in modo non continuativo o periodico, su itinerari e secondo orari stabiliti di volta in volta","Vengono effettuati in modo continuativo o periodico, su itinerari e orari fissi","Vengono effettuati solo su richiesta della Prefettura in caso di grave calamità o per ragioni di pubblica utilità"],0],[1,"Costituiscono autoservizi pubblici non di linea:",["Il servizio di taxi e il servizio di autonoleggio con conducente","Il servizio di autonoleggio senza conducente","Il servizio di autoambulanza"],0],[1,"Quale tra questi veicoli non può essere adibito a servizio pubblico non di linea ai sensi della Legge 15 gennaio 1992 n. 21?",["Motocarrozzetta","Veicolo a trazione animale","Autoambulanza"],2],[1,"La Legge 15 gennaio 1992 n. 21 è:",["La legge quadro per il trasporto di persone mediante autoservizi pubblici non di linea","La legge quadro sui trasporti pubblici locali di linea","La legge che riguarda interventi in materia di opere pubbliche"],0],[1,"Dove sosta il taxi per svolgere il servizio?",["In una autorimessa situata nel comune che ha rilasciato la licenza","In luogo pubblico","Esclusivamente su marciapiede appositamente attrezzati"],1],[1,"La prestazione del servizio taxi all’interno delle aree comunali è obbligatoria?",["Si","No","Solo in caso di pubblica necessità"],0],[1,"In caso di mancata prestazione del servizio taxi sono previste idonee sanzioni amministrative. Da chi sono stabilite?",["Dalla Regione","Dalla Prefettura","Dal Direttore provinciale della Motorizzazione Civile"],0],[1,"Con quali procedure il comune concede le licenze per servizio taxi e l’autorizzazione per il servizio di noleggio con conducente?",["In base all’ordine cronologico di presentazione delle domande degli interessati","Attraverso bando di pubblico concorso","Per sorteggio fra tutti i richiedenti aventi diritto"],1],[1,"Al titolare di licenza di taxi che abbia trasferito ad altri tale titolo può essere attribuita una nuova licenza per concorso pubblico?",["No","Si, dopo tre anni dal trasferimento","Si, dopo sette anni dal trasferimento"],0],[1,"Il termine entro il quale i comuni devono rendere conformi i regolamenti comunali alle norme della Legge 15 gennaio 1992 n. 21 è:",["Diciotto mesi dalla nomina dei sindaci","Due anni dall’entrata in vigore della Legge 15 gennaio 1992 n. 21","Dodici mesi dalla convocazione dei comizi elettorali"],1],[1,"Gli autoservizi pubblici non di linea come vengono definiti ai sensi della L. 21/92 art. 1 c. 1?",["Servizi con funzione complementare e integrativa a quelli di linea con qualsiasi mezzo effettuati","Servizi svolti senza obbligo di aderire alla richiesta di trasporto","Servizi ad offerta non indifferenziata"],0],[1,"Ai sensi della L. 21/92 art. 1 c. 1 che cosa distingue gli autoservizi pubblici non di linea da quelli di linea?",["L’offerta riservata a particolari categorie di utenti","La non continuità e periodicità e lo svolgimento su itinerari e con orari non predeterminati","Le tariffe contrattabili liberamente"],1],[1,"Ai sensi della L. 21/92 art. 1 c. 2 quali sono gli autoservizi pubblici non di linea?",["Taxi e noleggio con conducente con autovettura, natante, motocarrozzetta e veicolo a trazione animale","Servizio da piazza e servizio di rimessa, svolti con qualsiasi tipo di auto o motoveicolo","Taxi, noleggio senza conducente, noleggio con conducente"],0],[1,"Le tariffe del servizio di taxi ai sensi della L. 21/92 art. 2 c. 1 da chi sono determinate?",["Dalla libera contrattazione tra il cliente e il vettore, entro i limiti minimi e massimi comunali","Dagli organi competenti che stabiliscono le modalità del servizio","Dalla Camera di Commercio"],1],[1,"Ai sensi della L. 21/92 art. 2 c. 1 dove deve avvenire il prelevamento dell’utente o l’inizio del servizio taxi?",["Esclusivamente entro l’area comunale","Entro l’area comunale o comprensoriale","Entro l’area provinciale"],1],[1,"Ai sensi della L. 21/92 art. 2 c. 1 dove può avvenire lo stazionamento dei veicoli adibiti a servizio taxi, durante il servizio stesso?",["Esclusivamente su suolo pubblico, in aree specificatamente individuate","Esclusivamente su piazze","Indifferentemente su suolo pubblico o presso apposite rimesse private"],0],[1,"Ai sensi della L. 21/92 art. 2 c. 1 qual è lo scopo del servizio taxi?",["Soddisfa esigenze di trasporto individuale o di piccoli gruppi","Soddisfa esigenze solo di trasporto individuale","Soddisfa esigenze di trasporto di qualsiasi genere, anche con contratto di noleggio"],0],[1,"La prestazione del servizio di taxi, ai sensi della L. 21/92 art. 2 c. 2, dov’è obbligatoria?",["Per qualsiasi destinazione, anche esterna al limite dell’area in cui è consentito acquisire utenza","Entro l’area provinciale","Entro l’area comunale o comprensoriale"],2],[1,"Ai sensi della L. 21/92 art. 2 c. 2, quale ente determina le sanzioni per l’inosservanza dell’obbligatorietà della prestazione del servizio taxi?",["Il Comune","La Provincia","La Regione"],2],[1,"Il servizio di noleggio con conducente, ai sensi della L. 21/92 art. 3, a chi è rivolto?",["Ad una utenza indifferenziata","All’’utenza specifica che si deve rivolgere presso la sede del vettore","All’utenza specifica che prenota presso le apposite aree pubbliche di stazionamento"],1],[1,"Ai sensi della L. 21/92 art. 3, come possono essere effettuate le prestazioni di noleggio di veicoli con conducente?",["A tempo e/o viaggio","Solo a tempo","Solo a viaggio"],0],[1,"Lo stazionamento dei mezzi addetti al servizio di noleggio con conducente, ai sensi della L. 21/92 art. 3, dove avviene?",["Presso apposite autorimesse pubbliche","Su suolo privato, in apposite rimesse","Su suolo pubblico in aree specificatamente contrassegnate"],1],[1,"Ai sensi della L. 21/92 art. 4 c. 3, con quale fine dev’essere ricercata l’uniformazione delle regolamentazioni comunali all’interno delle aree comprensoriali?",["Per evitare concorrenze indebite tra taxisti e noleggiatori di comuni limitrofi","Per ottenere una maggiore razionalità ed efficienza del servizio pubblico non di linea","Per limitare il numero delle licenze e delle autorizzazioni al minimo possibile"],1],[1,"Ai sensi della L. 21/92 art. 4 c. 5, gli autoservizi pubblici non di linea sono disciplinati solo da regolamenti di esercizio predisposti dai Comuni?",["No, possono essere emanate anche norme speciali della Regione nel rispetto delle competenze comunali","No, sono regolati anche dalle disposizioni delle Province","No, sono regolati anche dalle disposizioni delle Camere di Commercio"],0],[1,"Ai sensi della L. 21/92 art. 6 c. 1, presso quale ente è istituito il ruolo dei conducenti di veicoli adibiti ad autoservizi pubblici non di linea?",["La Camera di Commercio del capoluogo di regione","La Camera di Commercio di ciascuna provincia","La Provincia"],1],[1,"Ai sensi della L. 21/92 art. 6 c. 2, qual è l’unico requisito indispensabile, per legge statale, per ottenere l’iscrizione a ruolo dei conducenti di veicoli adibiti ad autoservizi pubblici non di linea?",["La sola patente","La licenza o l’autorizzazione","Il certificato di abilitazione professionale"],2],[1,"Ai sensi della L. 21/92 art. 7 è possibile rientrare in possesso di licenze o autorizzazioni per autoservizi pubblici non di linea conferite ad organismi cooperativi?",["No","Si, in caso di recesso, decadenza o esclusione","Si, in qualsiasi caso"],1],[1,"Ai sensi della L. 21/92 art. 7 le persone giuridiche possono essere titolari di licenza o autorizzazione per autoservizi pubblici non di linea?",["Si, ma possono essere solo società cooperative tra taxisti e noleggiatori","No, i titolari possono essere solo persone fisiche iscritte a ruolo","Si, possono essere anche società di capitali"],1],[1,"Ai sensi della L. 21/92 art. 8 c. 1, a chi può essere rilasciata la licenza o autorizzazione ad autoservizi pubblici non di linea?",["A qualsiasi impresa individuale o societaria","A persone singole o cooperative","A persone singole"],2],[1,"Ai sensi della L. 21/92 art. 8 c. 1, come viene rilasciata la licenza o l’autorizzazione ad autoservizi pubblici non di linea?",["A richiesta","A seguito di denuncia di inizio del servizio","Tramite concorso pubblico"],2],[1,"Ai sensi della L. 21/92 art. 8 c. 2, a quanti veicoli  addetti ad autoservizi pubblici non di linea può fare riferimento una singola licenza o autorizzazione?",["A un solo taxi, a più veicoli per noleggio con conducente","A più taxi o veicoli per noleggio con conducente","A un solo taxi o veicolo per noleggio con conducente"],2],[1,"Ai sensi della L. 21/92 art. 8 c. 2, è possibile cumulare licenza di taxi e autorizzazione al noleggio in capo al medesimo soggetto?",["No","Solo se non è una persona fisica","Solo se esercitate col medesimo veicolo"],0],[1,"Ai sensi della L. 21/92 art. 8 c. 3, per quali autoservizi pubblici non di linea è necessario disporre di una rimessa propria?",["Sia per il taxi che per il noleggio con conducente","Solo per il taxi","Solo per il noleggio con conducente"],2],[1,"Ai sensi della L. 21/92 art. 9 c. 1, in quale dei seguenti casi le licenze e le autorizzazioni possono essere trasferite a richiesta del titolare?",["Se egli l’ha ottenuta da almeno 3 anni","Se egli ha raggiunto cinquantacinque anni d’età","Se egli è divenuto inabile o inidoneo al servizio in via permanente"],2],[1,"Ai sensi della L. 21/92 art. 9 c. 1, in quale dei seguenti casi le licenze e le autorizzazioni possono essere trasferite a richiesta del titolare?",["Se egli ha raggiunto cinquantacinque anni d’età","Se egli l’ha ottenuta da almeno cinque anni","Se egli è divenuto inabile o inidoneo al servizio in via provvisoria"],1],[1,"Ai sensi della L. 21/92 art. 9 c. 1, le licenze e autorizzazioni sono trasferite su richiesta del titolare a persona dallo stesso designata:",["Solo se la persona possiede i requisiti necessari","Solo se la persona possiede i requisiti necessari e quando il titolare stesso si trovi in una delle condizioni previste","Solo in caso di cessione d’azienda"],1],[1,"Ai sensi della L. 21/92 art. 9 c. 3, in caso di trasferimento della licenza o dell’autorizzazione da parte di un titolare, quanto tempo deve trascorrere prima che egli possa riottenerne un’altra?",["Tre anni","Non può più ottenerne un’altra","Cinque anni"],2],[1,"Ai sensi della L. 21/92 art. 10 c. 1, i titolari di licenza taxi possono farsi sostituire alla guida del taxi?",["Si, sia temporaneamente che definitivamente","Solo temporaneamente e per motivi specifici","Solo per incarichi sindacali"],1],[1,"Ai sensi della L. 21/92 art. 10 c. 4, i titolari di licenza o autorizzazione per autoservizi pubblici non di linea possono avvalersi nella guida di collaboratori familiari?",["Si, senza particolari obblighi","Si, purchè iscritti al ruolo dei conducenti","No, solo di sostituti o dipendenti"],1],[1,"Ai sensi della L. 21/92 art. 11 c. 1, i veicoli adibiti a servizio di taxi possono circolare e sostare liberamente?",["Si","Secondo quanto stabilito dai regolamenti comunali e dal codice della strada","Esclusivamente secondo quanto stabilito dal codice della strada"],1],[1,"Ai sensi della L. 21/92 art. 11 c. 2 da dove deve avvenire, nel servizio taxi, la partenza del veicolo per il prelevamento dell’utente o per l’inizio del servizio?",["Sempre e soltanto dal territorio del 
+// DATI CON SOLTANTO INGLESE
+const RAW_DATA = `
+Inglese | Where ………. from? | You are | Are you | Are | 2
+Inglese | Where ……….? | You live | Are you live | Do you live | 3
+Inglese | How old ……….? | Are you sister | Is your sister | Your sister | 2
+Inglese | I ………. to the cinema every Friday. | Go | Goes | Am going | 1
+Inglese | Paolo can ………. three languages. | Speak | To speak | Speaks | 1
+Inglese | My husband usually ………. home about 6. | Arrive | Is arriving | Arrives | 3
+Inglese | Take an umbrella. ………. | I’m raining | It’s raining | It’s rain | 2
+Inglese | How much ………. it cost? | Is | Does | Are | 2
+Inglese | ………. like coffee now or later? | Would you | You | Are you | 1
+Inglese | How ………. photo did you take? | Many | Any | Much | 1
+Inglese | I ………. John when i was at the bank. | See | Said | Saw | 3
+Inglese | This book is ………. that one. | Old as | Older as | Older than | 3
+Inglese | What did you ……….? | Say | Said | Told | 1
+Inglese | …….... go skiing this weekend? | Why do we | Why don’t we | How about | 2
+Inglese | Anne is 25 years old but (she) still lives ………. her parents. | With | To | From | 1
+Inglese | ………. you go to the mountains at the weekend? | Did | Have | Does | 1
+Inglese | This ………. my friend John. | Is | Are | A | 1
+Inglese | ………. there students in the room? | Are | Have | Does | 1
+Inglese | How are you? ………. | Fine, thanks. | How do you do? | I’m a secretary. | 1
+Inglese | Can you speak French? ………. | Yes, I can’t. | No, I can. | Yes, I can. | 3
+Inglese | Tom is ………. taxi driver. | An | The | A | 3
+Inglese | It’s cold today. ………. you got a jacket? | Have | Do | Has | 1
+Inglese | In my course there is only one man and four ………. | Women | Womens | Womans | 1
+Inglese | This is Mr. Taylor and that is ………. son. | His | Her | Its | 1
+Inglese | What’s the time? ……………? | A quarter to eight | At eight o’clock | It’s half past eight o’clock | 1
+Inglese | I don’t like wine. I ………. drink it. | Never | Ever | Always | 1
+Inglese | ………. do you go to the gym? | How much | How often | Many times | 2
+Inglese | What ………. your sister do? | Do | Does | Make | 2
+Inglese | Look at that girl! She ………. an ice cream. | Drink | Is eating | Eats | 2
+Inglese | My sister works in a restaurant. She ………. very well. | Cook | Can cook | Cans cook | 2
+Inglese | Tell me, is ………. your coat? | Those | It | This | 3
+Inglese | I’d like some coffee. I’m afraid there isn’t ………. | Anything | Any | Some | 2
+Inglese | There is ………. milk in the fridge. | A lot | More | Enough | 3
+Inglese | Kate and Jenny are sisters and Bill is ………. brother. | His | Their | Them | 2
+Inglese | Is that your car? No, ………. | It is | This is | It isn’t | 3
+Inglese | ………. are you? I am in the bedroom. | Where | Why | When | 1
+Inglese | How are you? …………… | I am fine. | I are good. | You are ok. | 1
+Inglese | I ………. hungry. | Have | Am | Got | 2
+Inglese | Our house has three bedrooms. I have the ………. | Largest | Greater | Big | 1
+Inglese | Shall we go ………. the cinema tonight? | From | With | To | 3
+Inglese | John and Mary have been married ………. last October. | In | To | Since | 3
+Inglese | I have been learning English ………. two years. | To | For | Since | 2
+Inglese | My son is afraid ………. dogs. | Into | Of | To | 2
+Inglese | What ……….? A letter to my pen friend. | Are you writing | Does you write | Write | 1
+Inglese | Where ……………? | Do he go | Doesn’t he going | Did he go | 3
+Inglese | Chinese people ………. a lot of rice. | Eat | Are eating | Drink | 1
+Inglese | How old is Bill? …………… | He is 21. | He has 21. | She are 21. | 1
+Inglese | What is her job? ………. nurse. | She is a | She | She has a | 1
+Inglese | Where ……….? From Japan. | Are you from | Are you for | Is Japan | 1
+Inglese | Do you like London? Yes, ………. | I do. | So I do. | I like. | 1
+Inglese | Where are you going …….. friday? | On | In | At | 1
+Inglese | What ………. in London last weekend? | You did | Did you | Did you do | 3
+Inglese | Is your English improving? ………. | Hoping. | I hope so. | I hope it. | 2
+Inglese | He was mowing the lawn when I ………. him yesterday. | Saw | Had seen | Was seeing | 1
+Inglese | Last tuesday I ………. to the passport Office. | Must gone | Must go | Had to go | 3
+Inglese | How many people ………. in your family? | Are there | Are they | Is | 1
+Inglese | What time is it? …………… | Ten and a quarter. | A quarter past ten. | Fifteen after ten o’clock. | 2
+Inglese | I get up at 8 o’clock ………. morning. | In the | In | At the | 1
+Inglese | What were you doing at 7.30 on Sunday evening? ………. TV. | Watched | I was watching | Was watched | 2
+Inglese | What time ………. to bed during the week? | You are going | Are you go | Do you go | 3
+Inglese | How much ………. where you live? | Do houses cost | Does cost houses | Do cost houses | 1
+Inglese | I’m afraid I haven’t got ………. | Scissor | Some scissors | Any scissors | 3
+Inglese | Would you mind ………. me that pencil? | Passing | Pass | To pass to | 1
+Inglese | I wish you ………. | Are there | Were here | Was here | 2
+Inglese | How old are you? …………… | I’m 30 years old. | I have 30. | 30 years. | 1
+Inglese | She came to Britain …….. | At four days | Four days ago | Since four days | 2
+Inglese | I’m sorry. I haven’t done my report …….. | Yet | Already | Until the present | 1
+Inglese | My friend doesn’t speak Chinese. I don’t ………. | Too | Also | Either | 3
+Inglese | It’s time ………. some work. | She did | For to do | She would do | 1
+Inglese | She asked me how big ………. | Is your house. | Is my house. | My house was. | 3
+Inglese | My friend let ………. his bike yesterday. | Me borrow | To borrow | Me to borrow | 1
+Inglese | I have difficulty ………. English. | To writing | To write | Writing | 3
+Inglese | We’re having the party at ………. | The Deborah’s house | Deborah’s | House of Deborah | 2
+Inglese | It’s now 9 o’clock and the train ………. arrive at 8:15. | Must | Was due to | Will | 2
+Inglese | I don’t like tests. Neither ………. | Do I | I do | I don’t | 1
+Inglese | Good afternoon! Excelsior Hotel. Can I ………. you? | Attend | Assist | Help | 3
+Inglese | Have you got any luggage? | I've got some | I've got any | I don't some | 1
+Geografia | In quale provincia si trova Caravaggio? | Varese | Milano | Bergamo | 3
+Geografia | Quale città è collegata da una linea delle FNM, in partenza da Milano? | Mantova | Novara | Sondrio | 2
+Geografia | Benaco è il nome di quale Lago: | Lago d'Iseo | Lago Maggiore | Lago di Garda | 3
+Geografia | Sebino è il nome di quale Lago: | Lago di Garda | Lago d'Iseo | Lago di Como | 2
+Geografia | La Val Veddasca, la Val Tresa, la Valcuvia e Valganna si trovano: | Nella provincia di Sondrio | Nella provincia di Brescia | Nella provincia di Varese | 3
+Geografia | Il fiume Mincio, forma in prossimità di un capoluogo di provincia della Lombardia, tre laghi, detti di “mezzo” “inferiore” e “superiore”, qual è questa città? | Cremona | Pavia | Mantova | 3
+Geografia | L'aeroporto bergamasco di Orio al serio rispetto a capoluogo di provincia, dove è situato? | Nord | Sud | All'interno della stessa città di Bergamo | 2
+Geografia | Le sorgenti del fiume Adda, in quale provincia della Lombardia si trovano? | Sondrio | Lecco | Varese | 1
+Geografia | Sotto il monte, città natale di Papa Giovanni XXIII si trova in provincia di: | Brescia | Bergamo | Lecco | 2
+Geografia | Quali fiumi collega il canale Villoresi? | Adda-Lambro | Ticino-Olona | Ticino-Adda | 3
+Geografia | Dove si trova il Monte barro | In provincia di Lecco | In provincia di Lodi | Provincia di Varese | 1
+Geografia | In Lombardia un comune sorge isolato in territorio svizzero, si tratta di: | Campione d'Italia | Castiglione Olona | Lavena-Ponte Tresa | 1
+Geografia | Verbano e il nome di quale Lago: | Lago Maggiore | Lago d'Iseo | Lago di Garda | 1
+Geografia | Mantova è bagnata da quale fiume: | Mincio | Serio | Bozzente | 1
+Geografia | In quale di queste tre province si trova Bellagio | Varese | Sondrio | Como | 3
+Geografia | La cittadina di Bosisio Parini si affaccia su un piccolo Lago: | Lago d'idro | Lago di Lecco | Lago di Pusiano | 3
+Geografia | Calolziocorte si trova in provincia di: | Bergamo | Lodi | Lecco | 3
+Geografia | La Lomellina è una zona della provincia di: | Pavia | Milano | Lecco | 1
+Geografia | Quale città della Lombardia è bagnata dal fiume Ticino: | Varese | Mantova | Pavia | 3
+Geografia | Uno di queste province non si affaccia sul Lago d'iseo, quale? | Brescia | Cremona | Bergamo | 2
+Geografia | Il capoluogo di provincia più meridionale della Lombardia e: | Como | Cremona | Pavia | 2
+Geografia | Il fiume Brembo e affluente del fiume: | Po | Mincio | Adda | 3
+Geografia | Il fiume Oglio attraversa: | Ponte di Legno | Ponte Chiasso | Seriate | 1
+Geografia | Il fiume Mincio è emissario del: | Lago di Como | Lago di Garda | Lago maggiore | 2
+Geografia | Qual è il passo più alto della Lombardia? | Passo Gavia | Passo di croce Domini | Passo dello Stelvio | 3
+Geografia | La provincia di Mantova confina con: | Il Trentino Alto Adige | L'Emilia Romagna | Il Piemonte | 2
+Geografia | Lario è il nome di quale Lago: | Lago di Como | Lago d'iseo | Lago maggiore | 1
+Geografia | Il passo del Tonale si trova nella provincia di: | Varese | Lecco | Brescia | 3
+Geografia | Quale città, capoluogo di provincia, e bagnata dai tre laghi? | Mantova | Varese | Lecco | 1
+Geografia | Tra il Lago di Como e quello di Lugano si estende: | La Val d'Intelvi | La Valsassina | La Val di Scalve | 1
+Geografia | Dov'è localizzato il parco delle Groane? | A est di Milano | A nord di Milano | A sud di Milano | 2
+Geografia | Castellanza situata tra: | Legnano e Busto Arsizio | Gallarate e Busto Arsizio | Desio e Seregno | 1
+Geografia | Il Lago di Mezzola si trova nella provincia di: | Brescia | Cremona | Sondrio | 3
+Geografia | La principale località Lombarda del Parco Nazionale dello Stelvio è | Bormio | Clusone | Cantù | 1
+Geografia | Quale dei seguenti fiumi interessa la provincia di Varese? | Ticino | Brembo | Agogna | 1
+Geografia | Rivolta d'Adda e in provincia di: | Cremona | Lecco | Bergamo | 1
+Geografia | La Grigna è: | Una montagna delle Prealpi | Una località della Val Brembana | Una collina dell'Oltrepò | 1
+Geografia | A quale di queste province appartiene la Val di Scalve? | Como | Bergamo | Pavia | 2
+Geografia | Monteisola è: | Una località turistica vicino a Livigno | Un'isola del Lago d'Iseo | Una collina nei pressi del Lago d'Endine | 2
+Geografia | Quale di queste località si affaccia sul Lago maggiore? | Laveno | Bellagio | Paratico | 1
+Geografia | La provincia di Pavia confina: | Con il Veneto | Con l'Emilia Romagna | Con la Svizzera | 2
+Geografia | Il Po attraversa la provincia di | Pavia | Bergamo | Varese | 1
+Geografia | Quale fiume attraversa la Valcamonica? | L’ Adda | L' Oglio | Il Ticino | 2
+Geografia | Quale di questi passi si trova in Lombardia | Falzarego | Sempione | Gavia | 3
+Geografia | Quale di queste regioni non si affaccia sul Lago di Garda? | Il Trentino Alto Adige | Il Friuli Venezia Giulia | Il Veneto | 2
+Geografia | Quali province lombarde bagna il fiume Po | Pavia-Cremona-Mantova-Piacenza | Pavia-Mantova-Cremona | Pavia-Cremona-Mantova-Lodi | 3
+Geografia | In quale di queste tre province si trova Sabbioneta? | Lodi | Cremona | Mantova | 3
+Geografia | Quale fiume forma il Lago d'Iseo? | L'Oglio | Il Brembo | Il Serio | 1
+Geografia | La Valceresio interessa il territorio della provincia di: | Como | Varese | Sondrio | 2
+Geografia | Come è denominata la zona dell'entroterra del Lago di Garda verso Mantova | Colli Euganei | Colli Morenici o Colli Storici | Col di Lana | 2
+Geografia | Quale di questi fiumi sfocia direttamente nel Po? | Brembo | Olona | Serio | 2
+Geografia | Una di queste località termali non è in Lombardia | Boario Terme | Bognanco Terme | Salice Terme | 2
+Geografia | Il passo dello Spluga collega: | La regione Svizzera dei grigioni con la Val Chiavenna | La Valtellina con il Trentino Alto Adige | La provincia di Brescia con il Trentino Alto Adige | 1
+Geografia | Il Lago di annone si trova: | In Brianza | Nell'Oltrepò pavese | Nell'alto mantovano | 1
+Geografia | Con quante regioni italiane confina la Lombardia? | 3 | 4 | 5 | 2
+Geografia | Uno di questi fiumi non è un confine naturale della Lombardia | Il Ticino | Il Po | L 'Adda | 3
+Geografia | è un comune della provincia di Lodi: | Paullo | Codogno | Locate Triulzi | 2
+Geografia | è un comune della provincia di Lecco: | Valmadrera | Dorno | Dongo | 1
+Geografia | Uno di questi laghi non è in Lombardia: | Lago di Alserio | Lago di Annone | Lago di Viverone | 3
+Geografia | Il Comune di campione d'Italia a quale provincia appartiene? | Alla provincia di Milano | Alla provincia di Como | A nessuna, è territorio svizzero | 2
+Geografia | La città di Sesto San Giovanni ha un numero di abitanti pari a: | Più di 110.000 | Tra 40.000 e 50.000 | Tra 70.000 e 100.000 | 3
+Geografia | La città di Cinisello Balsamo ha un numero di abitanti pari a: | Tra 50.000 e 80.000 | Meno di 40.000 | Più di 90.000 | 1
+Geografia | La città di Legnano ha un numero di abitanti pari a: | Meno di 30.000 | Tra 40.00 e 60.000 | Più di 70.000 | 2
+Geografia | La città di Rho ha un numero di abitanti pari a: | Tra 20.000 e 30.000 | Più di 80.000 | Tra 40.000 e 60.000 | 3
+Geografia | La città di Cologno Monzese ha un numero di abitanti pari a: | Tra 20.000 e 30.000 | Tra 40.000 e 60.000 | Più di 70.000 | 2
+Geografia | La città di Vigevano ha un numero di abitanti pari a: | Tra 40.000 e 70.000 | Tra 20.0000 e 30.000 | Tra 80.000 e 100.000 | 1
+Geografia | La città di Busto Arsizio ha un numero di abitanti pari a: | Tra 60.000 e 90.000 | Tra 20.000 e 50.000 | Più di 100.000 | 1
+Geografia | Quale di questi comuni non è in provincia di Pavia? | Stradella | Tortona | Mortara | 2
+Geografia | Castiglione Olona denominata “isola di Toscana in Lombardia” si trova: | In provincia di Milano | In provincia di Pavia | In provincia di Varese | 3
+Geografia | Dov'è sito il palazzo della Triennale di Milano? | In prossimità della “Darsena” di porta ticinese | In prossimità di città studi | In prossimità del “parco Sempione” | 3
+Geografia | Non è considerata una “stazione sciistica”: | Madesimo | Varzi | Monte Penice | 2
+Geografia | Dove si trova Villa Olmo, sede di un'importante centro di congressi? | Sul Lago di Garda | Sul Lago di Como | Sul Lago di Pusiano | 2
+Geografia | Cosa si intende per “Triangolo Lariano”? | Il territorio compreso tra Milano Pavia e Lodi | Il territorio compreso tra i rami del Lago di Como | Un'area montana del Bergamasco | 2
+Geografia | è il secondo nome del Lago di Lugano | Iridio | Ceresio | Verbano | 2
+Geografia | Interessa il territorio di due province della Lombardia: | Il Lago di Lugano | Il Lago di Garda | Il Lago d'idro | 1
+Geografia | Quale corso d'acqua attraversa la città di Sondrio: | Il Mallero | Il Ticino | L'Oglio | 1
+Geografia | Salò, nota a tutti per le vicende legate alla II guerra mondiale, su quale Lago lombardo si affaccia? | Lago di Garda | Lago di Como | Lago d'Iseo | 1
+Geografia | Tra i più importanti monumenti della Lombardia vi è: | La Certosa di Como | La Certosa di Brescia | La Certosa di Pavia | 3
+Geografia | Bellagio è una località turistica: | Del Lago di Como | Della Bassa Brianza | Della Val Sabbia | 1
+Geografia | è sede di un'antica università e di un celebre castello Visconteo: | Vigevano | Mantova | Pavia | 3
+Geografia | Una di queste università non ha sede a Milano: | C’a Foscari | Università del Sacro Cuore | Università degli Studi | 1
+Geografia | Su quale linea della metropolitana milanese si trova la fermata “Brenta”: | Linea 2 | Linea 3 | Linea 1 | 2
+Geografia | La stazione ferroviaria di Rho si trova sulla linea ferroviaria dello Stato: | Milano-Lecco | Milano-Mortara | Milano-Gallarate | 3
+Geografia | Quale importante via storica di epoca romana collega Milano con l'adriatico? | La via Emilia | La via Cassia | La via Aurelia | 1
+Geografia | Quale di queste città ha un porto fluviale? | Como | Cremona | Varese | 2
+Geografia | Cittadina in provincia di Brescia, nota oltre per la più grande villa romana Dell'Italia settentrionale anche per les grotte di Catullo: | Sirmione | Desenzano del Garda | Gardone Riviera | 1
+Geografia | è nota, oltre che per la sua stupenda piazza su cui si affacciano il Duomo ed un castello antico, anche qua l'importante centro calzaturiero della Lombardia: | Varese | Lodi | Vigevano | 3
+Geografia | Il patroncino dei Gonzaga, l'opéra, tra gli altri del Mantegna e di Giulio Romano, hanno reso questo capoluogo di provincia uno stupendo centro storico/culturale: | Pavia | Mantova | Lecco | 2
+Geografia | Città capoluogo di provincia, fondata dai Galli, conosciuta sotto i romani come il nome di Laus Pompeia, Distrutta dai milanesi nel 1110, ricostruita da Federico Barbarossa nel 1158, è rinomata per le sue ceramiche. È nota anche per il santuario dell'incoronata: | Lecco | Brescia | Lodi | 3
+Geografia | Quale tratto della metropolitana milanese, tra i seguenti, e in superficie? | Da Cimiano a Cascina Gobba | Da Brenta a Corvetto | Da Gambara a Primaticcio | 1
+Geografia | Garegnano è: | Una Certosa di Milano | Una famosa località turistica sul Lago di Garda | Un fiume della Val Trebbia | 1
+Geografia | Sirmione è una località turistica del: | Lago di Garda | Lago d'Iseo | Lago di Ledro | 1
+Geografia | La Certosa di Chiaravalle si trova nel Comune di: | Milano | Assago | Rozzano | 1
+Geografia | Piazza della Loggia in quale città della Lombardia si trova? | Brescia | Varese | Como | 1
+Geografia | Quale di questi tre importanti monumenti si trova a Milano? | La Cappella Colleoni | Il Cenacolo di Leonardo da Vinci | Il Palazzo Te | 2
+Geografia | L'aeroporto di Malpensa si trova nel territorio della provincia di: | Milano | Varese | Como | 2
+Geografia | La stazione ferroviaria di Paderno Dugnano si trova sulla linea delle ferrovie nord: | Milano Saronno | Milano Novara | Milano Meda | 3
+Geografia | La stazione ferroviaria di Novate Milanese si trova sulla linea delle Ferrovie Nord: | Milano-Erba-Asso | Milano-Saronno | Milano-Meda | 2
+Geografia | Quale di queste tre città è famosa per il “Torrazzo”? | Cremona | Mantova | Bergamo | 1
+Geografia | Quale di questi tre importanti monumenti si trova a Bergamo? | Il Cenacolo di Leonardo da Vinci | La Cappella Colleoni | Il Palazzo Te | 2
+Geografia | Cos’è il “Vittoriale degli Italiani”? | Il complesso degli edifici e giardini dimora di Gabriele D’Annunzio a Gardone Riviera | La casa di riposo voluta da Giuseppe Verdi a Milano | La torre eretta a S. Martino della Battaglia a ricordo della vittoria piemontese nella seconda guerra d’indipendenza | 1
+Geografia | Qual è il confine naturale che divide la provincia di Milano da quelle di Bergamo e Cremona? | Il fiume Olona | Il fiume Adda | Il fiume Ticino | 2
+Geografia | Quale dei seguenti comuni è zona extradoganale (zona franca)? | Aprica | Livigno | Erba | 2
+Geografia | Quanti abitanti ha Lecco (sulla base del censimento del 21/10/2001)? | Tra 30.000 e 50.000 | Tra 60.000 e 80.000 | Più di 100.000 | 1
+Geografia | Quanti abitanti ha Bergamo (sulla base del censimento del 21/10/2001)? | Da 100.000 a 180.000 | Meno di 90.000 | Più di 200.000 | 1
+Geografia | Dove si trova il “Parco del Campo dei Fiori”? | Nella provincia di Lodi | Nella provincia di Varese | Nella provincia di Bergamo | 2
+Geografia | In quante province è suddivisa la regione Lombardia? | 12 | 9 | 10 | 1
+Geografia | Nella città di Milano dov’è localizzato il quartiere “Ortica”? | A Ovest | A Est | A Sud | 2
+Geografia | Dove si trova la Valtrompia? | In provincia di Bergamo | In provincia di Brescia | In provincia di Sondrio | 2
+Geografia | Quanti abitanti ha Milano (sulla base del censimento del 21/10/2001)? | Meno di 1 milione di abitanti | Più di 2 milioni di abitanti | Tra 1 milione e 1,5 milioni di abitanti | 3
+Geografia | Quanti abitanti ha Brescia (sulla base del censimento del 21/10/2001)? | Tra 100.000 e 150.000 | Tra 180.000 e 220.000 | Più di 230.000 abitanti | 2
+Geografia | Quanti abitanti ha Como (sulla base del censimento del 21/10/2001)? | Tra 120.000 e 130.000 | Tra 70.000 e 100.000 | Tra 140.000 e 150.000 | 2
+Geografia | Quanti abitanti ha Cremona (sulla base del censimento del 21/10/2001)? | Meno di 80.000 | Tra 100.000 e 120.000 | Oltre i 130.000 | 1
+Geografia | Quanti abitanti ha Lodi (sulla base del censimento del 21/10/2001)? | Meno di 50.000 | Tra 60.000 e 70.000 | Più di 80.000 | 1
+Geografia | Quanti abitanti ha Mantova (sulla base del censimento del 21/10/2001)? | Meno di 60.000 | Tra 70.000 e 80.000 | Più di 100.000 | 1
+Geografia | Quanti abitanti ha Pavia (sulla base del censimento del 21/10/2001)? | Meno di 50.000 | Tra 60.000 e 80.000 | Più di 100.000 | 2
+Geografia | Quanti abitanti ha Sondrio (sulla base del censimento del 21/10/2001)? | Tra 40.000 e 50.000 | Più di 60.000 | Meno di 30.000 | 3
+Geografia | Quanti abitanti ha Varese (sulla base del censimento del 21/10/2001)? | Tra 70.000 e 90.000 | Oltre 100.000 | Tra 50.000 e 60.000 | 1
+Geografia | Dove si trova il “Parco Nazionale delle incisioni rupestri” ove è presente quale elemento ricorrente la “rosa camuna” adottata come simbolo della Regione Lombardia? | A Ponte di Legno | Nel Parco dell’Oglio Nord nei pressi di Ponte Oglio | A Capo di Ponte in Valcamonica | 3
+Geografia | In quale località si trova il parco dei divertimenti denominato “Fantasy World Minitalia”? | Sulla tangenziale ovest di Milano all’altezza di Assago | All’uscita del casello autostradale di Fino Mornasco sull’autostrada A9 | Nei pressi di Capriate San Gervasio sulla A4 | 3
+Geografia | Dove si trova un celebre Castello di San Giorgio e un Palazzo Ducale già residenza dei Gonzaga? | Cremona | Mantova | Pavia | 2
+Geografia | Non fa parte del territorio di Varese e dintorni. | Il Sacro Monte | Il Pian dei Resinelli | Il Campo dei Fiori | 2
+Geografia | E’ la patria di Donizetti e di Colleoni. Si trova allo sbocco della Val Seriana e della Val Brembana. Di quale città si tratta? | Brescia | Cremona | Bergamo | 3
+Geografia | Il “Cenacolo” di Leonardo da Vinci, capolavoro rinascimentale, si trova a Milano. In quale di questi luoghi? | Nella Pinacoteca di Brera | Nella chiesa di Santa Maria delle Grazie | Nel Castello Sforzesco | 2
+Geografia | Fu istituito nel 1935, è in massima parte nel territorio di un’altra regione, si trova nelle Alpi Centrali nell’Alta Valtellina. Di quale parco nazionale si tratta? | Il parco nazionale del Delta Padano | Il parco nazionale del Gran Paradiso | Il parco nazionale dello Stelvio | 3
+Geografia | Quale linea della metropolitana milanese collega tra loro le stazioni FS di Garibaldi, Centrale, Lambrate e la stazione FNM di Cadorna? | La linea rossa | La linea verde | La linea gialla | 2
+Geografia | E’ stazione della metropolitana milanese, di corrispondenza con le autolinee extraurbane della zona dell’Adda. | Molino Dorino | San Donato Milanese | Gessate | 3
+Geografia | La stazione ferroviaria di Arcore si trova sulla linea delle FS: | Milano-Gallarate | Milano-Lecco-Sondrio-Tirano | Milano-Treviglio-Bergamo | 2
+Geografia | La stazione ferroviaria di Melzo si trova sulla linea delle FS: | Milano-Treviglio-Bergamo | Milano-Saronno | Milano-Piacenza | 1
+Geografia | Quale di queste è una circonvallazione di Milano? | Raccordo anulare dei parchi | Circolo interstazionale | Cerchia dei navigli | 3
+Geografia | La SS 237 “del Caffaro” quale provincia attraversa? | Brescia | Mantova | Varese | 1
+Geografia | La SS 342 “Briantea” attraversa l’abitato di: | Chiavenna | Pontida | Castiglione delle Stiviere | 2
+Geografia | La SS 596 “dei Cairoli” interessa la provincia di: | Varese | Sondrio| Pavia | 3
+Geografia | La SS 37 “del Maloja” attraversa l’abitato di:| Chiavenna | Boario | Livigno | 1
+Geografia | La SS 527 “Bustese” collega Monza con un’importante cittadina delle provincia di Varese: | Malnate | Busto Arsizio | Gallarate | 2
+Geografia | La SS 234 “Codognese” attraversa tre province lombarde: | Bergamo, Brescia e Mantova | Lodi, Milano e Varese | Pavia, Lodi e Cremona | 3
+Geografia | La SS 12 “dell’Abetone e del Brennero” attraversa per pochi chilometri una provincia lombarda, superando un ponte sul fiume Po. Di quale provincia si tratta? | Mantova | Pavia | Cremona | 1
+Geografia | La località di Bellagio è attraversata dalla statale: | SS 239 “dei laghi di Pusiano e Garlate” | SS 583 “Lariana”| SS 33 “del Sempione” | 2
+Geografia | Como è attraversata, tra le altre, dalla seguente statale: | SS 33 “del Sempione” | SS 36 “del lago di Como e dello Spluga” | SS 35 “dei Giovi” | 3
+Geografia | La cittadina di Codogno è raggiunta dalla seguente statale: | SS 591 “Cremasca” | SS 36 “del lago di Como e dello Spluga” | SS 472 “Bergamina” | 1
+Geografia | Legnano si trova: | Sulla SS “Sempione” n. 33 | Sulla SS “Paullese” n. 415 | Sulla SS n.10 “Padana inferior” | 1
+Geografia | L’autostrada A4 Torino-Trieste attraversa quattro province lombarde nell’ordine: | Milano, Lodi, Brescia | Milano, Monza, Bergamo, Brescia | Milano, Bergamo, Mantova | 2
+Geografia | La SS 470 attraversa: | La Val di Scalve | La Val Seriana | La Val Brembana | 3
+Geografia | Quale strada statale collega Pavia a Lodi? | La SS 234 “Codognese” | La SS 235 “di Orzinuovi” | La SS 35 “dei Giovi” | 2
+Geografia | La A22 del Brennero attraversa unicamente una provincia lombarda: | La provincia di Mantova | La provincia di Brescia | La provincia di Cremona | 1
+Geografia | La A21 da Cremona raggiunge un altro capoluogo di provincia lombarda: | Bergamo | Mantova | Brescia | 3
+Geografia | La SS 38 attraversa un capoluogo di provincia della Lombardia. | Varese | Bergamo | Sondrio | 3
+Geografia | La SS 583 quale lago costeggia? | Il lago Maggiore | Il lago d’Iseo | Il lago di Como | 3
+Geografia | La SS 10 è denominata: | Padana Inferiore | Padana Superiore | Della Lomellina | 1
+Geografia | La SS 345 “delle tre valli” attraversa la provincia di: | Lodi | Brescia | Varese | 2
+Geografia | La SS 36 “del lago di Como e dello Spluga” attraversa: | Lecco | Lumezzane | Livigno | 1
+Geografia | La SS 402 “Valeriana” interessa principalemente la provincia di: | Mantova | Bergamo | Sondrio | 3
+Geografia | Quale di queste province non è attraversata dalla A21 “Brescia-Piacenza-Alessandria”? | Cremona | Lodi | Pavia | 2
+Geografia | Quale di queste località non è servita dalle FS: | Varese | Erba | Laveno Mombello | 2
+Geografia | Qual è la distanza tra Milano e Mantova? | Meno di 100 km | Più di 140 km | Più di 180 km | 2
+Geografia | Quale tra le seguenti stazioni ferroviarie, si trova sulla linea delle FS Milano-Treviglio-Bergamo? | Trecella | Buttafava | Gazzada-Schianno | 1
+Geografia | Quale linea della metropolitana milanese passa dalla stazione di P.ta Garibaldi? | La linea rossa | La linea gialla | La linea verde | 3
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Gallarate-Porto Ceresio? | Magenta | Secugnago | Canegrate | 3
+Geografia | Da Milano all’aeroporto intercontinentale della Malpensa la distanza è: | Km 17 circa | Km 40 circa | Km 83 circa | 2
+Geografia | Dove inizia la strada del Sempione? | All’Arco della Pace a Milano | All’uscita di Novara dell’autostrada Milano-Torino | Dopo l’abitato di Lecco in direzione della Valtellina | 1
+Geografia | Quale strada statale collega Milano a Crema? | La SS 33 del Sempione | La SS 11 Padana Superiore | La SS 415 Paullese | 3
+Geografia | Quale strada statale collega Cremona a Mantova? | La SS 415 Paullese | La SS 10 Padana Inferiore | La SS 45 bis Gardesana occidentale | 2
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Bergamo-Treviglio-Cremona? | Caravaggio | Rogoredo | Parona Lomellina | 1
+Geografia | La SS 9 Emilia attraversa la provincia di: | Pavia | Lodi | Cremona | 2
+Geografia | Quale di queste strade statali è denominata “Lago di Como e dello Spluga”? | SS 412 | SS 36 | SS 33 | 2
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Novara-Torino? | Parabiago | Magenta | San Zenone al Lambro | 2
+Geografia | Qual è la denominazione/destinazione dell’autostrada A8? | Milano-Genova | Milano-Varese (Autostrada dei Laghi) | Lainate-Como-Chiasso (Autostrada dei Laghi) | 2
+Geografia | L’aeroporto di Malpensa si trova: | A ovest di Milano | A nord di Varese | A est di Bergamo | 1
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle Ferrovie Nord Milano “Milano-Meda”? | Palazzolo Milanese | Garbagnate Milanese | Vedano al Lambro | 1
+Geografia | Quale linea della metropolitana di Milano non transita dalla Stazione Centrale? | La linea 2 verde | La linea 3 gialla | La linea 1 rossa | 3
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Mortara-Alessandria? | Gaggiano | Secugnago | Villasanta | 1
+Geografia | Il territorio della Lombardia è attraversato dall’autostrada del Sole nella provincia di: | Lodi | Como | Mantova | 1
+Geografia | La stazione ferroviaria di Seveso si trova sulla linea delle Ferrovie Nord Milano: | Milano-Erba-Asso | Milano-Lecco | Milano-Meda | 3
+Geografia | La stazione ferroviaria di Corsico si trova sulla linea delle FS: | Milano-Mortara-Alessandria | Milano-Gallarate | Milano-Saronno | 1
+Geografia | Quale linea ferroviaria non passa dalla stazione di Rho? | Milano-Gallarate-Varese-Luino-P.to Ceresio | Milano-Saronno-Novara | Milano-Domodossola | 2
+Geografia | La stazione ferroviaria di Parabiago si trova sulla linea delle FS: | Milano-Piacenza | Milano-Treviglio-Bergamo | Milano-Gallarate | 3
+Geografia | Quale linea ferroviaria passa da Treviglio? | Milano-Brescia-Venezia | Milano-Monza-Bergamo | Milano-Lodi-Piacenza-Bologna | 1
+Geografia | Quale autostrada transita dal territorio del comune di Legnano? | A8 Milano-Varese-Sesto Calende | A9 Milano-Como-Chiasso | A4 Milano-Torino | 1
+Geografia | Quale tra le seguenti stazioni ferroviarie si trova sulla linea delle FS Milano-Piacenza? | Rovello Porro | San Zenone al Lambro | Villasanta | 2
+Geografia | La stazione ferroviaria di Tavazzano si trova sulla linea delle FS: | Milano-Piacenza | Milano-Novara | Milano-Lecco-Sondrio | 1
+Geografia | La stazione ferroviaria di Milano-Rogoredo è servita da una linea della metropolitana milanese. Qual è? | La linea 2 verde | La linea 1 rossa | La linea 3 gialla | 3
+Geografia | L’aeroporto milanese di Linate è da considerarsi rispetto al centro della città a: | Nord | Est | Ovest | 2
+Geografia | La stazione ferroviaria di Villasanta si trova sulla linea delle FS: | Milano-Piacenza | Sesto S.Giovanni-Monza-Molteno-Lecco | Milano-Gallarate-Luino-Bellinzago | 2
+Geografia | La strada statale 412 della Val Tidone interessa la provincia di: | Pavia | Varese | Sondrio | 1
+Geografia | San Pellegrino Terme è attraversata da una statale. Trattasi della: | SS 472 Bergamina | SS 470 della Val Brembana | SS 342 Briantea | 2
+Geografia | Collega Magenta ad Abbiategrasso e si innesta nella strada statale 35 a Pavia. Stiamo parlando della: | SS 526 dell’Est Ticino | SS 494 Vigevanese | SS 236 Goitese | 1
+Geografia | La città di Castiglione delle Stiviere si trova in provincia di: | Brescia | Cremona | Mantova | 3
+Geografia | Quale zona della Lombardia è nota per essere fiorente produttrice di mobili? | La Brianza | La Lomellina | La Val Trompia | 1
+Geografia | Una di queste strade statali non interessa il territorio di Cremona: | SS n. 415 “Paullese” | SS n. 591 “Cremasca” | SS n. 11 “Padana Superiore” | 3
+Geografia | Tra Salò e Vestone si estende: | La Val Sabbia | La Val Trompia | La Val di Scalve | 1
+Geografia | Quale Strada Statale passa per Soncino? | SS n. 9 Emilia | SS n. 498 Soncinese | SS n. 494 Vigevanese | 2
+Geografia | Qual è il capoluogo di provincia della Lombardia più settentrionale? | Brescia | Sondrio | Lecco | 2
+Geografia | Quale fiume non passa da Milano? | Olona | Lambro | Ticino | 3
+Geografia | Quanto è alto il grattacielo Pirelli? | Da 90 a 100 metri | Da 100 a 120 metri | Oltre 120 metri | 3
+Geografia | Quale statale non passa da Busto Arsizio? | SS n. 33 del Sempione | SS n.527 Bustese | SS n.233 Varesina | 3
+Geografia | In quale provincia si trova il Lago di Endine? | Brescia | Bergamo | Mantova | 2
+Geografia | Il Mella è affluente del fiume: | Serio | Oglio | Adda | 2
+Geografia | Distanza da Bergamo all’aeroporto di Orio al Serio: | Meno di 10 Km | 15 Km | Più di 25 Km | 1
+Geografia | In quale provincia si trova il passo del Brallo? | Pavia | Cremona | Brescia | 1
+Geografia | La terza città in Lombardia per densità di popolazione | Monza | Bergamo | Lecco | 1
+Geografia | Quale città Lombarda non è diventata Capoluogo di Provincia nel 1993? | Monza | Lodi | Lecco | 1
+Geografia | Quanti sono gli abitanti della Lombardia? | 9 Milioni | Tra 9 e 11 Milioni | Più di 11 Milioni | 2
+Geografia | In quale provincia della Lombardia si trova il comune di Belgioioso? | Pavia | Lodi | Sondrio | 1
+Geografia | Qual è il Lago più profondo della Lombardia? | Lago di Garda | Lago di Como | Lago d’Idro | 2
+Geografia | Vi si trova una Rocca (Sforzesca) | Soncino | Soresina | Val di Nizza | 1
+Geografia | Tre Province in Lombardia non hanno confini esterni, ma sono circondate da altre province Lombarde: | Lecco, Monza e Brianza, Bergamo | Como, Lecco, Bergamo | Lecco, Bergamo, Cremona | 1
+Geografia | La provincia di Pavia non confina con… | Piemonte | Emilia Romagna | Liguria | 3
+Geografia | La denominazione-destinazione della A21 (Autostrada dei Vini) |Torino, Piacenza, Brescia | Torino, Lodi, Brescia | Alessandria, Piacenza, Bergamo | 1
+Geografia | Quale città è più vicina al Confine di Stato? | Como | Varese | Sondrio | 1
+Geografia | Quali di questi paesi NON ha la stazione delle ferrovie dello stato? | Varese | Saronno | Laveno Mombello | 2
+Geografia | Su quale Lago si affaccia Sarnico? | Lago di Idro | Lago di Garda | Lago d’Iseo | 3
+Geografia | Importante città dell’Oltrepò pavese | Voghera | Suzzara | Capri | 1
+Geografia | Dove si trova il Castello di San Gaudenzio | Cervesina | Belgioioso | Pietra… | 1
+Geografia | Sabbioneta NON è: | Una città romana | In Provincia di Mantova | Sul fiume Po | 3
+Geografia | Abbiategrasso è sulla linea ferroviaria: | Milano-Novara | Milano-Mortara | Milano-Pavia | 2
+Geografia | Da quale Fiume è attraversato Pizzighettone? | Serio | Adda | Oglio | 2
+Geografia | Su quale linea ferroviaria si trova Desenzano del Garda? | Milano-Novara-torino | Milano-Brescia-Venezia | Milano-Piacenza-Bologna | 2
+Geografia | Dove si trova Gargnano? | Sul Lago di Garda | Sul Lago Maggiore | Sul Lago di Como | 1
+Geografia | Per cosa è famosa Cremona? | Armi | Manufatti in Legno | Strumenti Musicali | 3
+Geografia | Quale di questi Fiumi non interessa le province di Brescia e Cremona? | Adda | Ticino | Oglio | 2
+Geografia | Quale linea collega Milano a Sesto San Giovanni? | MM 1, Rossa | FFSS Milano - Treviglio | FNM Milano - Meda | 1
+Geografia | Quale di questi laghi non è in Lombardia? | Molveno | Iseo | Idro | 1
+Geografia | Quale strada Provinciale passa vicinissimo al Comune di Chieve? | SP 234 Codognese | SP 235 di Orzinuovi | SS 36 Lago di Como e dello Spluga | 2
+Geografia | Dove si trova la statua "La Minerva"? | Vigevano | Voghera | Pavia | 3
+Geografia | Non fa parte di Vigevano | Piazza Ducale | Il Broletto | Castello Visconteo-Sforzesco | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 2 della legge 15 gennaio 1992 N. 21, chi stabilisce sanzioni amministrative per l’inosservanza dell’obbligo del servizio taxi nelle aree comunali o comprensoriali? | Le regioni | Le camere di Commercio Industria Artigianato e Agricoltura | Gli organi di Polizia Stradale | 1
+Normativa Statale e Regionale | L’art. 14 “disposizioni particolari” della legge 15 gennaio 1992 n. 21 regolamenta tra l’altro: | Le sanzioni amministrative per l’inosservanza delle tariffe del servizio taxi | L’accessibilità per i servizi taxi e autonoleggio a tutti i soggetti portatori di handicap | L’accesso al carico negli scali aeroportuali | 2
+Normativa Statale e Regionale | Il titolare di licenza taxi può essere sostituito, ai sensi dell’art. 10 della legge 15 gennaio 1992 n. 21, per motivi di salute o inabilità temporanea: | Da altro titolare di licenza taxi di altro comune | Da persone iscritte nel ruolo di cui art. 6 della legge 15 gennaio 1992 n. 21 | Da persone designate dal Prefetto | 2
+Normativa Statale e Regionale | Le autovetture adibite al servizio di noleggio con conducente, secondo l’art.12 comma 5 della Legge 15 gennaio 1992 n 21, portano, tra l’altro, una targa: | Inamovibile anteriore con la dicitura “N” | Adesiva posteriore con la dicitura “NC” | Posteriore inamovibile recante la dicitura “NCC” | 3
+Normativa Statale e Regionale | Ai sensi dell’art. 9 della legge 15 gennaio 1992 n.21, la licenza per l’esercizio del servizio taxi e l’autorizzazione del servizio di autonoleggio con conducente, sono trasferite su richiesta del titolare, a persona dallo stesso designata, iscritta al ruolo ed in possesso dei requisiti prescritti, purchè il titolare abbia: | Raggiunto il sessantesimo anno d’età | Raggiunto il sessantacinquesimo anno d’età | Raggiunto il sessantesimo anno d’età o almeno trentacinque anni d’esercizio di dell’attività | 1
+Normativa Statale e Regionale | Entro quanto tempo, dall’entrata in vigore della Legge 15 gennaio 1992 n.21, i regolamenti comunali per il servizio taxi e noleggio con conducente sono resi conformi alla legge stessa in base al secondo comma dell’art. 15 della medesima legge? | Entro un anno | Entro tre anni | Entro due anni | 3
+Normativa Statale e Regionale | Ai sensi dell’art. 5 della L. 21/92, chi stabilisce i requisiti e le condizioni per il rilascio delle licenze taxi e le autorizzazioni NCC? | La Regione | Il Comune | La Provincia | 2
+Normativa Statale e Regionale | I titolari di licenza taxi e di autorizzazione di noleggio con conducente, al fine del libero esercizio della propria attività, ai sensi dell’art 7 della legge 15 gennaio 1992 n.21, possono: | Associarsi in consorzio tra imprese artigiane e in tutte le altre forme previste dalla legge | Essere imprenditori privati per svolgere esclusivamente l’esercizio di taxi in due o più comuni | Essere imprenditori pubblici | 1
+Normativa Statale e Regionale | La prestazione del servizio di noleggio con conducente, come stabilito dall’art 13 della Legge 15 Gennaio 1992 n.21 è: | Obbligatoria | Tassativa solo se richiesta per motivi di estrema necessità | Non obbligatoria | 3
+Normativa Statale e Regionale | Ai sensi dell’art. 2 della Legge 15 Gennaio 1992 n.21, il servizio taxi è rivolto ad una utenza di tipo: | Collettiva differenziata | Indifferenziata individuale o di piccoli gruppi di persone | Individuale differenziata | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 3 della Legge 15 gennaio 1992 n. 21, lo stazionamento dei mezzi, nel servizio di noleggio con conducente, avviene: | In appositi parcheggi individuati dai comuni | Sulla pubblica piazza | All’interno delle rimesse o presso i pontili di attracco | 3
+Normativa Statale e Regionale | La competenza in materia di trasporto mediante autoservizi pubblici non di linea è affidata ai sensi dell’art. 4 della Legge 15 gennaio 1992 n. 21: | Alla questura territorialmente competente | Alle Regioni e agli enti locali delegati | All’ufficio provinciale della Motorizzazione Civile | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 6 della Legge 15 gennaio 1992 n. 21 il ruolo dei conducenti di veicoli o natanti adibiti ad autoservizi pubblici non di linea è istituito presso: | Le province | Le Camere di Commercio, Industria, Artigianato e Agricoltura | Le Regioni | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 8 della Legge 15 gennaio 1992 n. 21 è ammesso il cumulo della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio di noleggio con conducente nel caso gli stessi siano esercitati con autovettura? | Si, se l’autovettura da noleggio con conducente è attrezzata per il trasporto di portatori di handicap | No | Si, previa autorizzazione rilasciata dal Presidente della provincia territorialmente competente | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 12 della Legge 15 gennaio 1992 n. 21, in quale modo l’utente è portato a conoscenza dell’esistenza di eventuali supplementi tariffari per il servizio taxi? | Mediante communicatione verbale da parte del tassista alla fine della corsa | Mediante avvisi posti in luoghi pubblici | Mediante avviso chiaramente leggibile posto sul cruscotto dell’autovettura | 3
+Normativa Statale e Regionale | Ai sensi dell’art. 13 della Legge 15 gennaio 1992 n. 21, nel servizio taxi, la tariffa per il servizio urbano calcolata con tassametro è: | A base multipla | A progressione chilometrica | A tempo di percorrenza | 1
+Normativa Statale e Regionale | I titolari di licenza di taxi possono essere sostituiti temporaneamente per l’esercizio del servizio, da persone iscritte al ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21: | Per un periodo di ferie non superiore a giorni trenta annui | Per incarichi in società di capitale | Per il periodo necessario ad acquisire un diploma di laurea | 1
+Normativa Statale e Regionale | In base alla Legge 15 gennaio 1992 n. 21, a partire dal 1 gennaio 1992 i veicoli di nuova immatricolazione adibiti ai servizi di noleggio con conducente o al servizio taxi devono essere muniti: | Di estintore nell’eventualità di un incendio a bordo | Di telefono cellulare a servizio dell’utenza | Di marmitta catalitica o di altri dispositivi atti a ridurre i carichi inquinanti | 3
+Normativa Statale e Regionale | Il rilascio della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio noleggio con conducente è subordinata: | All’iscrizione al ruolo dei conducenti di cui all’art. 9 della Legge Regionale 15 aprile 1995 n. 20 | Al possesso dell’abilitazione alla guida di autobus di noleggio con conducente | Al possesso del titolo per espletare di responsabile di agenzia turistica | 1
+Normativa Statale e Regionale | Ai sensi della Legge 15 gennaio 1992 n. 21, è titolo preferenziale agli effetti del rilascio delle licenze e delle autorizzazioni, l’avere esercitato il servizio taxi in qualità di sostituto alla guida del titolare di licenza: | Per un periodo di tre mesi consecutivi | Per un periodo di tempo complessivo di almeno sei mesi | Per il periodo di tempo necessario a soddisfare l’obbligo del servizio militare | 2
+Normativa Statale e Regionale | Chi detta norme ai sensi dell’art. 14 della Legge 15 gennaio 1992 n. 21, per stabilire il numero e il tipo di veicoli già esistenti da attrezzare anche al trasporto di soggetti portatori di handicap di particolare gravità? | Le USL competenti territorialmente | I comuni nell’ambito dei regolamenti | Il Settore Assistenza della Regione Lombardia | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 14 della Legge 15 gennaio 1992 n. 21 è consentito che le autovetture di noleggio con conducente siano utilizzate anche per l’esercizio taxi? | Nei servizi aeroportuali | Nei comuni di minori dimensioni | Nelle zone di intensa conurbazione di cui all’art. 8 della Legge Regionale 15 aprile 1995 n. 20 | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 13 della Legge 15 gennaio 1992 n. 21 il servizio taxi si effettua: | A richiesta diretta del trasportato o dei trasportati | Solo su richiesta telefonica | Con prenotazione obbligatoria presso le agenzie di viaggio | 1
+Normativa Statale e Regionale | Costituiscono autoservizi pubblici non di linea ai sensi della Legge 15 gennaio 1992 n. 21: | Il servizio taxi con autovettura, motocarrozzetta, natante e veicoli con trazione animale | Tutti i servizi non di linea posti in essere dai privati | Tutti i servizi non di linea finanziati da enti locali | 1
+Normativa Statale e Regionale | Il servizio taxi si rivolge ad un’utenza di tipo: | Differenziata collettiva | Indifferenziata individuale o collettiva | Differenziata individuale | 2
+Normativa Statale e Regionale | Nel servizio di noleggio con conducente lo stazionamento dei mezzi avviene: | In luogo pubblico | In appositi spazi delimitati dai Comuni | All’interno delle rimesse o presso i pontili d’attracco | 3
+Normativa Statale e Regionale | A chi è affidata, ai sensi dell’art. 4 della Legge 15 gennaio 1992 n. 21, la competenza in materia di trasporto mediante autoservizi pubblici non di linea? | Alle Regioni | Alla prefettura territorialmente competente | Alla questura del capoluogo di provincia | 1
+Normativa Statale e Regionale | Il ruolo dei conducenti di veicoli o natanti adibiti ad autoservizi pubblici non di linea è istituito ai sensi dell’art.6 della Legge 15 gennaio 1992 n. 21 presso: | Le regions | Le camere di commercio, industria, artigianato e agricoltura | I comuni | 2
+Normativa Statale e Regionale | Secondo la Legge 15 gennaio 1992 n. 21 è ammesso il cumulo di più licenze per l’esercizio del servizio taxi ovvero il cumulo della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio di noleggio con conducente nel caso gli stessi siano esercitati con autovettura? | Si | No | Si, previa autorizzazione rilasciata dal Presidente della Giunta Regionale | 2
+Normativa Statale e Regionale | Ai sensi dell’art. 12 della Legge 15 gennaio 1992 n. 21 le autovetture adibite al servizio di taxi sono munite di tassametro omologato, attraverso la sola lettura del quale è deducibile il corrispettivo da pagare. L’esistenza di un eventuale supplemento tariffario è portata a conoscenza dell’utente: | Mediante comunicazione verbale da parte dello stesso tassista | Mediante avviso chiaramente leggibile posto sul cruscotto dell’autovettura | Mediante comunicazione verbale da parte dello stesso tassista a fine corsa | 2
+Normativa Statale e Regionale | I titolari di licenza per l’esercizio del servizio taxi possono essere sostituiti temporaneamente da persone iscritte nel ruolo di cui all’art. 6 Legge 15 gennaio 1992 n. 21, nel caso di chiamata alle armi? | Si | No | Solo in caso di chiamata per ferma prolungata | 1
+Normativa Statale e Regionale | A partire dal 1 gennaio 1992 i veicoli di nuova immatricolazione adibiti al servizio di noleggio con conducente o al servizio taxi devono essere muniti in base alla Legge 15 gennaio 1992 n. 21:| Di estintore, nell’eventualità di un incendio a bordo | Di cinture di sicurezza, sui sedili posteriori | Di marmitte catalitiche o di altri dispositivi atti a ridurre i carichi inquinanti | 3
+Normativa Statale e Regionale | In caso di morte del titolare la licenza può essere trasferita ad uno degli eredi appartenant al nucleo familiare del titolare qualora in possesso dei requisiti prescritti, ovvero può essere trasferita ad altri: | Dietro autorizzazione del Presidente della Regione | Dietro autorizzazione del Sindaco | Davanti al notaio curatore dell’eredità | 2
+Normativa Statale e Regionale | Sono esonerate dall’obbligo del tassametro le autovetture adibite al servizio taxi: | Nei comuni inferiori ai 5.000 abitanti | Nei comuni di minori dimensioni | Mai, in nessun caso | 2
+Normativa Statale e Regionale | Le autovetture adibite al servizio di noleggio con conducente portano un contrassegno con la scritta “noleggio”: | All’interno del parabrezza anteriore e sul lunotto posteriore | Solo sul lunotto posteriore | Sulla parte inferiore delle portiere anteriori | 1
+Normativa Statale e Regionale | Il rapporto del sostituto alla guida del taxi è regolato con un contratto di lavoro a tempo determinato. A tal fine l’assunzione del sostituto alla guida è equiparata a quella effettuata per sostituire lavoratori assenti, per i quali sussista il diritto alla conservazione del posto, e ciò in base: | Alla legge 18 aprile 1962 n. 230 art. 1, comma 2, lettera h | Al contratto collettivo nazionale dei lavoratori del comparto del trasporto pubblico | Ad un contratto di gestione per un termine non superiore ai 12 mesi | 1
+Normativa Statale e Regionale | Gli eredi minori del titolare di licenza possono farsi sostituire alla guida per l’esercizio del servizio taxi da persone iscritte nel ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21 ed in possesso dei requisiti prescritti: | Solo per un tempo massimo di due anni | Solo fino al conseguimento della prescritta licenza taxi | Fino al raggiungimento della maggiore età | 3
+Normativa Statale e Regionale | Chi stabilisce la tipologia della scritta in nero “servizio pubblico” che ogni vettura adibita al servizio taxi deve possedere? | L’ufficio comunale competente | L’ufficio regionale competente | L’ufficio apposito della Camera di commercio, industria, artigianato e agricoltura della provincia d’appartenenza | 1
+Normativa Statale e Regionale | Gli autoservizi pubblici non di linea sono quelli che: | Provvedono al solo trasporto individuale di persone | Provvedono al solo servizio collettivo di persone | Provvedono sia al trasporto individuale che collettivo di persone | 3
+Normativa Statale e Regionale | Quale funzione svolgono gli autoservizi pubblici non di linea rispetto ai trasporti pubblici di linea ferroviari, automobilistici, marittimi, lacuali ed aerei? | Nessuna funzione | Funzione complementare ed integrativa | Funzione sostitutiva | 2
+Normativa Statale e Regionale | Quale di queste caratteristiche riguardano gli autoservizi pubblici non di linea? | Vengono effettuati a richiesta in modo non continuativo o periodico, su itinerari e secondo orari stabiliti di volta in volta | Vengono effettuati in modo continuativo o periodico, su itinerari e orari fissi | Vengono effettuati solo su richiesta della Prefettura in caso di grave calamità o per ragioni di pubblica utilità | 1
+Normativa Statale e Regionale | Costituiscono autoservizi pubblici non di linea: | Il servizio di taxi e il servizio di autonoleggio con conducente | Il servizio di autonoleggio senza conducente | Il servizio di autoambulanza | 1
+Normativa Statale e Regionale | Quale tra questi veicoli non può essere adibito a servizio pubblico non di linea ai sensi della Legge 15 gennaio 1992 n. 21? | Motocarrozzetta | Veicolo a trazione animale | Autoambulanza | 3
+Normativa Statale e Regionale | La Legge 15 gennaio 1992 n. 21 è: | La legge quadro per il trasporto di persone mediante autoservizi pubblici non di linea | La legge quadro sui trasporti pubblici locali di linea | La legge che riguarda interventi in materia di opere pubbliche | 1
+Normativa Statale e Regionale | Dove sosta il taxi per svolgere il servizio? | In una autorimessa situata nel comune che ha rilasciato la licenza | In luogo pubblico | Esclusivamente su marciapiede appositamente attrezzati | 2
+Normativa Statale e Regionale | La prestazione del servizio taxi all’interno delle aree comunali è obbligatoria? | Si | No | Solo in caso di pubblica necessità | 1
+Normativa Statale e Regionale | In caso di mancata prestazione del servizio taxi sono previste idonee sanzioni amministrative. Da chi sono stabilite? | Dalla Regione | Dalla Prefettura | Dal Direttore provinciale della Motorizzazione Civile | 1
+Normativa Statale e Regionale | Con quali procedure il comune concede le licenze per servizio taxi e l’autorizzazione per il servizio di noleggio con conducente? | In base all’ordine cronologico di presentazione delle domande degli interessati | Attraverso bando di pubblico concorso | Per sorteggio fra tutti i richiedenti aventi diritto | 2
+Normativa Statale e Regionale | Al titolare di licenza di taxi che abbia trasferito ad altri tale titolo può essere attribuita una nuova licenza per concorso pubblico? | No | Si, dopo tre anni dal trasferimento | Si, dopo sette anni dal trasferimento | 1
+Normativa Statale e Regionale | Il termine entro il quale i comuni devono rendere conformi i regolamenti comunali alle norme della Legge 15 gennaio 1992 n. 21 è: | Diciotto mesi dalla nomina dei sindaci | Due anni dall’entrata in vigore della Legge 15 gennaio 1992 n. 21 | Dodici mesi dalla convocazione dei comizi elettorali | 2
+Normativa Statale e Regionale | Gli autoservizi pubblici non di linea come vengono definiti ai sensi della L. 21/92 art. 1 c. 1? | Servizi con funzione complementare e integrativa a quelli di linea con qualsiasi mezzo effettuati | Servizi svolti senza obbligo di aderire alla richiesta di trasporto | Servizi ad offerta non indifferenziata | 1
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 1 c. 1 che cosa distingue gli autoservizi pubblici non di linea da quelli di linea? | L’offerta riservata a particolari categorie di utenti | La non continuità e periodicità e lo svolgimento su itinerari e con orari non predeterminati | Le tariffe contrattabili liberamente | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 1 c. 2 quali sono gli autoservizi pubblici non di linea? | Taxi e noleggio con conducente con autovettura, natante, motocarrozzetta e veicolo a trazione animale | Servizio da piazza e servizio di rimessa, svolti con qualsiasi tipo di auto o motoveicolo | Taxi, noleggio senza conducente, noleggio con conducente | 1
+Normativa Statale e Regionale | Le tariffe del servizio di taxi ai sensi della L. 21/92 art. 2 c. 1 da chi sono determinate? | Dalla libera contrattazione tra il cliente e il vettore, entro i limits minimi e massimi comunali | Dagli organi competenti che stabiliscono le modalità del servizio | Dalla Camera di Commercio | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 dove deve avvenire il prelevamento dell’utente o l’inizio del servizio taxi? | Esclusivamente entro l’area comunale | Entro l’area comunale o comprensoriale | Entro l’area provinciale | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 dove può avvenire lo stazionamento dei veicoli adibiti a servizio taxi, durante il servizio stesso? | Esclusivamente su suolo pubblico, in aree specificatamente individuate | Esclusivamente su piazze | Indifferentemente su suolo pubblico o presso apposite rimesse private | 1
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 1 qual è lo scopo del servizio taxi? | Soddisfa esigenze di trasporto individuale o di piccoli gruppi | Soddisfa esigenze solo di trasporto individuale | Soddisfa esigenze di trasporto di qualsiasi genere, anche con contratto di noleggio | 1
+Normativa Statale e Regionale | La prestazione del servizio di taxi, ai sensi della L. 21/92 art. 2 c. 2, dov’è obbligatoria? | Per qualsiasi destinazione, anche esterna al limite dell’area in cui è consentito acquisire utenza | Entro l’area provinciale| Entro l’area comunale o comprensoriale | 3
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 2 c. 2, quale ente determina le sanzioni per l’inosservanza dell’obbligatorietà della prestazione del servizio taxi? | Il Comune | La Provincia |La Regione | 3
+Normativa Statale e Regionale | Il servizio di noleggio con conducente, ai sensi della L. 21/92 art. 3, a chi è rivolto? | Ad una utenza indifferenziata | All’’utenza specifica che si deve rivolgere presso la sede del vettore | All’utenza specifica che prenota presso le apposite aree pubbliche di stazionamento | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 3, come possono essere effettuate le prestazioni di noleggio di veicoli con conducente? | A tempo e/o viaggio | Solo a tempo | Solo a viaggio | 1
+Normativa Statale e Regionale | Lo stazionamento dei mezzi addetti al servizio di noleggio con conducente, ai sensi della L. 21/92 art. 3, dove avviene? | Presso apposite autorimesse pubbliche | Su suolo privato, in apposite rimesse | Su suolo pubblico in aree specificatamente contrassegnate | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 4 c. 3, con quale fine dev’essere ricercata l’uniformazione delle regolamentazioni comunali all’interno delle aree comprensoriali? | Per evitare concorrenze indebite tra taxisti e noleggiatori di comuni limitrofi | Per ottenere una maggiore razionalità ed efficienza del servizio pubblico non di linea | Per limitare il numero delle licenze e delle autorizzazioni al minimo possibile | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 4 c. 5, gli autoservizi pubblici non di linea sono disciplinati solo da regolamenti di esercizio predisposti dai Comuni? | No, possono essere emanate anche norme speciali della Regione nel rispetto delle competenze comunali | No, sono regolati anche dalle disposizioni delle Province | No, sono regolati anche dalle disposizioni delle Camere di Commercio | 1
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 6 c. 1, presso quale ente è istituito il ruolo dei conducenti di veicoli adibiti ad autoservizi pubblici non di linea? | La Camera di Commercio del capoluogo di regione | La Camera di Commercio di ciascuna provincia | La Provincia | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 6 c. 2, qual è l’unico requisito indispensabile, per legge statale, per ottenere l’iscrizione a ruolo dei conducenti di veicoli adibiti ad autoservizi pubblici non di linea? | La sola patente | La licenza o l’autorizzazione | Il certificato di abilitazione professionale | 3
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 7 è possibile rientrare in possesso di licenze o autorizzazioni per autoservizi pubblici non di linea conferite ad organismi cooperativi? | No | Si, in caso di recesso, decadenza o esclusione | Si, in qualsiasi caso | 2
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 7 le persone giuridiche possono essere titolari di licenza o autorizzazione per autoservizi pubblici n
