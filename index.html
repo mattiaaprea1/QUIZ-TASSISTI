@@ -352,7 +352,7 @@
 </div>
 
 <script>
-// BASE DATI INTEGRA
+// BASE DATI INTEGRA (Aggiornata con le 33 nuove domande + 2 varianti)
 const RAW_DATA = `
 Inglese | Where ………. from? | You are | Are you | Are | 2
 Inglese | Where ……….? | You live | Are you live | Do you live | 3
@@ -431,6 +431,8 @@ Inglese | It’s now 9 o’clock and the train ………. arrive at 8:15. | Must
 Inglese | I don’t like tests. Neither ………. | Do I | I do | I don’t | 1
 Inglese | Good afternoon! Excelsior Hotel. Can I ………. you? | Attend | Assist | Help | 3
 Inglese | Have you got any luggage? | I've got some | I've got any | I don't some | 1
+Inglese | How are you? …………… | I am fine. | I are good. | You are ok. | 1
+Inglese | Where ……………? | Do he go | Doesn’t he going | Did he go | 3
 Geografia | In quale provincia si trova Caravaggio? | Varese | Milano | Bergamo | 3
 Geografia | Quale città è collegata da una linea delle FNM, in partenza da Milano? | Mantova | Novara | Sondrio | 2
 Geografia | Benaco è il nome di quale Lago: | Lago d'Iseo | Lago Maggiore | Lago di Garda | 3
@@ -477,7 +479,7 @@ Geografia | Quale fiume attraversa la Valcamonica? | L’ Adda | L' Oglio | Il T
 Geografia | Quale di questi passi si trova in Lombardia | Falzarego | Sempione | Gavia | 3
 Geografia | Quale di queste regioni non si affaccia sul Lago di Garda? | Il Trentino Alto Adige | Il Friuli Venezia Giulia | Il Veneto | 2
 Geografia | Quali province lombarde bagna il fiume Po | Pavia-Cremona-Mantova-Piacenza | Pavia-Mantova-Cremona | Pavia-Cremona-Mantova-Lodi | 3
-Geografia | In quale di queste tre province si trova Sabbioneta? | Lodi | Cremona | Mantova | 3
+Geografia | In quale di queste tres province si trova Sabbioneta? | Lodi | Cremona | Mantova | 3
 Geografia | Quale fiume forma il Lago d'Iseo? | L'Oglio | Il Brembo | Il Serio | 1
 Geografia | La Valceresio interessa il territorio della provincia di: | Como | Varese | Sondrio | 2
 Geografia | Come è denominata la zona dell'entroterra del Lago di Garda verso Mantova | Colli Euganei | Colli Morenici o Colli Storici | Col di Lana | 2
@@ -656,6 +658,8 @@ Geografia | Quale di questi laghi non è in Lombardia? | Molveno | Iseo | Idro |
 Geografia | Quale strada Provinciale passa vicinissimo al Comune di Chieve? | SP 234 Codognese | SP 235 di Orzinuovi | SS 36 Lago di Como e dello Spluga | 2
 Geografia | Dove si trova la statua "La Minerva"? | Vigevano | Voghera | Pavia | 3
 Geografia | Non fa parte di Vigevano | Piazza Ducale | Il Broletto | Castello Visconteo-Sforzesco | 2
+Geografia | Quale Strada Statale passa per Soncino? | SS 9 Emilia | SS 498 Soncinese | SS 494 Vigevanese | 2
+Geografia | Quale statale non passa da Busto Arsizio? | 33 del Sempione | 527 Bustese | 233 Varesina | 3
 Normativa Statale e Regionale | Ai sensi dell’art. 2 della legge 15 gennaio 1992 N. 21, chi stabilisce sanzioni amministrative per l’inosservanza dell’obbligo del servizio taxi nelle aree comunali o comprensoriali? | Le regioni | Le camere di Commercio Industria Artigianato e Agricoltura | Gli organi di Polizia Stradale | 1
 Normativa Statale e Regionale | L’art. 14 “disposizioni particolari” della legge 15 gennaio 1992 n. 21 regolamenta tra l’altro: | Le sanzioni amministrative per l’inosservanza delle tariffe del servizio taxi | L’accessibilità per i servizi taxi e autonoleggio a tutti i soggetti portatori di handicap | L’accesso al carico negli scali aeroportuali | 2
 Normativa Statale e Regionale | Il titolare di licenza taxi può essere sostituito, ai sensi dell’art. 10 della legge 15 gennaio 1992 n. 21, per motivi di salute o inabilità temporanea: | Da altro titolare di licenza taxi di altro comune | Da persone iscritte nel ruolo di cui art. 6 della legge 15 gennaio 1992 n. 21 | Da persone designate dal Prefetto | 2
@@ -854,6 +858,8 @@ Normativa Statale e Regionale | L’importo a tassametro è sempre omnicomprensi
 Normativa Statale e Regionale | E’ ammesso il cumulo di più autorizzazioni NCC in capo alla stessa persona? | No, mai | Sì, sempre | A volte | 2
 Normativa Statale e Regionale | E’ consentito al titolare di Licenza Taxi l’uso di auto sostitutiva? | No, mai | Sì, se l’auto è guasta (minimo 3 giorni max 120 giorni all’anno) | Sì per 3 giorni se non è stato la causa del fermo | 2
 Normativa Statale e Regionale | Ai sensi del RR 2014 chi certifica l'omologazione del Tassametro? | I Comuni capoluogo di Provincia | La Regione | L'autorità di Polizia | 1
+Normativa Statale e Regionale | Ai sensi della L. 21/92 art. 9 c. 1, in quale dei seguenti casi le licenze e le autorizzazioni possono essere trasferite a richiesta del titolare? | Se egli ha raggiunto cinquantacinque anni d’età | Se egli l’ha ottenuta da almeno cinque anni | Se egli è divenuto inabile o inidoneo al servizio in via provvisoria | 2
+Normativa Statale e Regionale | Fra le zone di intensa conurbazione, ai sensi dell'art.52 comma 1 della Legge Regionale 14 luglio 2009 n.11 sono da comprendere: | Gli scali ferroviari e aeroportuali | Gli scali ferroviari delle FS e aeroportuali privati | Gli scali ferroviari adibiti al carico e scarico delle merci | 1
 Regolamento e Comportamento | I conducenti delle autopubbliche hanno l'obbligo, tra l'altro, durante la corsa: | Di ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | Di effettuare il servizio di trasporto di bambini non accompagnati da persona maggiorenne | Di ultimare la corsa anche se, nel frattempo, è scaduto il turno | 3
 Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicato dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
 Regolamento e Comportamento | Al termine del servizio, il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | 2
@@ -888,8 +894,8 @@ Regolamento e Comportamento | Come viene assigned la licenza per l'esercizio del
 Regolamento e Comportamento | Come viene assigned l'autorizzazione per il servizio di noleggio con conducente? (art.6) | Mediante concorso pubblico | Mediante iscrizione al ruolo dei conducenti | A seguito di denuncia di inizio del servizio | 1
 Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
 Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Non essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età superiore ai 55 anni | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 1
-Regolamento e Comportamento | La licenza taxi può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.10) | è titolare di licenza da almeno quattro anni | Ha raggiunto il sessantesimo anno d'età | Ha raggiunto il cinquantacinquesimo anno d'età | 2
-Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio con conducente può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.7) | è titolare di autorizzazione da cinque anni | Ha raggiunto il cinquantacinquesimo anno d'età | Non aver raggiunto il sessantesimo anno d'età | 1
+Regolamento e Comportamento | La licenza taxi può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.10) | è titolare di licenza da almeno quattro anni | Ha raggiunto il sessantesimo anno d’età | Ha raggiunto il cinquantacinquesimo anno d’età | 2
+Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio con conducente può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.7) | è titolare di autorizzazione da cinque anni | Ha raggiunto il cinquantacinquesimo anno d’età | Non aver raggiunto il sessantesimo anno d’età | 1
 Regolamento e Comportamento | In caso di morte del titolare, a chi può essere trasferita la licenza taxi? (art.11) | Ad uno degli eredi appartenenti al nucleo familiare del defunto | Ai soli figli maggiorenni, anche se non ancora in possesso del CAP | A qualsiasi erede in linea indiretta | 1
 Regolamento e Comportamento | Qual è l'autorità che consente il rinnovo dell'autorizzazione per l'esercizio del servizio di autonoleggio con conducente? (art.8) | La Provincia | La Regione | Il Comune | 3
 Regolamento e Comportamento | I titolari di licenza taxi possono essere sostituiti alla guida? (art.16) | Si, solo temporaneamente e per motivi specifici | Si, solo definitivamente | No, mai | 1
@@ -901,7 +907,7 @@ Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in 
 Regolamento e Comportamento | Tra i doveri dei conducenti di autopubbliche in servizio è previsto quello di: (art.29) | Essere provvisti di una guida aggiornata delle vie e delle piazze comprese nel territorio comunale | Interrompere la corsa se nel frattempo è scaduto il turno | Chiedere compensi oltre il prezzo segnato sul tassametro | 1
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in servizio di noleggio è previsto quello di: (art.20) | Interrompere la corsa se nel frattempo è scaduto il turno | Controllare che il funzionamento del contachilometri sia regolare | Chiedere compensi ulteriori al prezzo convenuto nel caso si sia dovuto prolungare il tragitto per cause di forza maggiore | 2
 Regolamento e Comportamento | Tra gli atti vietati ai conducenti di autopubbliche in servizio è previsto quello di: (art.30) | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Caricare i bagagli degli utenti di cui è consentito il trasporto | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 3
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche durante la corsa è previsto quello di: (art.33) | Ultimare la corsa se nel frattempo è scaduto il turno | Mettere a disposizione dell'utente la stampa quotidiana | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche durante la corsa è previsto quello di: (art.33) | Ultimare la corsa se nel frattempo è scaduto il turno | Mettere a disposizione dell'utente la stampa quotidiana | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 1
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Attendere che l'utente scenda, azionando contestualmente la segnalazione d'emergenza (quattro frecce) | Azzerare il tassametro | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | 2
 Regolamento e Comportamento | Per quali motivi può essere, tra l'altro, revocata la licenza taxi? (art.40) | Per mancato rispetto dell'orario di servizio | Per inottemperanza all'obbligo di presentarsi alla visita straordinaria di controllo | Per aver manomesso il tassametro al fine di alterarne il funzionamento | 3
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
@@ -992,6 +998,88 @@ Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno
 Regolamento e Comportamento | Dove vanno posizionate le tariffe? | Dietro al sedile anteriore lato passeggero | Di fianco al tassametro | Nella portiera lato conducente | 1
 Regolamento e Comportamento | Da dove deve iniziare il Servizio Taxi? (art.37 Regolamento di Bacino 2014) | Dal Bacino di Traffico del Sistema Aeroportuale | Dalla Provincia del Comune che ha rilasciato la Licenza | Dalla Città Metropolitana di Milano | 2
 Regolamento e Comportamento | Cosa riporta il Foglio di Servizio NCC? | Targa, conducente, data, ora, km, destinazione, utente | Il divieto di fumare | La capacità del bagaglio | 1
+Regolamento e Comportamento | I conducenti delle autopubbliche hanno l'obbligo, tra l'altro, durante la corsa: | Di ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | Di effettuare il servizio di trasporto di bambini non accompagnati da persona maggiorenne | Di ultimare la corsa anche se, nel frattempo, è scaduto il turno | 3
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicato dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
+Regolamento e Comportamento | Al termine del servizio, il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | 2
+Regolamento e Comportamento | I taxi in turno di servizio sostano: | Temporaneamente presso gli alberghi scelti dal conducente purchè non rechino intralcio alla circolazione dei veicoli | Negli appositi posteggi e nel numero massimo consentito dalla segnaletica orizzontale tracciata a delimitazione degli stessi | Nelle apposite autorimesse | 2
+Regolamento e Comportamento | Gli autoveicoli destinati al servizio di autonoleggio con conducente sono sottoposti all'inizio del servizio e successivamente una volta all'anno a visite di controllo presso: | Gli uffici della Polizia Stradale | Gli uffici dell'Amministrazione Provinciale | L'ufficio Autopubbliche del Comune di Milano | 3
+Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio da rimessa con conducente è rilasciata da: | Dirigente del Settore Trasporti e Mobilità del Comune | Consiglio Comunale | Consiglio Provinciale | 1
+Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
+Regolamento e Comportamento | Tra i doveri per i conducenti di autoveicoli in servizio di noleggio è previsto, tra l'altro, quello di: | Controllare che il funzionamento del contachilometri sia regolare | Svolgere il servizio assistiti da altro conducente | Permettere agli utenti del servizio di fumare nell'autoveicolo | 1
+Regolamento e Comportamento | Tra i requisiti per l'assegnazione delle autorizzazioni di autonoleggio con conducente è previsto quello di: | Aver istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo conducenti | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età non superiore ai 55 anni | 3
+Regolamento e Comportamento | Il prezzo del servizio di autonoleggio da rimessa con conducente è: | Quello che risulta convenuto tra l'esercente del servizio e l'utente | Quello indicato dal tassametro | Quello determinato da tariffe fissate dall'amministrazione provinciale | 1
+Regolamento e Comportamento | Il titolare di licenza taxi deve comunicare entro 30 giorni le variazioni di indirizzo: | Al Settore Trasporti e Mobilità del Comune di Milano | Al Settore Trasporto Pubblico della Provincia di Milano | Alla Camera di Commercio, Industria, Artigianato ed Agricoltura di Milano | 1
+Regolamento e Comportamento | Chi approva i regolamenti comunali per gli autoservizi pubblici non di linea? | Comune | Regione | Provincia | 1
+Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Aiutare a salire le persone e caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
+Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Mantenere in funzione il tassametro e controllare il suo regolare funzionamento | 3
+Regolamento e Comportamento | Da chi è esercitata la vigilanza urbana sul servizio taxi? | Dalla Prefettura | Dall'amministrazione comunale | Dalla Provincia | 2
+Regolamento e Comportamento | Le tariffe e le condizioni di trasporto del servizio taxi sono determinate: | Dalla Giunta comunale | Dalla Giunta provinciale | Dal Dirigente del Settore Trasporti e Mobilità del Comune di Milano | 1
+Regolamento e Comportamento | La licenza dell'esercizio del servizio taxi è rilasciata da: | Direttore del Settore Trasporto Pubblico della Provincia di Milano | Consiglio Comunale | Dirigente del Settore Trasporti e Mobilità del Comune di Milano | 3
+Regolamento e Comportamento | La licenza d'esercizio può essere revocata da: | Comune | Provincia | Regione | 1
+Regolamento e Comportamento | I conducenti di taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente con pagamento anticipato della corsa | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
+Regolamento e Comportamento | Qual è la colorazione delle autovetture adibite al servizio taxi? (art.2a) | Quella determinata dalle disposizioni di legge vigenti in materia | Gialla | Quella determinata dal regolamento regionale | 1
+Regolamento e Comportamento | Le autovetture adibite al servizio taxi possono recare stemmi identificativi del comune? (art.2b) | Si, solo nella parte posteriore | Si, solo nella parte anteriore | Si, solo sulle portiere laterali | 3
+Regolamento e Comportamento | Lo stampato contenente le tariffe da chi viene fornito? (art.5) | Dal Comune | Dalla Provincia | Dalla Regione | 1
+Regolamento e Comportamento | Dove deve essere posto il tassametro? (art.6) | In posizione ben visibile da parte degli utenti | Al di sotto della lato superiore del piantone dello sterzo | Sulla parte superiore del parabrezza | 1
+Regolamento e Comportamento | I sigilli di garanzia applicati all'impianto tassametrico da chi vengono apposti? | Dall'Ufficio Comunale competente | Dall'Ufficio periferico del Dipartimento dei Trasporti Terrestri | Dal competente Settore della Provincia di Milano | 1
+Regolamento e Comportamento | è possibile utilizzare un'autovettura adibita a servizio taxi per uso proprio? (art.27) | No, mai | Si, con specifico nulla osta dell'Amministratore comunale | Si, se è fuori servizio | 3
+Regolamento e Comportamento | Quando l'autopubblica è fuori servizio può eccezionalmente effettuare alcune corse? (art.27) | No, mai | Si, se è richiesto dalle Forze dell'ordine | Si, in caso di necessità | 1
+Regolamento e Comportamento | Il servizio taxi ha lo scopo di soddisfare le richieste individuali? (art.1) | Si | No, può essere richiesto anche da piccoli gruppi | Si, perché è vietato trasportare persone con diversa direttrice e diversa destinazione | 2
+Regolamento e Comportamento | Il servizio taxi può essere svolto solamente con autovetture da piazza? ( art.1) | Si | No, può essere svolto anche con minibus | No, può essere svolto anche con minibus ma con autorizzazione comunale | 1
+Regolamento e Comportamento | Qual è lo scopo del servizio taxi? (art.1) | Quello di soddisfare esigenze di trasporto individuale | Quello di soddisfare esigenze di trasporto individuale o di piccoli gruppi | Quello di soddisfare esigenze di trasporto di qualsiasi genere, anche con contrato di noleggio | 2
+Regolamento e Comportamento | Chi può essere titolare di licenza per l'esercizio del servizio taxi? (art.9) | La persona singola | La persona giuridica | Qualsiasi società di capitali | 1
+Regolamento e Comportamento | Come viene assigned la licenza per l'esercizio del servizio taxi? (art.9) | Mediante concorso pubblico | Mediante iscrizione al ruolo conducenti | A seguito di denuncia di inizio del servizio | 1
+Regolamento e Comportamento | Come viene assigned l'autorizzazione per il servizio di noleggio con conducente? (art.6) | Mediante concorso pubblico | Mediante iscrizione al ruolo dei conducenti | A seguito di denuncia di inizio del servizio | 1
+Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
+Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Non essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età superiore ai 55 anni | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 1
+Regolamento e Comportamento | La licenza taxi può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.10) | è titolare di licenza da almeno quattro anni | Ha raggiunto il sessantesimo anno d’età | Ha raggiunto il cinquantacinquesimo anno d’età | 2
+Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio con conducente può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.7) | è titolare di autorizzazione da cinque anni | Ha raggiunto il cinquantacinquesimo anno d’età | Non aver raggiunto il sessantesimo anno d’età | 1
+Regolamento e Comportamento | In caso di morte del titolare, a chi può essere trasferita la licenza taxi? (art.11) | Ad uno degli eredi appartenenti al nucleo familiare del defunto | Ai soli figli maggiorenni, anche se non ancora in possesso del CAP | A qualsiasi erede in linea indiretta | 1
+Regolamento e Comportamento | Qual è l'autorità che consente il rinnovo dell'autorizzazione per l'esercizio del servizio di autonoleggio con conducente? (art.8) | La Provincia | La Regione | Il Comune | 3
+Regolamento e Comportamento | I titolari di licenza taxi possono essere sostituiti alla guida? (art.16) | Si, solo temporaneamente e per motivi specifici | Si, solo definitivamente | No, mai | 1
+Regolamento e Comportamento | Come viene regolato il rapporto di lavoro tra il taxista ed il sostituto alla guida? (art.16) | Con un contratto di prestazione d'opera | Con un contratto di lavoro a tempo determinato o con un contratto di gestione per un termine non superiore a sei mesi | La gestione avviene in modo informale | 2
+Regolamento e Comportamento | Dove avviene la sosta delle autopubbliche in turno di servizio? (art.23) | Nella propria rimessa | Liberamente, secondo quanto stabilito dal codice della strada | Negli appositi posteggi | 3
+Regolamento e Comportamento | Tra i contrassegni che contraddistinguono il servizio di autonoleggio con conducente vi è: (art.15) | Sul lunotto posteriore, in modo interamente visibile, quello con la scritta "NOLEGGIO" | La scritta "NOLEGGIO" dipinta sulla fiancata destra | Un contrassegno luminoso, posto sul tetto, con la scritta "NCC" | 1
+Regolamento e Comportamento | Tra gli obblighi del conducente di autopubblica durante la corsa è previsto quello di: (art.33) | Allacciare la cintura di sicurezza | Effettuare il percorso più breve, salvo che l'utente non chieda di seguire un percorso diverso | Interrompere la corsa se nel frattempo è scaduto il turno | 2
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in servizio di noleggio è previsto quello di: (art.20) | Interrompere di propria iniziativa il servizio se nel frattempo è terminato il turno | Tenere nell'autoveicolo cose che non abbiano attinenza col servizio | Controllare che il funzionamento del contachilometri sia regolare | 3
+Regolamento e Comportamento | Tra i doveri dei conducenti di autopubbliche in servizio è previsto quello di: (art.29) | Essere provvisti di una guida aggiornata delle vie e delle piazze comprese nel territorio comunale | Interrompere la corsa se nel frattempo è scaduto il turno | Chiedere compensi oltre il prezzo segnato sul tassametro | 1
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in servizio di noleggio è previsto quello di: (art.20) | Interrompere la corsa se nel frattempo è scaduto il turno | Controllare che il funzionamento del contachilometri sia regolare | Chiedere compensi ulteriori al prezzo convenuto nel caso si sia dovuto prolungare il tragitto per cause di forza maggiore | 2
+Regolamento e Comportamento | Tra gli atti vietati ai conducenti di autopubbliche in servizio è previsto quello di: (art.30) | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Caricare i bagagli degli utenti di cui è consentito il trasporto | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 3
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche durante la corsa è previsto quello di: (art.33) | Ultimare la corsa se nel frattempo è scaduto il turno | Mettere a disposizione dell'utente la stampa quotidiana | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 1
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Attendere che l'utente scenda, azionando contestualmente la segnalazione d'emergenza (quattro frecce) | Azzerare il tassametro | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | 2
+Regolamento e Comportamento | Per quali motivi può essere, tra l'altro, revocata la licenza taxi? (art.40) | Per mancato rispetto dell'orario di servizio | Per inottemperanza all'obbligo di presentarsi alla visita straordinaria di controllo | Per aver manomesso il tassametro al fine di alterarne il funzionamento | 3
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
+Regolamento e Comportamento | Gli incaricati della sorveglianza devono ritirare la licenza d'esercizio quando accertino, tra l'altro, che: (art.37) | L'autopubblica è il circolazione senza aver ottemperato all'obbligo si presentarsi alla visita straordinaria di controllo | Il titolare abbia manomesso il tassametro al fine di alterarne il funzionamento | Il titolare non abbia controlled il regolare funzionamento del contachilometri | 1
+Regolamento e Comportamento | è possibile cumulare più licenze per l'esercizio del servizio taxi in capo al medesimo soggetto? (art.6) | Solo se non è una persona fisica | No | Solo se esso è associato ad una cooperativa | 2
+Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Non essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età superiore ai 55 anni | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 1
+Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto nei confronti dei passeggeri trasportati | 3
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
+Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
+Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura cani propri | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
+Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente le strade statali | 1
+Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
+Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza deteriorare il veicolo | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
+Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello "FUORI SERVIZIO" al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
+Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luce rossa | 2
+Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno l'obbligo di: | Prodigarsi per portare a destinazione l'utente, anche se il veicolo si guasta | Prevedere l'importo definitivo e contrattare con l'utente il corrispettivo | Concordare e programmare in accordo con l'utente più viaggi o percorsi | 1
+Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Disimpegnare il servizio con ogni decoro | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere sempre un contegno corretto sia con il pubblico che con i colleghi | 3
+Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi stabiliti dall'Amministrazione comunale | Attraverso lo stazionamento in apposite rimesse | 2
+Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
+Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone e/o cani di proprietà del conducente | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
+Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi del carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita ambulante di merci | 3
+Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza che deteriorino il veicolo o limitino la visuale del conducente | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
+Regolamento e Comportamento | Al conducente di taxi in servizio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere l'importo segnato dal tassametro a fine corsa | Abbandonare il veicolo in posteggio presso la stazione per cercare utenti tra i passeggeri in attesa all'interno della stessa | 3
+Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di fumare in servizio | Di vestire decorosamente | Di allontanarsi dal veicolo quando è in servizio | 2
+Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
+Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone, animali o cose che non abbiano attinenza con il servizio | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
+Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
+Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | 3
+Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Aiutare educatamente a scendere le persone e scaricare i bagagli | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto in ogni circostanza | 3
+Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo oppure quando il tassametro non funziona regolarmente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
+Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura all'esposizione o alla vendita di merci | 3
 `;
 
 // PARSING E DEDUPLICAZIONE
@@ -1056,7 +1144,6 @@ function initSession(customPool = null) {
   const topicFilter = $('topicSelect').value;
 
   if (customPool) {
-    // Sessione speciale (es. Solo Errori)
     pool = [...customPool];
     $('modeDisplay').textContent = "Recupero Errori";
   } else if (mode === 'exam') {
@@ -1069,7 +1156,6 @@ function initSession(customPool = null) {
     pool.sort(() => Math.random() - 0.5);
     $('modeDisplay').textContent = "Modalità Esame (16 Domande)";
   } else {
-    // Modalità Ripasso Libera
     pool = ALL_QUESTIONS.filter(q => topicFilter === 'all' || q.topic === topicFilter);
     pool.sort(() => Math.random() - 0.5);
     $('modeDisplay').textContent = "Modalità Ripasso";
@@ -1216,7 +1302,6 @@ function showResults() {
   const topicBreakdown = $('topicBreakdown');
   const retryBtn = $('retryErrorsBtn');
 
-  // Salvataggio statistiche nel LocalStorage
   saveGlobalStats(correct, wrong);
 
   if (mode === 'exam') {
@@ -1258,7 +1343,6 @@ function showResults() {
     topicBreakdown.innerHTML = 'Continua ad esercitarti per consolidare la tua preparazione!';
   }
 
-  // Abilita il tasto per ripetere solo gli errori
   const wrongQuestions = history.filter(h => !h.isCorrect).map(h => h.q);
   if (wrongQuestions.length > 0) {
     retryBtn.classList.remove('hidden');
@@ -1267,7 +1351,6 @@ function showResults() {
     retryBtn.classList.add('hidden');
   }
 
-  // Riepilogo Dettagliato Domande
   const list = $('reviewList');
   list.innerHTML = '<h3 style="margin-bottom: 12px; font-weight: 800;">Riepilogo Domande</h3>';
   
@@ -1294,7 +1377,6 @@ function showResults() {
   updateGlobalStatsDisplay();
 }
 
-// GESTIONE SALVATAGGIO PROGRESSI (LOCALSTORAGE)
 function saveGlobalStats(c, w) {
   let stats = JSON.parse(localStorage.getItem('taxi_quiz_stats')) || { totalQuiz: 0, correct: 0, wrong: 0 };
   stats.totalQuiz += 1;
@@ -1312,7 +1394,6 @@ function updateGlobalStatsDisplay() {
   }
 }
 
-// EVENT LISTENERS
 $('nextBtn').addEventListener('click', handleNext);
 $('modeSelect').addEventListener('change', () => initSession());
 $('topicSelect').addEventListener('change', () => initSession());
@@ -1323,7 +1404,6 @@ $('homeBtn').addEventListener('click', () => {
   }
 });
 
-// AVVIO APPLICAZIONE
 initSession();
 </script>
 </body>
