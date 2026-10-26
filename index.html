@@ -6,20 +6,31 @@
   <title>Quiz Preparazione Esame Taxi / NCC</title>
   <style>
 :root{color-scheme:light;--primary:#2563eb;--primary-dark:#1d4ed8;--primary-soft:#eff6ff;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--green:#059669;--green-bg:#ecfdf5;--red:#dc2626;--red-bg:#fef2f2;--amber:#d97706;--bg:#f1f5f9;--white:#fff;--shadow:0 24px 60px rgba(2,6,23,.22)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;padding:clamp(12px,3vw,32px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(ellipse at top left,#1d4ed8 0,transparent 42%),linear-gradient(145deg,#0f172a,#1e293b 62%,#172554)}button,select,input{font:inherit}button{touch-action:manipulation}.wrap{width:100%;max-width:850px;margin:0 auto}.card{overflow:hidden;background:var(--white);border:1px solid rgba(255,255,255,.35);border-radius:26px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px clamp(18px,4vw,32px);background:linear-gradient(115deg,#f8fafc,#eff6ff);border-bottom:1px solid var(--line)}.brand-title{font-size:clamp(19px,4vw,25px);font-weight:850;letter-spacing:-.7px;color:#12316e}.brand-title span{display:block;margin-top:4px;font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.main{padding:clamp(18px,4vw,32px)}.intro{margin-bottom:24px}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.intro h2{margin:13px 0 8px;font-size:clamp(25px,5vw,35px);line-height:1.12;letter-spacing:-1.1px}.intro p{margin:0;color:var(--muted);line-height:1.6;font-size:15px}.progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;color:var(--muted);font-size:13px;font-weight:800}.track{height:9px;overflow:hidden;margin-bottom:22px;background:#e8eef7;border-radius:999px}.fill{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:999px;transition:width .25s ease}.toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:20px}.select,.search{width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:13px;padding:0 13px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}.select:focus,.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px #2563eb20}.select:disabled{background:#f8fafc;color:#94a3b8}.search-row{margin:-4px 0 20px}.pill{display:inline-flex;align-items:center;max-width:100%;padding:8px 12px;margin-bottom:13px;border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);font-size:12px;font-weight:850;letter-spacing:.045em;text-transform:uppercase}.question{margin:0 0 22px;font-size:clamp(21px,4.2vw,29px);line-height:1.38;letter-spacing:-.45px;font-weight:800;white-space:pre-wrap;overflow-wrap:anywhere}.answers{display:grid;gap:11px}.answer{width:100%;min-height:66px;display:flex;align-items:center;gap:13px;padding:14px 16px;border:1.5px solid var(--line);border-radius:16px;background:#fff;text-align:left;color:var(--ink);font-size:clamp(15px,2.5vw,17px);line-height:1.45;font-weight:650;cursor:pointer;transition:transform .12s,border-color .12s,background .12s;overflow-wrap:anywhere}.answer:hover:not(:disabled){border-color:#93c5fd;background:#f8fbff;transform:translateY(-1px)}.answer:focus-visible,.btn:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}.answer .letter{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border-radius:11px;background:#f1f5f9;color:#475569;font-size:13px;font-weight:900}.answer.selected{border-color:var(--primary);background:var(--primary-soft)}.answer.selected .letter{background:var(--primary);color:#fff}.answer.correct{border-color:var(--green);background:var(--green-bg);color:#065f46}.answer.correct .letter{background:var(--green);color:#fff}.answer.wrong{border-color:var(--red);background:var(--red-bg);color:#991b1b}.answer.wrong .letter{background:var(--red);color:#fff}.answer:disabled{cursor:default}.feedback{display:none;margin-top:16px;padding:14px 16px;border-radius:14px;font-size:14px;font-weight:700;line-height:1.55}.feedback.show{display:block}.feedback.good{background:var(--green-bg);color:#065f46;border:1px solid #a7f3d0}.feedback.bad{background:var(--red-bg);color:#991b1b;border:1px solid #fecaca}.feedback.info{background:var(--primary-soft);color:#1e40af;border:1px solid #bfdbfe}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:47px;padding:12px 17px;border:0;border-radius:13px;font-size:14px;font-weight:800;cursor:pointer;transition:background .15s,transform .15s}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn:disabled{opacity:.48;cursor:not-allowed}.btn-primary{flex:1;background:var(--primary);color:#fff}.btn-primary:hover:not(:disabled){background:var(--primary-dark)}.btn-secondary{background:#eef2f7;color:#334155}.btn-secondary:hover:not(:disabled){background:#e2e8f0}.btn-warning{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}.btn-warning:hover:not(:disabled){background:#ffedd5}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}.stat{padding:14px 8px;border:1px solid var(--line);border-radius:15px;background:#f8fafc;text-align:center}.stat strong{display:block;margin-bottom:3px;font-size:24px;line-height:1.2;font-weight:900}.stat span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.hidden{display:none!important}.result{text-align:center}.result h2{margin:0 0 12px;font-size:clamp(26px,5vw,34px);letter-spacing:-.8px}.status-badge{display:inline-flex;padding:10px 18px;margin:4px 0 16px;border-radius:999px;font-size:14px;font-weight:900}.status-badge.passed{background:var(--green-bg);color:#065f46;border:1px solid #a7f3d0}.status-badge.failed{background:var(--red-bg);color:#991b1b;border:1px solid #fecaca}.result-copy{font-size:16px;line-height:1.7;margin:0 0 18px}.breakdown{margin:20px 0;padding:16px;text-align:left;background:#f8fafc;border:1px solid var(--line);border-radius:15px;line-height:1.8}.review-list{margin-top:24px;text-align:left}.review-list h3{margin:0 0 10px;font-size:18px}.review-item{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55;overflow-wrap:anywhere}.review-item b{display:block;margin-bottom:6px;color:var(--ink);font-size:14px}.review-item .ok{color:var(--green);font-weight:750}.review-item .no{color:var(--red);font-weight:750}.global-stats{margin-top:20px;padding:16px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:15px;color:var(--muted);font-size:13px;line-height:1.8;text-align:left}.empty-state{padding:22px 12px;text-align:center;color:var(--muted);background:#f8fafc;border:1px dashed var(--line);border-radius:14px}.foot{padding:16px 10px 0;text-align:center;color:#cbd5e1;font-size:12px;line-height:1.5}.hidden{display:none!important}@media(max-width:560px){body{padding:10px 8px 22px}.card{border-radius:20px}.brand{padding:17px 16px}.main{padding:18px 15px}.toolbar{grid-template-columns:1fr}.answer{min-height:62px;padding:13px}.actions .btn{flex:1}.stats{gap:7px}.stat{padding:12px 4px}.stat strong{font-size:21px}.stat span{font-size:10px}.brand .btn{padding:10px 12px;min-height:42px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;padding:clamp(12px,3vw,32px);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(ellipse at top left,#1d4ed8 0,transparent 42%),linear-gradient(145deg,#0f172a,#1e293b 62%,#172554)}button,select,input{font:inherit}button{touch-action:manipulation}.wrap{width:100%;max-width:850px;margin:0 auto}.card{overflow:hidden;background:var(--white);border:1px solid rgba(255,255,255,.35);border-radius:26px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px clamp(18px,4vw,32px);background:linear-gradient(115deg,#f8fafc,#eff6ff);border-bottom:1px solid var(--line)}.brand-title{font-size:clamp(19px,4vw,25px);font-weight:850;letter-spacing:-.7px;color:#12316e}.brand-title span{display:block;margin-top:4px;font-size:12px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.main{padding:clamp(18px,4vw,32px)}.progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;color:var(--muted);font-size:13px;font-weight:800}.track{height:9px;overflow:hidden;margin-bottom:22px;background:#e8eef7;border-radius:999px}.fill{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:999px;transition:width .25s ease}.toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:20px}.select,.search{width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:13px;padding:0 13px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}.select:focus,.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px #2563eb20}.select:disabled{background:#f8fafc;color:#94a3b8}.search-row{margin:-4px 0 20px}.pill{display:inline-flex;align-items:center;max-width:100%;padding:8px 12px;margin-bottom:13px;border-radius:999px;background:var(--primary-soft);color:var(--primary-dark);font-size:12px;font-weight:850;letter-spacing:.045em;text-transform:uppercase}.question{margin:0 0 22px;font-size:clamp(21px,4.2vw,29px);line-height:1.38;letter-spacing:-.45px;font-weight:800;white-space:pre-wrap;overflow-wrap:anywhere}.answers{display:grid;gap:11px}.answer{width:100%;min-height:66px;display:flex;align-items:center;gap:13px;padding:14px 16px;border:1.5px solid var(--line);border-radius:16px;background:#fff;text-align:left;color:var(--ink);font-size:clamp(15px,2.5vw,17px);line-height:1.45;font-weight:650;cursor:pointer;transition:transform .12s,border-color .12s,background .12s;overflow-wrap:anywhere}.answer:hover:not(:disabled){border-color:#93c5fd;background:#f8fbff;transform:translateY(-1px)}.answer:focus-visible,.btn:focus-visible{outline:3px solid #93c5fd;outline-offset:3px}.answer .letter{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border-radius:11px;background:#f1f5f9;color:#475569;font-size:13px;font-weight:900}.answer.selected{border-color:var(--primary);background:var(--primary-soft)}.answer.selected .letter{background:var(--primary);color:#fff}.answer.correct{border-color:var(--green);background:var(--green-bg);color:#065f46}.answer.correct .letter{background:var(--green);color:#fff}.answer.wrong{border-color:var(--red);background:var(--red-bg);color:#991b1b}.answer.wrong .letter{background:var(--red);color:#fff}.answer:disabled{cursor:default}.feedback{display:none;margin-top:16px;padding:14px 16px;border-radius:14px;font-size:14px;font-weight:700;line-height:1.55}.feedback.show{display:block}.feedback.good{background:var(--green-bg);color:#065f46;border:1px solid #a7f3d0}.feedback.bad{background:var(--red-bg);color:#991b1b;border:1px solid #fecaca}.feedback.info{background:var(--primary-soft);color:#1e40af;border:1px solid #bfdbfe}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:47px;padding:12px 17px;border:0;border-radius:13px;font-size:14px;font-weight:800;cursor:pointer;transition:background .15s,transform .15s}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn:disabled{opacity:.48;cursor:not-allowed}.btn-primary{flex:1;background:var(--primary);color:#fff}.btn-primary:hover:not(:disabled){background:var(--primary-dark)}.btn-secondary{background:#eef2f7;color:#334155}.btn-secondary:hover:not(:disabled){background:#e2e8f0}.btn-warning{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}.btn-warning:hover:not(:disabled){background:#ffedd5}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}.stat{padding:14px 8px;border:1px solid var(--line);border-radius:15px;background:#f8fafc;text-align:center}.stat strong{display:block;margin-bottom:3px;font-size:24px;line-height:1.2;font-weight:900}.stat span{color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.hidden{display:none!important}.result{text-align:center}.result h2{margin:0 0 12px;font-size:clamp(26px,5vw,34px);letter-spacing:-.8px}.status-badge{display:inline-flex;padding:10px 18px;margin:4px 0 16px;border-radius:999px;font-size:14px;font-weight:900}.status-badge.passed{background:var(--green-bg);color:#065f46;border:1px solid #a7f3d0}.status-badge.failed{background:var(--red-bg);color:#991b1b;border:1px solid #fecaca}.result-copy{font-size:16px;line-height:1.7;margin:0 0 18px}.breakdown{margin:20px 0;padding:16px;text-align:left;background:#f8fafc;border:1px solid var(--line);border-radius:15px;line-height:1.8}.review-list{margin-top:24px;text-align:left}.review-list h3{margin:0 0 10px;font-size:18px}.review-item{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.55;overflow-wrap:anywhere}.review-item b{display:block;margin-bottom:6px;color:var(--ink);font-size:14px}.review-item .ok{color:var(--green);font-weight:750}.review-item .no{color:var(--red);font-weight:750}.global-stats{margin-top:20px;padding:16px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:15px;color:var(--muted);font-size:13px;line-height:1.8;text-align:left}.empty-state{padding:22px 12px;text-align:center;color:var(--muted);background:#f8fafc;border:1px dashed var(--line);border-radius:14px}.foot{padding:16px 10px 0;text-align:center;color:#cbd5e1;font-size:12px;line-height:1.5}.hidden{display:none!important}@media(max-width:560px){body{padding:10px 8px 22px}.card{border-radius:20px}.brand{padding:17px 16px}.main{padding:18px 15px}.toolbar{grid-template-columns:1fr}.answer{min-height:62px;padding:13px}.actions .btn{flex:1}.stats{gap:7px}.stat{padding:12px 4px}.stat strong{font-size:21px}.stat span{font-size:10px}.brand .btn{padding:10px 12px;min-height:42px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <div class="card">
+  <!-- SCHERMATA LOGIN PASSWORD -->
+  <div id="loginScreen" class="card" style="padding: 40px 24px; text-align: center;">
+    <h1 class="brand-title" style="margin-bottom: 8px;">🚕 Quiz Taxi & NCC</h1>
+    <p style="color: var(--muted); margin-bottom: 24px; font-size: 15px;">Inserisci la password per accedere all'applicazione</p>
+    <div style="max-width: 320px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+      <input type="password" id="passwordInput" class="search" placeholder="Password..." style="text-align: center;" autofocus>
+      <button class="btn btn-primary" id="loginBtn" type="button">Accedi</button>
+      <p id="loginError" class="hidden" style="color: var(--red); font-weight: 700; font-size: 13px; margin: 0;">Password errata. Riprova.</p>
+    </div>
+  </div>
+
+  <!-- CONTENITORE PRINCIPALE (inizialmente nascosto) -->
+  <div class="card hidden" id="mainAppCard">
     <header class="brand">
       <h1 class="brand-title">🚕 Quiz Taxi & NCC<span>Preparazione esame · Milano</span></h1>
       <button class="btn btn-secondary" id="homeBtn" type="button" aria-label="Avvia una nuova sessione">Nuova sessione</button>
     </header>
     
     <main class="main">
-      <section class="intro" aria-labelledby="introTitle"><span class="eyebrow">● Allenati con metodo</span><h2 id="introTitle">Preparati al tuo esame.</h2><p>Ripassa tutto il database oppure simula l’esame ufficiale con 16 domande casuali, 4 per argomento. Domande disponibili: <b id="questionBankCount">—</b>.</p></section>
       <!-- SCHERMATA QUIZ -->
       <div id="quizScreen">
         <div class="progress-row">
@@ -88,7 +99,6 @@
 </div>
 
 <script>
-// BASE DATI INTEGRA (Aggiornata con le 33 nuove domande + 2 varianti)
 const RAW_DATA = `
 Inglese | Where ………. from? | You are | Are you | Are | 2
 Inglese | Where ……….? | You live | Are you live | Do you live | 3
@@ -412,7 +422,7 @@ Normativa Statale e Regionale | Ai sensi dell’art. 6 della Legge 15 gennaio 19
 Normativa Statale e Regionale | Ai sensi dell’art. 8 della Legge 15 gennaio 1992 n. 21 è ammesso il cumulo della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio di noleggio con conducente nel caso gli stessi siano esercitati con autovettura? | Si, se l’autovettura da noleggio con conducente è attrezzata per il trasporto di portatori di handicap | No | Si, previa autorizzazione rilasciata dal Presidente della provincia territorialmente competente | 2
 Normativa Statale e Regionale | Ai sensi dell’art. 12 della Legge 15 gennaio 1992 n. 21, in quale modo l’utente è portato a conoscenza dell’esistenza di eventuali supplementi tariffari per il servizio taxi? | Mediante communicatione verbale da parte del tassista alla fine della corsa | Mediante avvisi posti in luoghi pubblici | Mediante avviso chiaramente leggibile posto sul cruscotto dell’autovettura | 3
 Normativa Statale e Regionale | Ai sensi dell’art. 13 della Legge 15 gennaio 1992 n. 21, nel servizio taxi, la tariffa per il servizio urbano calcolata con tassametro è: | A base multipla | A progressione chilometrica | A tempo di percorrenza | 1
-Normativa Statale e Regionale | I titolari di licenza di taxi possono essere sostituiti temporaneamente per l’esercizio del servizio, da persone iscritte al ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21: | Per un periodo di ferie non superiore a giorni trenta annui | Per incarichi in società di capitale | Per il periodo necessario ad acquisire un diploma di laurea | 1
+Normativa Statale e Regionale | I titolari di licenza di taxi possono essere sostituiti temporaneamente per l’esercizio del servizio, da persone iscritte nel ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21: | Per un periodo di ferie non superiore a giorni trenta annui | Per incarichi in società di capitale | Per il periodo necessario ad acquisire un diploma di laurea | 1
 Normativa Statale e Regionale | In base alla Legge 15 gennaio 1992 n. 21, a partire dal 1 gennaio 1992 i veicoli di nuova immatricolazione adibiti ai servizi di noleggio con conducente o al servizio taxi devono essere muniti: | Di estintore nell’eventualità di un incendio a bordo | Di telefono cellulare a servizio dell’utenza | Di marmitta catalitica o di altri dispositivi atti a ridurre i carichi inquinanti | 3
 Normativa Statale e Regionale | Il rilascio della licenza per l’esercizio del servizio taxi e dell’autorizzazione per l’esercizio del servizio noleggio con conducente è subordinata: | All’iscrizione al ruolo dei conducenti di cui all’art. 9 della Legge Regionale 15 aprile 1995 n. 20 | Al possesso dell’abilitazione alla guida di autobus di noleggio con conducente | Al possesso del titolo per espletare di responsabile di agenzia turistica | 1
 Normativa Statale e Regionale | Ai sensi della Legge 15 gennaio 1992 n. 21, è titolo preferenziale agli effetti del rilascio delle licenze e delle autorizzazioni, l’avere esercitato il servizio taxi in qualità di sostituto alla guida del titolare di licenza: | Per un periodo di tre mesi consecutivi | Per un periodo di tempo complessivo di almeno sei mesi | Per il periodo di tempo necessario a soddisfare l’obbligo del servizio militare | 2
@@ -436,7 +446,7 @@ Normativa Statale e Regionale | Sono esonerate dall’obbligo del tassametro le 
 Normativa Statale e Regionale | Le autovetture adibite al servizio di noleggio con conducente portano un contrassegno con la scritta “noleggio”: | All’interno del parabrezza anteriore e sul lunotto posteriore | Solo sul lunotto posteriore | Sulla parte inferiore delle portiere anteriori | 1
 Normativa Statale e Regionale | Il rapporto del sostituto alla guida del taxi è regolato con un contratto di lavoro a tempo determinato. A tal fine l’assunzione del sostituto alla guida è equiparata a quella effettuata per sostituire lavoratori assenti, per i quali sussista il diritto alla conservazione del posto, e ciò in base: | Alla legge 18 aprile 1962 n. 230 art. 1, comma 2, lettera h | Al contratto collettivo nazionale dei lavoratori del comparto del trasporto pubblico | Ad un contratto di gestione per un termine non superiore ai 12 mesi | 1
 Normativa Statale e Regionale | Gli eredi minori del titolare di licenza possono farsi sostituire alla guida per l’esercizio del servizio taxi da persone iscritte nel ruolo di cui all’art. 6 della Legge 15 gennaio 1992 n. 21 ed in possesso dei requisiti prescritti: | Solo per un tempo massimo di due anni | Solo fino al conseguimento della prescritta licenza taxi | Fino al raggiungimento della maggiore età | 3
-Normativa Statale e Regionale | Chi stabilisce la tipologia della scritta in nero “servizio pubblico” che ogni vettura adibita al servizio taxi deve possedere? | L’ufficio comunale competente | L’ufficio regionale competente | L’ufficio apposito della Camera di commercio, industria, artigianato e agricoltura della provincia d’appartenenza | 1
+Normativa Statale e Regionale | Chi stabilisce forma e dimensioni della scritta “servizio pubblico” che ogni vettura adibita al servizio taxi deve possedere? | L’ufficio comunale competente | L’ufficio regionale competente | L’ufficio apposito della Camera di commercio, industria, artigianato e agricoltura della provincia d’appartenenza | 1
 Normativa Statale e Regionale | Gli autoservizi pubblici non di linea sono quelli che: | Provvedono al solo trasporto individuale di persone | Provvedono al solo servizio collettivo di persone | Provvedono sia al trasporto individuale che collettivo di persone | 3
 Normativa Statale e Regionale | Quale funzione svolgono gli autoservizi pubblici non di linea rispetto ai trasporti pubblici di linea ferroviari, automobilistici, marittimi, lacuali ed aerei? | Nessuna funzione | Funzione complementare ed integrativa | Funzione sostitutiva | 2
 Normativa Statale e Regionale | Quale di queste caratteristiche riguardano gli autoservizi pubblici non di linea? | Vengono effettuati a richiesta in modo non continuativo o periodico, su itinerari e secondo orari stabiliti di volta in volta | Vengono effettuati in modo continuativo o periodico, su itinerari e orari fissi | Vengono effettuati solo su richiesta della Prefettura in caso di grave calamità o per ragioni di pubblica utilità | 1
@@ -519,7 +529,7 @@ Normativa Statale e Regionale | Nelle zone di intensa conurbazione individuate a
 Normativa Statale e Regionale | I criteri e le procedure per determinare il contingente complessivo delle licenze e delle autorizzazioni assentibili, ai sensi dell'art.24 comma 1 della Legge Regionale 4 aprile 2012 n.6, sono disciplinati con: | Decreto ministeriale | Regolamento provinciale | Regolamento regionale | 3
 Normativa Statale e Regionale | Le zone caratterizzate da intensa conurbazione di cui all'art.52 comma 1 della Legge Regionale 14 luglio 2009 n.11 sono: | Quelle ove non esiste un servizio di noleggio con conducente | Quelle individuate dalla giunta regionale, sentito le Province e i Comuni interessati e previo parere della Commissione Consultiva Regionale | Quelle in cui è esercitato il servizio taxi esclusivamente mediante radiotaxi | 2
 Normativa Statale e Regionale | Ai sensi dell'art.24 comma 4 della Legge Regionale 4 aprile 2012 n.6, la revoca della licenza o dell'autorizzazione è dichiarata: | Dal Prefetto | Dal Sindaco del Comune che l'ha rilasciata | Dalla Camera di Commercio | 2
-Normativa Statale e Regionale | Nelle zone di intensa conurbazione il varo di una struttura tariffaria su base multipla e/o progressiva con validità sull'intera zona vieta: | L'applicazione di oneri aggiuntivi all'utente per eventuale corsa di ritorno a vuoto | Il trasporto collettivo con funzione complementare e integrativa rispetto ai trasporti pubblici di linea | Il pagamento della corsa con carta di credito | 1
+Normativa Statale e Regionale | Nelle zone di intensa conurbazione il varo di una struttura tariffaria su base multipla e/o progressiva con validità sull'intera zona vieta: | L'applicazione di oneri aggiuntivi all'utente per eventuale corsa di ritorno a vuoto | Il trasporto collettivo con funzione complementare e integrativa rispetto ai trasporti pubblici non di linea | Il pagamento della corsa con carta di credito | 1
 Normativa Statale e Regionale | La prova d'esame che sta sostenendo serve: | Ad avere l'autorizzazione alla guida di autobus in servizio pubblico di linea | Per l'iscrizione dei conducenti di autovetture o natanti adibiti a servizi pubblici non di linea | Per essere assunto presso la Camera di Commercio Industria e Artigianato | 2
 Normativa Statale e Regionale | La Legge Regionale 4 aprile 2012 n.6 regolamenta: | Il servizio di noleggio mediante ambulanza | Il servizio di radiotaxi | La disciplina del Settore Trasporti | 3
 Normativa Statale e Regionale | Il servizio taxi può essere esercitato con l'utilizzo di natanti? | Si | No | Solo nel caso in cui il natante sia già in possesso di autorizzazione per il servizio di noleggio con conducente | 1
@@ -648,135 +658,9 @@ Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche a
 Regolamento e Comportamento | Gli incaricati della sorveglianza devono ritirare la licenza d'esercizio quando accertino, tra l'altro, che: (art.37) | L'autopubblica è il circolazione senza aver ottemperato all'obbligo si presentarsi alla visita straordinaria di controllo | Il titolare abbia manomesso il tassametro al fine di alterarne il funzionamento | Il titolare non abbia controlled il regolare funzionamento del contachilometri | 1
 Regolamento e Comportamento | è possibile cumulare più licenze per l'esercizio del servizio taxi in capo al medesimo soggetto? (art.6) | Solo se non è una persona fisica | No | Solo se esso è associato ad una cooperativa | 2
 Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto nei confronti dei passeggeri trasportati | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
-Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi | Vestire con decoro | 1
-Regolamento e Comportamento | Al termine del servizio, il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura, sul lato scorrimento dei veicoli, ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre al prezzo segnato sul tassametro ed i supplementi dovuti | 2
-Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi assegnati | Attraverso lo stazionamento in apposite rimesse | 2
-Regolamento e Comportamento | Ai conducenti dei servizi taxi e/o autonoleggio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere il pagamento dell'importo del servizio prestato | Adibire il veicolo a servizi su itinerari fissi con orari e tariffe prestabilite | 3
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di fumare in servizio | Di rilasciare, a richiesta del cliente, una ricevuta attestante l'importo della corsa | Di allontanarsi dal veicolo quando è in servizio | 2
 Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Ai conducenti dei taxi e delle vetture da noleggio è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
 Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura cani propri | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita od al trasporto di masserizie ingombranti | 3
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i cases di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
-Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
-Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e/o tenere la radio ad alto volume | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
-Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
-Regolamento e Comportamento | I conducenti di taxi durante il servizio hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Essere sempre muniti di una congrua quantità di moneta spicciola per essere in grado di corrispondere al cliente il resto | 3
-Regolamento e Comportamento | I conducenti di taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente, con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto sia con il pubblico che con i colleghi | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicado dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
-Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi | Vestire decorosamente | 1
-Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Accettare il pagamento di supplementi oltre il prezzo della corsa, quando sono dovuti | Fare servizio senza aver azionato il tassametro | Interrompere il lavoro a fine turno di servizio | 2
-Regolamento e Comportamento | Al conducente di taxi in servizio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere l'importo segnato dal tassametro a fine corsa | Allontanarsi dall'autoveicolo in sosta in attesa di passeggeri | 3
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Ai conducenti dei taxi è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
-Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura persone e/o cani di proprietà del conducente | Tenere con gli utenti un contegno corretto | Seguire les indicazioni di percorso fornite dall'utente | 1
 Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e fumare | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
-Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente, con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto e cortese nei confronti dei passeggeri trasportati | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al tassametro | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
-Regolamento e Comportamento | Al termine del servizio il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre al prezzo segnato sul tassametro ed i supplementi dovuti | 2
-Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi assegnati dall'Amministrazione comunale | Attraverso lo stazionamento in apposite rimesse | 2
-Regolamento e Comportamento | Al conducente di taxi in servizio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere l'importo segnato dal tassametro a fine corsa | Abbandonare il veicolo in posteggio presso la stazione per cercare utenti tra i passeggeri in attesa all'interno della stessa | 3
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura alla vendita od al trasporto di masserizie ingombranti | 3
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
-Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello di fuori servizio al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e tenere la radio ad alto volume | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno l'obbligo di: | Prodigarsi per portare a destinazione l'utente anche se il veicolo si guasta | Prevedere l'importo definitivo e contrattare con l'utente il corrispettivo | Concordare e programmare in accordo con l'utente più viaggi o percorsi | 1
-Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | 3
-Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Aiutare educatamente a scendere le persone e scaricare i bagagli | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
-Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Effettuare il servizio di trasporto di bambini non accompagnati | Rilasciare ricevuta firmata con i dati identificativi della corsa e del conducente | Tenere un comportamento corretto in ogni circostanza | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Sospendere immediatamente il servizio in caso di guasto al veicolo oppure quando il tassametro non funciona regolarmente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | 1
-Regolamento e Comportamento | I conducenti di vetture taxi non possono: | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | Sostare in attesa dei clienti nei posteggi taxi | Vestire con decoro | 1
-Regolamento e Comportamento | Al termine del servizio il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre al prezzo segnato sul tassametro ed i supplementi dovuti | 2
-Regolamento e Comportamento | L'attesa del servizio taxi avviene: | Attraverso lo stazionamento presso gli alberghi scelti dal conducente del veicolo ed elencati sulla licenza | Attraverso la sosta in appositi posteggi assegnati | Attraverso lo stazionamento in apposite rimesse | 2
-Regolamento e Comportamento | Ai conducenti del servizio taxi e/o autonoleggio è vietato: | Accettare utenti tra i passeggeri in attesa presso la stazione | Chiedere il pagamento dell'importo del servizio prestato | Adibire il veicolo a servizi su itinerari fissi con orari e tariffe prestabilite | 3
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di fumare in servizio | Di rilasciare, a richiesta del cliente, una ricevuta attestante l'importo della corsa | Di allontanarsi dal veicolo quando è in servizio | 2
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Ai conducenti dei taxi e delle autovetture da noleggio è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
-Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura cani propri | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Controllare il regolare funzionamento del tassametro e/o del contachilometri | Verificare con attenzione i consumi di carburante al fine di limitare i danni ecologici indotti | Adibire l'autovettura all'esposizione o alla vendita di merci | 3
-Regolamento e Comportamento | Ai conducenti di autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente les strade statali | 1
-Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Misurare la pressione degli pneumatici prima di ogni servizio | Avvertire immediatamente l'utente dell'avvicinarsi della destinazione | Avere a bordo del veicolo la licenza comunale ed i documenti di circolazione | 3
-Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza deteriorare il veicolo | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello di fuori servizio al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Mangiare e tenere la radio ad alto volume | Mangiare e fumare, se autorizzati dall'utente | Dialogare con l'utente | 1
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno il divieto di: | Seguire le indicazioni di percorso fornite dall'utente | Fare schiamazzi ed azionare continuamente i dispositivi acustici di segnalazione | Fermarsi con il semaforo che proietta luz rossa | 2
-Regolamento e Comportamento | I conducenti dei taxi durante l'effettuazione della corsa hanno l'obbligo di: | Prodigarsi per portare a destinazione l'utente, anche se il veicolo si guasta | Prevedere l'importo definitivo e contrattare con l'utente il corrispettivo | Concordare e programmare in accordo con l'utente più viaggi o percorsi | 1
-Regolamento e Comportamento | I conducenti dei taxi durante il servizio hanno l'obbligo di: | Verificare la consistenza del bagaglio | Pretendere il pagamento anticipato della corsa successiva | Essere sempre muniti di una congrua quantità di moneta spicciola per essere in grado di corrispondere al cliente il resto | 3
-Regolamento e Comportamento | I conducenti dei taxi hanno l'obbligo di: | Disimpegnare il servizio con ogni decoro | Acquisire un'altra corsa attraverso l'utilizzo del telefono cellulare | Perquisire con attenzione i bagagli | 1
-Regolamento e Comportamento | I conducenti dei taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente, con pagamento della corsa anticipato | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Dove vanno posizionate le tariffe? | Dietro al sedile anteriore lato passeggero | Di fianco al tassametro | Nella portiera lato conducente | 1
-Regolamento e Comportamento | Da dove deve iniziare il Servizio Taxi? (art.37 Regolamento di Bacino 2014) | Dal Bacino di Traffico del Sistema Aeroportuale | Dalla Provincia del Comune che ha rilasciato la Licenza | Dalla Città Metropolitana di Milano | 2
-Regolamento e Comportamento | Cosa riporta il Foglio di Servizio NCC? | Targa, conducente, data, ora, km, destinazione, utente | Il divieto di fumare | La capacità del bagaglio | 1
-Regolamento e Comportamento | I conducenti delle autopubbliche hanno l'obbligo, tra l'altro, durante la corsa: | Di ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | Di effettuare il servizio di trasporto di bambini non accompagnati da persona maggiorenne | Di ultimare la corsa anche se, nel frattempo, è scaduto il turno | 3
-Regolamento e Comportamento | Tra i doveri prescritti per i conducenti di vetture da piazza è previsto: | Compiere il percorso più breve per raggiungere la destinazione richiesta e comunque il percorso indicato dall'utente | Nel caso di rinvenimento di qualsiasi oggetto smarrito, aprire una ricerca per riconsegnare l'oggetto al legittimo proprietario | Interrompere di propria iniziativa il servizio quando si venga richiesti per altro più vantaggioso | 1
-Regolamento e Comportamento | Al termine del servizio, il conducente della vettura taxi deve: | Aprire la portiera dell'autovettura sul lato scorrimento dei veicoli ed aiutare a scendere i passeggeri | Far prendere visione all'utente del prezzo della corsa e quindi azzerare il tassametro | Pretendere compensi oltre il prezzo segnato sul tassametro ed i supplementi dovuti | 2
-Regolamento e Comportamento | I taxi in turno di servizio sostano: | Temporaneamente presso gli alberghi scelti dal conducente purchè non rechino intralcio alla circolazione dei veicoli | Negli appositi posteggi e nel numero massimo consentito dalla segnaletica orizzontale tracciata a delimitazione degli stessi | Nelle apposite autorimesse | 2
-Regolamento e Comportamento | Gli autoveicoli destinati al servizio di autonoleggio con conducente sono sottoposti all'inizio del servizio e successivamente una volta all'anno a visite di controllo presso: | Gli uffici della Polizia Stradale | Gli uffici dell'Amministrazione Provinciale | L'ufficio Autopubbliche del Comune di Milano | 3
-Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio da rimessa con conducente è rilasciata da: | Dirigente del Settore Trasporti e Mobilità del Comune | Consiglio Comunale | Consiglio Provinciale | 1
-Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Dialogare con l'utente | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | Avvertire immediatamente l'utente dei supplementi di tariffa applicabili | 2
-Regolamento e Comportamento | Tra i doveri per i conducenti di autoveicoli in servizio di noleggio è previsto, tra l'altro, quello di: | Controllare che il funzionamento del contachilometri sia regolare | Svolgere il servizio assistiti da altro conducente | Permettere agli utenti del servizio di fumare nell'autoveicolo | 1
-Regolamento e Comportamento | Tra i requisiti per l'assegnazione delle autorizzazioni di autonoleggio con conducente è previsto quello di: | Aver istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo conducenti | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età non superiore ai 55 anni | 3
-Regolamento e Comportamento | Il prezzo del servizio di autonoleggio da rimessa con conducente è: | Quello che risulta convenuto tra l'esercente del servizio e l'utente | Quello indicato dal tassametro | Quello determinato da tariffe fissate dall'amministrazione provinciale | 1
-Regolamento e Comportamento | Il titolare di licenza taxi deve comunicare entro 30 giorni le variazioni di indirizzo: | Al Settore Trasporti e Mobilità del Comune di Milano | Al Settore Trasporto Pubblico della Provincia di Milano | Alla Camera di Commercio, Industria, Artigianato ed Agricoltura di Milano | 1
-Regolamento e Comportamento | Chi approva i regolamenti comunali per gli autoservizi pubblici non di linea? | Comune | Regione | Provincia | 1
-Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Aiutare a salire le persone e caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
-Regolamento e Comportamento | I conducenti di taxi durante l'effettuazione della corsa hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Mantenere in funzione il tassametro e controllare il suo regolare funzionamento | 3
-Regolamento e Comportamento | Da chi è esercitata la vigilanza urbana sul servizio taxi? | Dalla Prefettura | Dall'amministrazione comunale | Dalla Provincia | 2
-Regolamento e Comportamento | Le tariffe e le condizioni di trasporto del servizio taxi sono determinate: | Dalla Giunta comunale | Dalla Giunta provinciale | Dal Dirigente del Settore Trasporti e Mobilità del Comune di Milano | 1
-Regolamento e Comportamento | La licenza dell'esercizio del servizio taxi è rilasciata da: | Direttore del Settore Trasporto Pubblico della Provincia di Milano | Consiglio Comunale | Dirigente del Settore Trasporti e Mobilità del Comune di Milano | 3
-Regolamento e Comportamento | La licenza d'esercizio può essere revocata da: | Comune | Provincia | Regione | 1
-Regolamento e Comportamento | I conducenti di taxi al termine della corsa hanno l'obbligo di: | Recapitare ad altro indirizzo il bagaglio dell'utente con pagamento anticipato della corsa | Accertare che l'utente non abbia smarrito alcun oggetto all'interno dell'autovettura | Appropriarsi di qualsiasi oggetto smarrito all'interno dell'autovettura | 2
-Regolamento e Comportamento | Qual è la colorazione delle autovetture adibite al servizio taxi? (art.2a) | Quella determinata dalle disposizioni di legge vigenti in materia | Gialla | Quella determinata dal regolamento regionale | 1
-Regolamento e Comportamento | Le autovetture adibite al servizio taxi possono recare stemmi identificativi del comune? (art.2b) | Si, solo nella parte posteriore | Si, solo nella parte anteriore | Si, solo sulle portiere laterali | 3
-Regolamento e Comportamento | Lo stampato contenente le tariffe da chi viene fornito? (art.5) | Dal Comune | Dalla Provincia | Dalla Regione | 1
-Regolamento e Comportamento | Dove deve essere posto il tassametro? (art.6) | In posizione ben visibile da parte degli utenti | Al di sotto della lato superiore del piantone dello sterzo | Sulla parte superiore del parabrezza | 1
-Regolamento e Comportamento | I sigilli di garanzia applicati all'impianto tassametrico da chi vengono apposti? | Dall'Ufficio Comunale competente | Dall'Ufficio periferico del Dipartimento dei Trasporti Terrestri | Dal competente Settore della Provincia di Milano | 1
-Regolamento e Comportamento | è possibile utilizzare un'autovettura adibita a servizio taxi per uso proprio? (art.27) | No, mai | Si, con specifico nulla osta dell'Amministratore comunale | Si, se è fuori servizio | 3
-Regolamento e Comportamento | Quando l'autopubblica è fuori servizio può eccezionalmente effettuare alcune corse? (art.27) | No, mai | Si, se è richiesto dalle Forze dell'ordine | Si, in caso di necessità | 1
-Regolamento e Comportamento | Il servizio taxi ha lo scopo di soddisfare le richieste individuali? (art.1) | Si | No, può essere richiesto anche da piccoli gruppi | Si, perché è vietato trasportare persone con diversa direttrice e diversa destinazione | 2
-Regolamento e Comportamento | Il servizio taxi può essere svolto solamente con autovetture da piazza? ( art.1) | Si | No, può essere svolto anche con minibus | No, può essere svolto anche con minibus ma con autorizzazione comunale | 1
-Regolamento e Comportamento | Qual è lo scopo del servizio taxi? (art.1) | Quello di soddisfare esigenze di trasporto individuale | Quello di soddisfare esigenze di trasporto individuale o di piccoli gruppi | Quello di soddisfare esigenze di trasporto di qualsiasi genere, anche con contrato di noleggio | 2
-Regolamento e Comportamento | Chi può essere titolare di licenza per l'esercizio del servizio taxi? (art.9) | La persona singola | La persona giuridica | Qualsiasi società di capitali | 1
-Regolamento e Comportamento | Come viene assegnate la licenza per l'esercizio del servizio taxi? (art.9) | Mediante concorso pubblico | Mediante iscrizione al ruolo conducenti | A seguito di denuncia di inizio del servizio | 1
-Regolamento e Comportamento | Come viene assegnate l'autorizzazione per il servizio di noleggio con conducente? (art.6) | Mediante concorso pubblico | Mediante iscrizione al ruolo dei conducenti | A seguito di denuncia di inizio del servizio | 1
-Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
-Regolamento e Comportamento | La licenza taxi può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.10) | è titolare di licenza da almeno quattro anni | Ha raggiunto il sessantesimo anno d’età | Ha raggiunto il cinquantacinquesimo anno d’età | 2
-Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio con conducente può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.7) | è titolare di autorizzazione da cinque anni | Ha raggiunto il cinquantacinquesimo anno d’età | Non aver raggiunto il sessantesimo anno d’età | 1
-Regolamento e Comportamento | In caso di morte del titolare, a chi può essere trasferita la licenza taxi? (art.11) | Ad uno degli eredi appartenenti al nucleo familiare del defunto | Ai soli figli maggiorenni, anche se non ancora in possesso del CAP | A qualsiasi erede in linea indiretta | 1
-Regolamento e Comportamento | Qual è l'autorità che consente il rinnovo dell'autorizzazione per l'esercizio del servizio di autonoleggio con conducente? (art.8) | La Provincia | La Regione | Il Comune | 3
-Regolamento e Comportamento | I titolari di licenza taxi possono essere sostituiti alla guida? (art.16) | Si, solo temporaneamente e per motivi specifici | Si, solo definitivamente | No, mai | 1
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Come viene regolato il rapporto di lavoro tra il taxista ed il sostituto alla guida? (art.16) | Con un contratto di prestazione d'opera | Con un contratto di lavoro a tempo determinato o con un contratto di gestione per un termine non superiore a sei mesi | La gestione avviene in modo informale | 2
-Regolamento e Comportamento | Dove avviene la sosta delle autopubbliche in turno di servizio? (art.23) | Nella propria rimessa | Liberamente, secondo quanto stabilito dal codice della strada | Negli appositi posteggi | 3
-Regolamento e Comportamento | Tra i contrassegni che contraddistinguono il servizio di autonoleggio con conducente vi è: (art.15) | Sul lunotto posteriore, in modo interamente visibile, quello con la scritta "NOLEGGIO" | La scritta "NOLEGGIO" dipinta sulla fiancata destra | Un contrassegno luminoso, posto sul tetto, con la scritta "NCC" | 1
-Regolamento e Comportamento | Tra gli obblighi del conducente di autopubblica durante la corsa è previsto quello di: (art.33) | Allacciare la cintura di sicurezza | Effettuare il percorso più breve, salvo che l'utente non chieda di seguire un percorso diverso | Interrompere la corsa se nel frattempo è scaduto il turno | 2
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in servizio di noleggio è previsto quello di: (art.20) | Interrompere di propria iniziativa il servizio se nel frattempo è terminato il turno | Tenere nell'autoveicolo cose che non abbiano attinenza col servizio | Controllare che il funzionamento del contachilometri sia regolare | 3
-Regolamento e Comportamento | Tra i doveri dei conducenti di autopubbliche in servizio è previsto quello di: (art.29) | Essere provvisti di una guida aggiornata delle vie e delle piazze comprese nel territorio comunale | Interrompere la corsa se nel frattempo è scaduto il turno | Chiedere compensi oltre il prezzo segnato sul tassametro | 1
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autoveicoli in servizio di noleggio è previsto quello di: (art.20) | Interrompere la corsa se nel frattempo è scaduto il turno | Controllare che il funzionamento del contachilometri sia regolare | Chiedere compensi ulteriori al prezzo convenuto nel caso si sia dovuto prolungare il tragitto per cause di forza maggiore | 2
-Regolamento e Comportamento | Tra gli atti vietati ai conducenti di autopubbliche in servizio è previsto quello di: (art.30) | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio | Caricare i bagagli degli utenti di cui è consentito il trasporto | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 3
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche durante la corsa è previsto quello di: (art.33) | Ultimare la corsa se nel frattempo è scaduto il turno | Mettere a disposizione dell'utente la stampa quotidiana | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, se non con il consenso di queste ultime | 1
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Attendere che l'utente scenda, azionando contestualmente la segnalazione d'emergenza (quattro frecce) | Azzerare il tassametro | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | 2
-Regolamento e Comportamento | Per quali motivi può essere, tra l'altro, revocata la licenza taxi? (art.40) | Per mancato rispetto dell'orario di servizio | Per inottemperanza all'obbligo di presentarsi alla visita straordinaria di controllo | Per aver manomesso il tassametro al fine di alterarne il funzionamento | 3
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
-Regolamento e Comportamento | Gli incaricati della sorveglianza devono ritirare la licenza d'esercizio quando accertino, tra l'altro, che: (art.37) | L'autopubblica è il circolazione senza aver ottemperato all'obbligo si presentarsi alla visita straordinaria di controllo | Il titolare abbia manomesso il tassametro al fine di alterarne il funzionamento | Il titolare non abbia controlled il regolare funzionamento del contachilometri | 1
-Regolamento e Comportamento | è possibile cumulare più licenze per l'esercizio del servizio taxi in capo al medesimo soggetto? (art.6) | Solo se non è una persona fisica | No | Solo se esso è associato ad una cooperativa | 2
-Regolamento e Comportamento | Tra gli obblighi dei conducenti di autopubbliche al termine della corsa è previsto quello di: (art.34) | Far prendere visione all'utente del prezzo della corsa specificando gli eventuali supplementi tariffari applicati | Recapitare il bagaglio dimenticato dall'utente, con pagamento della corsa | Ammettere sull'autovettura persone estranee a quelle che hanno richiesto il servizio, senza il consenso di queste ultime | 1
-Regolamento e Comportamento | I conducenti di autovetture da piazza hanno l'obbligo: | Di essere provvisti di una guida aggiornata delle vie e piazze comprese nel territorio comunale | Interrompere di propria iniziativa il servizio quando si venga richiesti per un altro più vantaggioso | Recapitare i bagagli sulla soglia di casa dell'utente | 1
-Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di linea è vietato: | Tenere sull'autovettura cani propri | Tenere con gli utenti un contegno corretto | Seguire le indicazioni di percorso fornite dall'utente | 1
-Regolamento e Comportamento | Ai conducenti delle autopubbliche è vietato: | Interrompere spontaneamente il turno di servizio o la corsa eccettuati i casi di forza maggiore | Sostituire la ruota in caso di foratura | Percorrere senza autorizzazione dell'utente le strade statali | 1
 Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Azionare il tassametro ed assicurarsi che lo stesso funzioni regolarmente | Pulire accuratamente il veicolo in ogni sua parte | Richiamare l'attenzione della vigilanza urbana per verificare l'attendibilità dell'utente | 1
 Regolamento e Comportamento | I conducenti di taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto senza deteriorare il veicolo | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
 Regolamento e Comportamento | I conducenti di taxi hanno l'obbligo di: | Sospendere la corsa solo per consumare il pasto | Mettere a disposizione dell'utente la stampa quotidiana | Applicare il cartello "FUORI SERVIZIO" al termine di ciascun turno e quando la vettura è usata per scopi familiari | 3
@@ -794,7 +678,6 @@ Regolamento e Comportamento | Ai conducenti degli autoservizi pubblici non di li
 Regolamento e Comportamento | I conducenti dei taxi all'inizio della corsa hanno l'obbligo di: | Segnalare tempestivamente la svolta a sinistra | Caricare i bagagli di cui è consentito il trasporto | Azionare il segnalatore acustico contestualmente alla salita dell'utente | 2
 `;
 
-// PARSING E CONTROLLI DATI: mantiene le domande distinte anche quando hanno lo stesso testo.
 function normalizeText(value) {
   return String(value ?? '').toLocaleLowerCase('it').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
 }
@@ -819,7 +702,6 @@ function parseQuestions(dataStr) {
     seen.add(key);
     list.push(q);
   }
-  if (invalid.length) console.warn(`Quiz: ${invalid.length} righe non valide ignorate.`, invalid);
   return list;
 }
 const ALL_QUESTIONS = parseQuestions(RAW_DATA);
@@ -829,14 +711,14 @@ const STORAGE_KEYS = { stats: 'taxi_quiz_stats', mistakes: 'taxi_quiz_saved_mist
 let pool = [], index = 0, selected = null, answered = false, correct = 0, wrong = 0, history = [], macroErrors = {};
 let sessionType = 'practice', displayOptionIndexes = [0, 1, 2], sessionSaved = false;
 const $ = id => document.getElementById(id);
-$('questionBankCount').textContent = ALL_QUESTIONS.length;
+
 function safeRead(key, fallback) {
   try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; }
-  catch (error) { console.warn('Impossibile leggere i dati locali.', error); return fallback; }
+  catch (error) { return fallback; }
 }
 function safeWrite(key, value) {
   try { localStorage.setItem(key, JSON.stringify(value)); return true; }
-  catch (error) { console.warn('Impossibile salvare i dati locali.', error); return false; }
+  catch (error) { return false; }
 }
 function shuffleArray(items) {
   const result = [...items];
@@ -877,7 +759,7 @@ function initSession(customPool = null) {
   } else if (mode === 'exam') {
     const missing = MACRO_CATEGORIES.filter(category => ALL_QUESTIONS.filter(q => q.topic === category).length < 4);
     if (missing.length) {
-      alert(`Non è possibile avviare l'esame: servono almeno 4 domande per ciascun argomento. Da verificare: ${missing.join(', ')}.`);
+      alert(`Non è possibile avviare l'esame: servono almeno 4 domande per ciascun argomento.`);
       $('modeSelect').value = 'practice';
       return initSession();
     }
@@ -885,12 +767,12 @@ function initSession(customPool = null) {
     pool = [];
     MACRO_CATEGORIES.forEach(category => pool.push(...shuffleArray(ALL_QUESTIONS.filter(q => q.topic === category)).slice(0, 4)));
     pool = shuffleArray(pool);
-    $('modeDisplay').textContent = 'Esame ufficiale · 16 domande';
+    $('modeDisplay').textContent = 'Modalità Esame Ufficiale (16 Domande)';
   } else {
     sessionType = 'practice';
     pool = ALL_QUESTIONS.filter(q => (topicFilter === 'all' || q.topic === topicFilter) && (!search || q.question.toLocaleLowerCase('it').includes(search) || q.options.some(option => option.toLocaleLowerCase('it').includes(search))));
     pool = shuffleArray(pool);
-    $('modeDisplay').textContent = 'Modalità ripasso';
+    $('modeDisplay').textContent = 'Modalità Ripasso (Libera)';
   }
   setFreshSessionState();
   $('resultScreen').classList.add('hidden');
@@ -898,17 +780,16 @@ function initSession(customPool = null) {
   $('topicSelect').disabled = sessionType === 'exam' || sessionType === 'review';
   $('modeSelect').disabled = sessionType === 'review';
   $('questionSearch').disabled = sessionType !== 'practice';
-  $('introTitle').textContent = sessionType === 'exam' ? 'Simulazione d’esame.' : sessionType === 'review' ? 'Rivediamo gli errori.' : 'Preparati al tuo esame.';
   renderQuestion();
 }
 function startSavedMistakes() {
   const mistakes = savedMistakes();
-  if (!mistakes.length) { alert('Non hai errori salvati. Quando sbagli una domanda, la aggiungerò qui per il ripasso.'); return; }
+  if (!mistakes.length) { alert('Non hai errori salvati.'); return; }
   initSession(mistakes);
 }
 function renderQuestion() {
   if (pool.length === 0) {
-    $('counter').textContent = 'Nessuna domanda trovata'; $('progress').style.width = '0%'; $('topicPill').textContent = 'Nessun risultato'; $('question').textContent = 'Non ho trovato domande con questi filtri.'; $('answers').replaceChildren(); const empty = document.createElement('div'); empty.className = 'empty-state'; empty.textContent = 'Prova a modificare la ricerca oppure seleziona un altro argomento.'; $('answers').appendChild(empty); $('feedback').className = 'feedback'; $('nextBtn').disabled = true; $('correctCount').textContent = '0'; $('wrongCount').textContent = '0'; $('remainingCount').textContent = '0'; return;
+    $('counter').textContent = 'Nessuna domanda trovata'; $('progress').style.width = '0%'; $('topicPill').textContent = 'Nessun risultato'; $('question').textContent = 'Non ho trovato domande con questi filtri.'; $('answers').replaceChildren(); const empty = document.createElement('div'); empty.className = 'empty-state'; empty.textContent = 'Prova a modificare la ricerca.'; $('answers').appendChild(empty); $('feedback').className = 'feedback'; $('nextBtn').disabled = true; $('correctCount').textContent = '0'; $('wrongCount').textContent = '0'; $('remainingCount').textContent = '0'; return;
   }
   if (index >= pool.length) { showResults(); return; }
   const q = pool[index];
@@ -924,44 +805,64 @@ function renderQuestion() {
     btn.type = 'button'; btn.className = 'answer';
     const letter = document.createElement('span'); letter.className = 'letter'; letter.textContent = letters[displayIndex];
     const text = document.createElement('span'); text.textContent = q.options[originalIndex];
-    btn.append(letter, text); btn.addEventListener('click', () => chooseOption(originalIndex)); answers.appendChild(btn);
+    btn.append(letter, text); 
+    btn.addEventListener('click', () => chooseOption(originalIndex)); 
+    answers.appendChild(btn);
   });
   $('feedback').className = 'feedback'; $('feedback').textContent = '';
-  $('nextBtn').disabled = true;
-  $('nextBtn').textContent = sessionType === 'exam' ? 'Registra risposta' : 'Conferma risposta';
+  
+  if (sessionType === 'exam') {
+    $('nextBtn').style.display = 'none'; // Nasconde completamente il bottone "Prossima Domanda" in modalità esame
+  } else {
+    $('nextBtn').style.display = 'inline-flex';
+    $('nextBtn').disabled = true;
+    $('nextBtn').textContent = 'Conferma risposta';
+  }
+
   $('correctCount').textContent = correct; $('wrongCount').textContent = wrong; $('remainingCount').textContent = pool.length - index;
   updateSavedMistakesButton();
 }
+
 function chooseOption(originalIndex) {
   if (answered) return;
   selected = originalIndex;
   [...$('answers').children].forEach((btn, displayIndex) => btn.classList.toggle('selected', displayOptionIndexes[displayIndex] === originalIndex));
-  $('nextBtn').disabled = false;
-}
-function handleNext() {
-  if (selected === null) return;
-  if (!answered) {
-    const q = pool[index];
-    const isCorrect = selected === q.answer;
-    answered = true;
-    if (isCorrect) { correct++; clearMistake(q); }
-    else { wrong++; saveMistake(q); if (macroErrors[q.topic] !== undefined) macroErrors[q.topic]++; }
-    history.push({ q, selected, isCorrect });
+
+  const q = pool[index];
+  const isCorrect = selected === q.answer;
+  answered = true;
+
+  if (isCorrect) { correct++; clearMistake(q); }
+  else { wrong++; saveMistake(q); if (macroErrors[q.topic] !== undefined) macroErrors[q.topic]++; }
+  history.push({ q, selected, isCorrect });
+
+  if (sessionType === 'exam') {
+    // In modalità esame passa immediatamente alla prossima domanda senza blocchi né messaggi
+    index++;
+    renderQuestion();
+  } else {
+    // In modalità ripasso mostra feedback e abilita il pulsante
+    $('nextBtn').disabled = false;
     [...$('answers').children].forEach((btn, displayIndex) => {
-      btn.disabled = true; btn.classList.remove('selected');
-      const originalIndex = displayOptionIndexes[displayIndex];
-      if (sessionType !== 'exam') {
-        if (originalIndex === q.answer) btn.classList.add('correct');
-        else if (originalIndex === selected) btn.classList.add('wrong');
-      }
+      btn.disabled = true;
+      const originalIdx = displayOptionIndexes[displayIndex];
+      if (originalIdx === q.answer) btn.classList.add('correct');
+      else if (originalIdx === selected) btn.classList.add('wrong');
     });
     const feedback = $('feedback');
-    if (sessionType === 'exam') { feedback.className = 'feedback show info'; feedback.textContent = 'Risposta registrata. La soluzione sarà mostrata al termine della simulazione.'; }
-    else { feedback.className = `feedback show ${isCorrect ? 'good' : 'bad'}`; feedback.textContent = isCorrect ? '✓ Risposta corretta!' : `✕ Risposta errata. La risposta corretta era: ${q.options[q.answer]}`; }
+    feedback.className = `feedback show ${isCorrect ? 'good' : 'bad'}`; 
+    feedback.textContent = isCorrect ? '✓ Risposta corretta!' : `✕ Risposta errata. La risposta corretta era: ${q.options[q.answer]}`;
     $('correctCount').textContent = correct; $('wrongCount').textContent = wrong; $('remainingCount').textContent = pool.length - index - 1;
     $('nextBtn').textContent = index === pool.length - 1 ? 'Vedi risultati' : 'Prossima domanda';
-  } else { index++; renderQuestion(); }
+  }
 }
+
+function handleNext() {
+  if (selected === null) return;
+  index++; 
+  renderQuestion();
+}
+
 function showResults() {
   $('quizScreen').classList.add('hidden'); $('resultScreen').classList.remove('hidden'); $('progress').style.width = '100%';
   const badge = $('statusBadge'), resultText = $('resultText'), breakdown = $('topicBreakdown'), retryBtn = $('retryErrorsBtn');
@@ -972,7 +873,7 @@ function showResults() {
     const passed = !tooManyErrors && !failedCategory && history.length === 16;
     badge.className = `status-badge ${passed ? 'passed' : 'failed'}`;
     badge.textContent = passed ? '🎉 ESAME SUPERATO' : '✕ ESAME NON SUPERATO';
-    resultText.innerHTML = `Risposte corrette: <b>${correct} su ${history.length}</b> · Errori: <b>${wrong}</b>.<br>${history.length !== 16 ? 'La simulazione non contiene 16 domande complete. ' : ''}${tooManyErrors ? 'Hai superato il limite di 4 errori totali. ' : ''}${failedCategory ? `Hai superato il limite di 2 errori in “${failedCategory}”.` : ''}`;
+    resultText.innerHTML = `Risposte corrette: <b>${correct} su ${history.length}</b> · Errori: <b>${wrong}</b>.<br>${tooManyErrors ? 'Hai superato il limite di 4 errori totali. ' : ''}${failedCategory ? `Hai superato il limite di 2 errori in “${failedCategory}”.` : ''}`;
     breakdown.innerHTML = '<b>Errori per argomento</b><ul style="margin:8px 0 0;padding-left:20px"></ul>';
     const ul = breakdown.querySelector('ul');
     MACRO_CATEGORIES.forEach(category => { const li = document.createElement('li'); const errors = macroErrors[category] || 0; li.textContent = `${category}: ${errors} errori${errors > 2 ? ' (limite superato)' : ' ✓'}`; ul.appendChild(li); });
@@ -980,14 +881,13 @@ function showResults() {
     const pct = history.length ? Math.round(correct / history.length * 100) : 0;
     badge.className = 'status-badge passed'; badge.textContent = sessionType === 'review' ? 'RIPASSO COMPLETATO' : 'SESSIONE COMPLETATA';
     resultText.innerHTML = `Risposte corrette: <b>${correct} su ${history.length}</b> (${pct}%) · Errori: <b>${wrong}</b>.`;
-    breakdown.textContent = sessionType === 'review' ? 'Le risposte corrette sono state rimosse dagli errori salvati. Quelle ancora sbagliate resteranno disponibili per un altro ripasso.' : 'Continua ad esercitarti per consolidare la tua preparazione.';
+    breakdown.textContent = sessionType === 'review' ? 'Le risposte corrette sono state rimosse dagli errori salvati.' : 'Continua ad esercitarti.';
   }
   const wrongThisSession = history.filter(item => !item.isCorrect).map(item => item.q);
   if (wrongThisSession.length) { retryBtn.classList.remove('hidden'); retryBtn.onclick = () => initSession(wrongThisSession); }
   else retryBtn.classList.add('hidden');
   const list = $('reviewList'); list.replaceChildren();
   const heading = document.createElement('h3'); heading.textContent = 'Riepilogo domande'; list.appendChild(heading);
-  if (!history.length) { const empty = document.createElement('div'); empty.className = 'empty-state'; empty.textContent = 'Nessuna risposta registrata in questa sessione.'; list.appendChild(empty); }
   history.forEach((item, i) => {
     const row = document.createElement('div'); row.className = 'review-item';
     const question = document.createElement('b'); question.textContent = `${i + 1}. [${item.q.topic}] ${item.q.question}`;
@@ -1007,7 +907,7 @@ function updateGlobalStatsDisplay() {
   if (!stats) { $('globalStatsText').textContent = 'Nessuna statistica registrata.'; return; }
   const total = (Number(stats.correct) || 0) + (Number(stats.wrong) || 0);
   const pct = total ? Math.round((Number(stats.correct) || 0) / total * 100) : 0;
-  $('globalStatsText').textContent = `Sessioni completate: ${stats.totalQuiz || 0} · Risposte corrette totali: ${stats.correct || 0} · Errori totali: ${stats.wrong || 0} · Precisione media: ${pct}%`;
+  $('globalStatsText').textContent = `Sessioni: ${stats.totalQuiz || 0} · Corrette totali: ${stats.correct || 0} · Errori totali: ${stats.wrong || 0} · Precisione: ${pct}%`;
 }
 function exportStats() {
   const payload = { format: 'quiz-taxi-backup-v1', exportedAt: new Date().toISOString(), stats: safeRead(STORAGE_KEYS.stats, { totalQuiz: 0, correct: 0, wrong: 0 }), savedMistakes: savedMistakes() };
@@ -1018,27 +918,43 @@ async function importStatsFile(file) {
   if (!file) return;
   try {
     const payload = JSON.parse(await file.text());
-    if (!payload || typeof payload !== 'object' || !payload.stats || !Array.isArray(payload.savedMistakes)) throw new Error('Formato file non valido');
-    const validStats = { totalQuiz: Math.max(0, Number(payload.stats.totalQuiz) || 0), correct: Math.max(0, Number(payload.stats.correct) || 0), wrong: Math.max(0, Number(payload.stats.wrong) || 0) };
-    const validMistakes = payload.savedMistakes.filter(q => q && typeof q.question === 'string' && Array.isArray(q.options) && q.options.length === 3 && Number.isInteger(q.answer) && q.answer >= 0 && q.answer <= 2 && typeof q.topic === 'string');
-    if (!confirm(`Importare il backup? Le statistiche e gli errori salvati attuali saranno sostituiti. Errori nel backup: ${validMistakes.length}.`)) return;
-    safeWrite(STORAGE_KEYS.stats, validStats); safeWrite(STORAGE_KEYS.mistakes, validMistakes);
+    safeWrite(STORAGE_KEYS.stats, payload.stats); safeWrite(STORAGE_KEYS.mistakes, payload.savedMistakes);
     updateGlobalStatsDisplay(); updateSavedMistakesButton(); alert('Backup importato correttamente.');
-  } catch (error) { alert('Impossibile importare il file: controlla che sia un backup JSON valido esportato da questo quiz.'); }
+  } catch (error) { alert('File non valido.'); }
 }
+
+// Gestione Login Password
+function checkPassword() {
+  const pwd = $('passwordInput').value;
+  if (pwd === 'Chediotassista21') {
+    $('loginScreen').classList.add('hidden');
+    $('mainAppCard').classList.remove('hidden');
+    updateGlobalStatsDisplay(); 
+    updateSavedMistakesButton();
+    initSession();
+  } else {
+    $('loginError').classList.remove('hidden');
+    $('passwordInput').value = '';
+    $('passwordInput').focus();
+  }
+}
+
+$('loginBtn').addEventListener('click', checkPassword);
+$('passwordInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkPassword();
+});
+
 $('nextBtn').addEventListener('click', handleNext);
 $('modeSelect').addEventListener('change', () => initSession());
 $('topicSelect').addEventListener('change', () => initSession());
 $('restartBtn').addEventListener('click', () => { $('modeSelect').disabled = false; $('modeSelect').value = 'practice'; $('topicSelect').value = 'all'; $('questionSearch').value = ''; initSession(); });
-$('homeBtn').addEventListener('click', () => { if (confirm('Avviare una nuova sessione? I progressi già registrati resteranno salvati.')) { $('modeSelect').disabled = false; $('topicSelect').value = 'all'; $('questionSearch').value = ''; initSession(); } });
+$('homeBtn').addEventListener('click', () => { if (confirm('Avviare una nuova sessione?')) { $('modeSelect').disabled = false; $('topicSelect').value = 'all'; $('questionSearch').value = ''; initSession(); } });
 $('reviewSavedBtn').addEventListener('click', startSavedMistakes);
 $('exportStatsBtn').addEventListener('click', exportStats);
 $('importStatsBtn').addEventListener('click', () => $('importStatsFile').click());
 $('importStatsFile').addEventListener('change', event => { importStatsFile(event.target.files?.[0]); event.target.value = ''; });
 let searchTimer;
 $('questionSearch').addEventListener('input', () => { window.clearTimeout(searchTimer); searchTimer = window.setTimeout(() => { if ($('modeSelect').value !== 'exam') initSession(); }, 250); });
-updateGlobalStatsDisplay(); updateSavedMistakesButton();
-initSession();
 </script>
 </body>
 </html>
