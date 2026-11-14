@@ -35,6 +35,7 @@
       <div id="quizScreen">
         <div class="progress-row">
           <span id="counter">Domanda 1</span>
+          <span id="examTimerDisplay" class="hidden" style="color: var(--red); font-weight: 900;">⏱️ 30:00</span>
           <span id="modeDisplay">Modalità Ripasso</span>
         </div>
         <div class="track"><div class="fill" id="progress"></div></div>
@@ -82,9 +83,6 @@
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <button class="btn btn-primary" id="restartBtn" type="button">Nuova Sessione</button>
           <button class="btn btn-warning hidden" id="retryErrorsBtn" type="button">Ripeti errori di questa sessione</button>
-          <button class="btn btn-secondary" id="exportStatsBtn" type="button">Esporta dati</button>
-          <button class="btn btn-secondary" id="importStatsBtn" type="button">Importa dati</button>
-          <input id="importStatsFile" type="file" accept="application/json,.json" class="hidden" aria-label="Seleziona file di backup">
         </div>
 
         <div class="global-stats" id="globalStatsBox">
@@ -636,7 +634,7 @@ Regolamento e Comportamento | Qual è lo scopo del servizio taxi? (art.1) | Quel
 Regolamento e Comportamento | Chi può essere titolare di licenza per l'esercizio del servizio taxi? (art.9) | La persona singola | La persona giuridica | Qualsiasi società di capitali | 1
 Regolamento e Comportamento | Come viene assegnate la licenza per l'esercizio del servizio taxi? (art.9) | Mediante concorso pubblico | Mediante iscrizione al ruolo conducenti | A seguito di denuncia di inizio del servizio | 1
 Regolamento e Comportamento | Come viene assegnate l'autorizzazione per il servizio di noleggio con conducente? (art.6) | Mediante concorso pubblico | Mediante iscrizione al ruolo dei conducenti | A seguito di denuncia di inizio del servizio | 1
-Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
+Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Non essere titolare contemporaneamente di altra autorizzazione o concessione administrative | Avere istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 2
 Regolamento e Comportamento | Tra i requisiti per l'assegnazione di licenza taxi è previsto quello di: (art.9) | Non essere già stato in passato titolare di licenza taxi o di autorizzazione per il servizio di autonoleggio da rimessa con conducente a mezzo autovettura | Avere un'età superiore ai 55 anni | Avere presentato istanza presso la Provincia di Milano per sostenere l'esame per l'iscrizione al ruolo dei conducenti | 1
 Regolamento e Comportamento | La licenza taxi può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.10) | è titolare di licenza da almeno quattro anni | Ha raggiunto il sessantesimo anno d’età | Ha raggiunto il cinquantacinquesimo anno d’età | 2
 Regolamento e Comportamento | L'autorizzazione per l'esercizio del servizio di autonoleggio con conducente può essere trasferita se il titolare si trova in una delle seguenti condizioni: (art.7) | è titolare di autorizzazione da cinque anni | Ha raggiunto il cinquantacinquesimo anno d’età | Non aver raggiunto il sessantesimo anno d’età | 1
@@ -707,9 +705,11 @@ function parseQuestions(dataStr) {
 const ALL_QUESTIONS = parseQuestions(RAW_DATA);
 const MACRO_CATEGORIES = ['Geografia', 'Normativa Statale e Regionale', 'Regolamento e Comportamento', 'Inglese'];
 const letters = ['A', 'B', 'C'];
-const STORAGE_KEYS = { stats: 'taxi_quiz_stats', mistakes: 'taxi_quiz_saved_mistakes' };
+const STORAGE_KEYS = { stats: 'taxi_quiz_stats', mistakes: 'taxi_quiz_saved_mistakes', session: 'taxi_quiz_active_session' };
 let pool = [], index = 0, selected = null, answered = false, correct = 0, wrong = 0, history = [], macroErrors = {};
 let sessionType = 'practice', displayOptionIndexes = [0, 1, 2], sessionSaved = false;
+let examTimerInterval = null, examTimeRemaining = 1800; // 30 minutes in seconds
+
 const $ = id => document.getElementById(id);
 
 function safeRead(key, fallback) {
@@ -748,7 +748,102 @@ function setFreshSessionState() {
   macroErrors = Object.fromEntries(MACRO_CATEGORIES.map(category => [category, 0]));
   sessionSaved = false;
 }
+
+// Gestione Salvataggio Sessione Attiva
+function saveActiveSession() {
+  if (pool.length === 0 || index >= pool.length) {
+    localStorage.removeItem(STORAGE_KEYS.session);
+    return;
+  }
+  const sessionData = {
+    pool,
+    index,
+    correct,
+    wrong,
+    history,
+    macroErrors,
+    sessionType,
+    examTimeRemaining
+  };
+  safeWrite(STORAGE_KEYS.session, sessionData);
+}
+
+function loadActiveSession() {
+  const data = safeRead(STORAGE_KEYS.session, null);
+  if (!data || !data.pool || data.pool.length === 0 || data.index >= data.pool.length) {
+    return false;
+  }
+  pool = data.pool;
+  index = data.index;
+  correct = data.correct;
+  wrong = data.wrong;
+  history = data.history || [];
+  macroErrors = data.macroErrors || {};
+  sessionType = data.sessionType || 'practice';
+  examTimeRemaining = data.examTimeRemaining !== undefined ? data.examTimeRemaining : 1800;
+  
+  if (sessionType === 'exam') {
+    $('modeSelect').value = 'exam';
+    $('modeDisplay').textContent = 'Modalità Esame Ufficiale (16 Domande)';
+    startExamTimer();
+  } else if (sessionType === 'review') {
+    $('modeDisplay').textContent = 'Recupero errori';
+  } else {
+    $('modeSelect').value = 'practice';
+    $('modeDisplay').textContent = 'Modalità Ripasso (Libera)';
+  }
+  $('topicSelect').disabled = sessionType === 'exam' || sessionType === 'review';
+  $('modeSelect').disabled = sessionType === 'review';
+  $('questionSearch').disabled = sessionType !== 'practice';
+  
+  $('resultScreen').classList.add('hidden');
+  $('quizScreen').classList.remove('hidden');
+  renderQuestion();
+  return true;
+}
+
+// Gestione Timer Esame
+function startExamTimer() {
+  stopExamTimer();
+  const timerDisplay = $('examTimerDisplay');
+  if (timerDisplay) timerDisplay.classList.remove('hidden');
+  updateTimerDisplay();
+  
+  examTimerInterval = setInterval(() => {
+    examTimeRemaining--;
+    updateTimerDisplay();
+    if (examTimeRemaining <= 0) {
+      stopExamTimer();
+      alert('Tempo scaduto! L\'esame è terminato.');
+      showResults();
+    } else {
+      saveActiveSession();
+    }
+  }, 1000);
+}
+
+function stopExamTimer() {
+  if (examTimerInterval) {
+    clearInterval(examTimerInterval);
+    examTimerInterval = null;
+  }
+  const timerDisplay = $('examTimerDisplay');
+  if (timerDisplay) timerDisplay.classList.add('hidden');
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(examTimeRemaining / 60);
+  const seconds = examTimeRemaining % 60;
+  const timerDisplay = $('examTimerDisplay');
+  if (timerDisplay) {
+    timerDisplay.textContent = `⏱️ ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+}
+
 function initSession(customPool = null) {
+  stopExamTimer();
+  localStorage.removeItem(STORAGE_KEYS.session);
+
   const mode = $('modeSelect').value;
   const topicFilter = $('topicSelect').value;
   const search = $('questionSearch').value.trim().toLocaleLowerCase('it');
@@ -768,6 +863,8 @@ function initSession(customPool = null) {
     MACRO_CATEGORIES.forEach(category => pool.push(...shuffleArray(ALL_QUESTIONS.filter(q => q.topic === category)).slice(0, 4)));
     pool = shuffleArray(pool);
     $('modeDisplay').textContent = 'Modalità Esame Ufficiale (16 Domande)';
+    examTimeRemaining = 1800;
+    startExamTimer();
   } else {
     sessionType = 'practice';
     pool = ALL_QUESTIONS.filter(q => (topicFilter === 'all' || q.topic === topicFilter) && (!search || q.question.toLocaleLowerCase('it').includes(search) || q.options.some(option => option.toLocaleLowerCase('it').includes(search))));
@@ -781,6 +878,7 @@ function initSession(customPool = null) {
   $('modeSelect').disabled = sessionType === 'review';
   $('questionSearch').disabled = sessionType !== 'practice';
   renderQuestion();
+  saveActiveSession();
 }
 function startSavedMistakes() {
   const mistakes = savedMistakes();
@@ -812,7 +910,7 @@ function renderQuestion() {
   $('feedback').className = 'feedback'; $('feedback').textContent = '';
   
   if (sessionType === 'exam') {
-    $('nextBtn').style.display = 'none'; // Nasconde completamente il bottone "Prossima Domanda" in modalità esame
+    $('nextBtn').style.display = 'none';
   } else {
     $('nextBtn').style.display = 'inline-flex';
     $('nextBtn').disabled = true;
@@ -821,6 +919,7 @@ function renderQuestion() {
 
   $('correctCount').textContent = correct; $('wrongCount').textContent = wrong; $('remainingCount').textContent = pool.length - index;
   updateSavedMistakesButton();
+  saveActiveSession();
 }
 
 function chooseOption(originalIndex) {
@@ -837,11 +936,10 @@ function chooseOption(originalIndex) {
   history.push({ q, selected, isCorrect });
 
   if (sessionType === 'exam') {
-    // In modalità esame passa immediatamente alla prossima domanda senza blocchi né messaggi
     index++;
+    saveActiveSession();
     renderQuestion();
   } else {
-    // In modalità ripasso mostra feedback e abilita il pulsante
     $('nextBtn').disabled = false;
     [...$('answers').children].forEach((btn, displayIndex) => {
       btn.disabled = true;
@@ -854,6 +952,7 @@ function chooseOption(originalIndex) {
     feedback.textContent = isCorrect ? '✓ Risposta corretta!' : `✕ Risposta errata. La risposta corretta era: ${q.options[q.answer]}`;
     $('correctCount').textContent = correct; $('wrongCount').textContent = wrong; $('remainingCount').textContent = pool.length - index - 1;
     $('nextBtn').textContent = index === pool.length - 1 ? 'Vedi risultati' : 'Prossima domanda';
+    saveActiveSession();
   }
 }
 
@@ -864,6 +963,9 @@ function handleNext() {
 }
 
 function showResults() {
+  stopExamTimer();
+  localStorage.removeItem(STORAGE_KEYS.session);
+
   $('quizScreen').classList.add('hidden'); $('resultScreen').classList.remove('hidden'); $('progress').style.width = '100%';
   const badge = $('statusBadge'), resultText = $('resultText'), breakdown = $('topicBreakdown'), retryBtn = $('retryErrorsBtn');
   if (!sessionSaved) { saveGlobalStats(correct, wrong); sessionSaved = true; }
@@ -909,19 +1011,6 @@ function updateGlobalStatsDisplay() {
   const pct = total ? Math.round((Number(stats.correct) || 0) / total * 100) : 0;
   $('globalStatsText').textContent = `Sessioni: ${stats.totalQuiz || 0} · Corrette totali: ${stats.correct || 0} · Errori totali: ${stats.wrong || 0} · Precisione: ${pct}%`;
 }
-function exportStats() {
-  const payload = { format: 'quiz-taxi-backup-v1', exportedAt: new Date().toISOString(), stats: safeRead(STORAGE_KEYS.stats, { totalQuiz: 0, correct: 0, wrong: 0 }), savedMistakes: savedMistakes() };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'backup-quiz-taxi.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-}
-async function importStatsFile(file) {
-  if (!file) return;
-  try {
-    const payload = JSON.parse(await file.text());
-    safeWrite(STORAGE_KEYS.stats, payload.stats); safeWrite(STORAGE_KEYS.mistakes, payload.savedMistakes);
-    updateGlobalStatsDisplay(); updateSavedMistakesButton(); alert('Backup importato correttamente.');
-  } catch (error) { alert('File non valido.'); }
-}
 
 // Gestione Login Password
 function checkPassword() {
@@ -931,7 +1020,11 @@ function checkPassword() {
     $('mainAppCard').classList.remove('hidden');
     updateGlobalStatsDisplay(); 
     updateSavedMistakesButton();
-    initSession();
+    
+    // Ripristina la sessione salvata se esistente, altrimenti ne avvia una nuova
+    if (!loadActiveSession()) {
+      initSession();
+    }
   } else {
     $('loginError').classList.remove('hidden');
     $('passwordInput').value = '';
@@ -950,9 +1043,7 @@ $('topicSelect').addEventListener('change', () => initSession());
 $('restartBtn').addEventListener('click', () => { $('modeSelect').disabled = false; $('modeSelect').value = 'practice'; $('topicSelect').value = 'all'; $('questionSearch').value = ''; initSession(); });
 $('homeBtn').addEventListener('click', () => { if (confirm('Avviare una nuova sessione?')) { $('modeSelect').disabled = false; $('topicSelect').value = 'all'; $('questionSearch').value = ''; initSession(); } });
 $('reviewSavedBtn').addEventListener('click', startSavedMistakes);
-$('exportStatsBtn').addEventListener('click', exportStats);
-$('importStatsBtn').addEventListener('click', () => $('importStatsFile').click());
-$('importStatsFile').addEventListener('change', event => { importStatsFile(event.target.files?.[0]); event.target.value = ''; });
+
 let searchTimer;
 $('questionSearch').addEventListener('input', () => { window.clearTimeout(searchTimer); searchTimer = window.setTimeout(() => { if ($('modeSelect').value !== 'exam') initSession(); }, 250); });
 </script>
